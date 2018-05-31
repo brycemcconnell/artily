@@ -1,18 +1,27 @@
+<?php include_once('inc/svg.php'); ?>
+<?php include_once('inc/head.php'); ?>
 <?php include_once('inc/header.php'); ?>
-<div class="container">
 
-<div class="starter-template">
-        <h1>Bootstrap starter template</h1>
-        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-      </div>
 
-<div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-10 box text-center">
-        <h1>Assignment 2</h1>
+<?php include_once('inc/sidebar.php'); ?>
+<main class="main" role="main">
+	<div class="grid sidebar-open_margins">
+		<div class="item"></div>
+		<div class="item item2x1"></div>
+		<div class="item"></div>
+		<div class="item item2x2"></div>
+		<div class="item item1x2"></div>
+		<div class="item item1x2"></div>
+		<div class="item"></div>
+		<div class="item item2x1"></div>
+		<div class="item item2x2"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="item"></div>
+		<div class="grid-last">There seems to be nothing left...</div>
+	</div>
 
-    </div>
-    <div class="col-sm-1"></div>
-</div>
-</div>
+</main>
 <?php include_once('inc/footer.php'); ?>

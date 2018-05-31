@@ -1,52 +1,62 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/favicon.ico">
+<body class="body-header_compensation">
 
-    <title>Starter Template for Bootstrap</title>
+<?php if (isset($_GET['status']) && $_GET['status'] == 'loggedout'): ?>
+<div class="message">
+	<div>Successfully logged out.</div>
+	<button class="theme-btn message-btn" onclick="removeLogout();">X</button>
+</div>
+<script>
+	function removeLogout() {
+		if (document.querySelector('.message')) {
+			document.querySelector('.message').remove();
+		}
+	}
+	setTimeout(() => {
+		removeLogout();
+	}, 7000);
+</script>
+<?php endif; ?>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<header class="header">
+	<a href="/" class="header-logo theme-btn"><!-- Logo (img/link) -->
+		<span class="header-logo_text">artily</span>
+	</a>
+	<div class="header-artboard_container"><!-- Artboard -->
+		<img class="header-artboard_icon" src="/public/assets/img/test-artboard-icon.png"><!-- Artboard icon -->
+		<div class="header-artboard_name">Home</div><!-- Artboard name/link -->
+	</div>
+	<div class="header-search_container"><!-- Search Box -->
+		<form>
+			<input class="header-search_input" type="search" placeholder="Find something new...">
+		</form>
+	</div>
+	<?php if (isset($_SESSION['user'])): ?>
+	<div class="header-user_container"><!-- User dash -->
+		<a href="" class="header-user">
+			<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
+			<div class="header-user_details"><!-- Deets -->
+				<div class="header-user_name">bryce</div><!-- User name -->
+				<div><span class="heart">♥</span>399</div><!-- User heart count -->
+			</div>
+		</a>
+		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a>
+		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a>
+		<button class="header-user_submit theme-btn">Submit</button><!-- Submit new content -->
+		<button class="btn header-user_icon" onclick="toggleUserMenu();"><?= $SVG->arrow_down(); ?></button><!-- Other options, eg. preferences/logout -->
+		<ul class="header-user_menu none">
+			<li><a href=""><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>
+			<li><a href="?action=logout"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Logout</a></li>
+		</ul>
+	</div>
+	<?php else: ?>
+	<div class="header-user_container">
+		<a href="?action=login" class="header-user_login theme-btn">Login</a>
+	</div>
+	<?php endif;?>
+	<script>
+		function toggleUserMenu() {
+			document.querySelector('.header-user_menu').classList.toggle('none');
+		}
+	</script>
+</header>
 
-    <!-- Custom styles for this template -->
-    <link href="assets/css/custom.css" rel="stylesheet">
-  </head>
-
-  <body>
-
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-      </div>
-    </nav>
-
-    <main role="main" >

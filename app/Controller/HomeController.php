@@ -1,7 +1,7 @@
 <?php
 
 
-namespace ModifyMe\Controller;
+namespace App\Controller;
 
 
 class HomeController

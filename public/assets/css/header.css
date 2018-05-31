@@ -1,0 +1,147 @@
+.body-header_compensation {
+	margin-top: 60px;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	box-shadow: 0px 2px 8px -4px #000a;
+	height: 60px;
+	min-height: 60px;
+	background-color: #fff;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}
+
+.header-logo {
+	background-color: #d33;
+	height: 100%;
+	width: 280px;
+	min-width: 280px;
+	display: flex;
+	align-items: center;
+}
+
+.header-logo_text {
+	font-size: 25px;
+	font-weight: bold;
+	color: #fff;
+	margin: 0 auto;
+}
+
+.header-artboard_container {
+	display: flex;
+	align-items: center;
+	margin: 0 20px;
+}
+
+.header-artboard_icon {
+	height: 40px;
+	width: auto;
+	margin-right: 10px;
+}
+
+.header-artboard_name {
+	font-size: 20px;
+	color: #555;
+	margin-top: 4px;
+	font-weight: bold;
+}
+
+.header-search_container {
+	margin-right: 20px;
+}
+
+.header-user_container {
+	border-left: 1px solid #eee;
+	height: 100%;
+	margin-left: auto;
+	display: flex;
+	align-items: center;
+	padding: 0 10px 0 20px;
+}
+
+.header-user {
+	display: flex;
+	/*border: 1px solid #eee;*/
+	height: 40px;
+	margin-right: 10px;
+}
+
+.header-search_input {
+	margin: 0;
+	line-height: 1;
+	border: 1px solid #eee;
+	padding: 10px 20px 6px;
+	font-size: 20px;
+	color: #555;
+	border-radius: 0px;
+	box-shadow: 0px 0px 5px 0 inset #eee;
+}
+
+.header-user_avatar {
+	height: 40px;
+	width: 40px;
+	margin-right: 10px;
+}
+
+.header-user_name {
+	font-weight: bold;
+}
+
+.header-user_submit {
+	background-color: #d33;
+	color: #fff;
+	margin-left: auto;
+	margin-right: 10px;
+	padding: 10px 20px;
+	font-weight: bold;
+	height: 40px;
+}
+
+.header-user_icon {
+	display: block;
+	height: 40px;
+	width: 40px;
+	border: 1px solid #eee;
+	padding: 8px;
+	margin-right: 10px;
+}
+
+.header-user_details {
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+
+}
+
+.header-user_menu {
+	position: absolute;
+    top: 61px;
+    right: 0;
+    background-color: #fff;
+    box-shadow: 0px 14px 38px -19px #000a;
+}
+
+.header-user_menu a {
+	width: 100%;
+	display: block;
+	padding: 10px 20px;
+	transition: .2s;
+}
+
+.header-user_menu a:hover {
+	color: #fff;
+	background-color: #d33;
+}
+.header-user_login {
+	height: 40px;
+	padding: 0 20px;
+    line-height: 40px;
+    font-weight: bold;
+}
+.header-user_login:hover {
+	color: #fff;
+}
