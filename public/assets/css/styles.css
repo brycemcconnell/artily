@@ -59,3 +59,8 @@
 	from { opacity: 1; visibility: visible; }
 	to { opacity: 0; visibility: hidden; }
 }
+
+.home-btn {
+    margin-top: 20px;
+    margin-left: 20px;
+}

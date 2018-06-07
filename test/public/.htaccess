@@ -1,0 +1,4 @@
+# If /public is accessed directly, remove from url
+RewriteEngine on
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /public
+RewriteRule (.*) /$1 [R=302,L]

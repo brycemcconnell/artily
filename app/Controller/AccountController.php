@@ -4,12 +4,10 @@
 namespace App\Controller;
 
 include_once('app/Model/Users.php');
-include_once('app/Utils/Validation.php');
 
 Use App\Model\Users as Users;
-Use App\Utils\Validation as Validation;
 
-class LoginController {
+class AccountController {
 	private $db;
 
 	public function __construct(Users $db) {
@@ -48,5 +46,34 @@ class LoginController {
         unset($_SESSION['user']);
         header("Location: /index.php?status=loggedout");
         die();
+    }
+
+    public function signup(): void
+    {
+        $signup_success = true; //assumed true for first run
+
+        if (array_key_exists('user',$_SESSION)) {
+            // header("Location: /index.php");
+            var_dump("youre logged in");
+            die();
+        }
+
+        if (isset($_POST['submitsignup'])) {
+            $password = filter_input(INPUT_POST, 'password');
+            $username = filter_input(INPUT_POST, 'username');
+            $email = filter_input(INPUT_POST, 'email');
+            $user = $this->db->createUser($username, $password, $email);
+
+            if ($user) {
+                var_dump($user);
+                $_SESSION['user'] = $user;
+                // header("Location: /index.php");
+                die();
+
+            }
+            $signup_success = false;
+
+        }
+        include 'views/signup.php';
     }
 }

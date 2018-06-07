@@ -12,18 +12,20 @@ ini_set('display_errors', 1);
 include_once '../config.php';
 
 include_once "app/Controller/HomeController.php";
-include_once "app/Controller/LoginController.php";
+include_once "app/Controller/AccountController.php";
 
 use App\Controller\HomeController as HomeController;
-use App\Controller\LoginController as LoginController;
+use App\Controller\AccountController as AccountController;
 
 
 use App\Model\Users as Users;
 $user_db = new Users($pdo);
+use App\Model\Hearts as Hearts;
+$hearts_db = new Hearts($pdo);
 
 // create controllers
-$homeController = new HomeController();
-$loginController = new LoginController($user_db);
+$homeController = new HomeController($user_db, $hearts_db);
+$AccountController = new AccountController($user_db);
 
 
 $action = $_GET['action'] ?? '';
@@ -34,14 +36,21 @@ switch ($action) {
             header("Location: /index.php");
             die();
         }
-        $loginController->login();
+        $AccountController->login();
 		break;
 	case 'logout':
-		if (!array_key_exists('user', $_SESSION)) {
+        if (!array_key_exists('user', $_SESSION)) {
             header("Location: /index.php?action=login");
             die();
         }
-        $loginController->logout();
+        $AccountController->logout();
+        break;
+    case 'signup':
+		if (array_key_exists('user', $_SESSION)) {
+            header("Location: /index.php");
+            die();
+        }
+        $AccountController->signup();
 		break;
     default:
         $homeController->home_page();

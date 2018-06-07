@@ -35,8 +35,8 @@
 		<a href="" class="header-user">
 			<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
 			<div class="header-user_details"><!-- Deets -->
-				<div class="header-user_name">bryce</div><!-- User name -->
-				<div><span class="heart">♥</span>399</div><!-- User heart count -->
+				<div class="header-user_name"><?= $user["username"]; ?></div><!-- User name -->
+				<div><span class="heart">♥</span><?= $user["userhearts"]; ?></div><!-- User heart count -->
 			</div>
 		</a>
 		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a>
@@ -51,6 +51,7 @@
 	<?php else: ?>
 	<div class="header-user_container">
 		<a href="?action=login" class="header-user_login theme-btn">Login</a>
+		<a href="?action=signup" class="header-user_login theme-btn">Signup</a>
 	</div>
 	<?php endif;?>
 	<script>

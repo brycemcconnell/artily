@@ -1,3 +1,4 @@
+<?php header('Content-Type: text/html'); ?>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -11,11 +12,11 @@
 
 
 		<!-- Development styles for this template -->
-		<link href="assets/css/theme.css" rel="stylesheet">
-		<link href="assets/css/header.css" rel="stylesheet">
-		<link href="assets/css/sidebar.css" rel="stylesheet">
-		<link href="assets/css/footer.css" rel="stylesheet">
-		<link href="assets/css/login.css" rel="stylesheet">
+		<link href="/public/assets/css/theme.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/header.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/sidebar.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/footer.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/login.css" rel="stylesheet" type="text/css">
 		<!-- Compiled styles -->
-		<link href="assets/css/styles.css" rel="stylesheet">
+		<link href="/public/assets/css/styles.css" rel="stylesheet">
 	</head>

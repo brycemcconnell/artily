@@ -3,6 +3,7 @@
 declare(strict_types=1); //optional
 
 set_include_path(__DIR__ . PATH_SEPARATOR . get_include_path());
+
 define('APP_ROOT', 'http://artily.local'); //no trailing '/', empty string or fully qualified name for root
 
 

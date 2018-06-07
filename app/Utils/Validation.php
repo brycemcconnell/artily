@@ -1,5 +1,5 @@
 <?php
-Namespace BookingApp\Utils;
+Namespace App\Utils;
 /**
  * Description of Validation Class
  * Provides validation service for form fields
