@@ -17,7 +17,7 @@ class Hearts {
 		$this->pdo = null;
 	}
 
-	public function getHeartsByUserId(string $user_id) {
+	public function getHeartsByUserId(int $user_id) {
 		$sql = '
 			SELECT
 				COUNT(*)

@@ -44,7 +44,8 @@ class Users {
 	public function createUser(string $username, string $password, string $email) {
 		$oldUser = $this->getUser($username);
 		if ($oldUser)
-			return 'Duplicate entry, someone with that name already exists.';
+			// return 'Duplicate entry, someone with that name already exists.';
+			return false;
 
 		$validation = new Validation();
 		$errors = [];
@@ -54,12 +55,17 @@ class Users {
             "email" => [$email, 'email', false]
         ];
         foreach ($fields as $key => $values) {
+        	var_dump($values);
         	$message = $validation->validate(...$values);
+        	var_dump($message);
         	if (strlen($message))
         		$errors[$key] = $message;
         }
-        if ($errors)
-        	return $errors;
+        var_dump($errors);
+        if ($errors) {
+        	// return $errors;
+        	return false;
+        }
 
 		$sql = '
 			INSERT INTO
@@ -75,12 +81,16 @@ class Users {
 		$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 		$stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
 		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
-		$success = $stmt->execute();
+		$result = $stmt->execute();
 
-		if ($success)
-			return 'Account successfully created.';
+		if ($result) {
+			// return 'Account successfully created.';
+			return true;
+			var_dump($result);
+		}
 		else
-			return 'Account creation error.';
+			// return 'Account creation error.';
+			return false;
 	}
 
 	public function getUser(string $username) {

@@ -12,6 +12,7 @@
 	</form>
 
 	<?php if ($signup_success === false): ?>
-	    <div class="row text-center text-danger">signup failure. Username/password combination invalid</div>
+	    <div class="row text-center text-danger">Signup failure.d</div>
+	    <?php $accountCreation ?? ""; ?>
 	<?php endif; ?>
 </main>

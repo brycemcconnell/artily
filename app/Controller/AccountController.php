@@ -53,8 +53,8 @@ class AccountController {
         $signup_success = true; //assumed true for first run
 
         if (array_key_exists('user',$_SESSION)) {
-            // header("Location: /index.php");
-            var_dump("youre logged in");
+            // User already logged in
+            header("Location: /index.php");
             die();
         }
 
@@ -62,17 +62,16 @@ class AccountController {
             $password = filter_input(INPUT_POST, 'password');
             $username = filter_input(INPUT_POST, 'username');
             $email = filter_input(INPUT_POST, 'email');
-            $user = $this->db->createUser($username, $password, $email);
-
-            if ($user) {
-                var_dump($user);
-                $_SESSION['user'] = $user;
-                // header("Location: /index.php");
+            // Return the status of the account creation, if succcess create
+            $userCreation = $this->db->createUser($username, $password, $email);
+            var_dump($userCreation);
+            if ($userCreation) {
+                header("Location: /index.php?status=accountCreated");
+                // $_SESSION['user'] = $user;
                 die();
 
             }
             $signup_success = false;
-
         }
         include 'views/signup.php';
     }
