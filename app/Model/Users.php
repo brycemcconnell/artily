@@ -43,29 +43,19 @@ class Users {
 
 	public function createUser(string $username, string $password, string $email) {
 		$oldUser = $this->getUser($username);
-		if ($oldUser)
-			// return 'Duplicate entry, someone with that name already exists.';
-			return false;
+		if ($oldUser) {
+			// return 'Duplicate entry, someone with that name already exists.'
+		}
+			
+		$oldEmail = $this->getUserEmail($email);
+		if ($oldEmail) {
+			// return 'Duplicate entry, someone with that email already exists.'
+		}
 
-		$validation = new Validation();
-		$errors = [];
-        $fields = [
-            "username" => [$username, 'alpha_num', true],
-            "password" => [$password, 'password', true],
-            "email" => [$email, 'email', false]
-        ];
-        foreach ($fields as $key => $values) {
-        	var_dump($values);
-        	$message = $validation->validate(...$values);
-        	var_dump($message);
-        	if (strlen($message))
-        		$errors[$key] = $message;
-        }
-        var_dump($errors);
-        if ($errors) {
-        	// return $errors;
-        	return false;
-        }
+		$username = validate($username);
+		$email    = validate($email);
+		$password = validate($password);
+
 
 		$sql = '
 			INSERT INTO

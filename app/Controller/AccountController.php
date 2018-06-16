@@ -62,15 +62,18 @@ class AccountController {
             $password = filter_input(INPUT_POST, 'password');
             $username = filter_input(INPUT_POST, 'username');
             $email = filter_input(INPUT_POST, 'email');
-            // Return the status of the account creation, if succcess create
+
+            // Will return a status true or false, if false contains errors array
             $userCreation = $this->db->createUser($username, $password, $email);
-            var_dump($userCreation);
-            if ($userCreation) {
-                header("Location: /index.php?status=accountCreated");
+
+            // redirect to login page and display success message
+            if ($userCreation["status"] == true) {
+                header("Location: /index.php?action=login&status=accountCreated");
                 // $_SESSION['user'] = $user;
                 die();
 
             }
+            // If this far, there was an error somehow, 
             $signup_success = false;
         }
         include 'views/signup.php';

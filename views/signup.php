@@ -12,7 +12,7 @@
 	</form>
 
 	<?php if ($signup_success === false): ?>
-	    <div class="row text-center text-danger">Signup failure.d</div>
-	    <?php $accountCreation ?? ""; ?>
+	    <div class="row text-center text-danger">Signup failure.</div>
+	    <?php isset($userCreation["errors"]) ? var_dump($userCreation) : ""; ?>
 	<?php endif; ?>
 </main>
