@@ -41,15 +41,23 @@ class Users {
 		return false;
 	} 
 
+	public function getUserByEmail(string $email) {
+		return false;
+	}
+
 	public function createUser(string $username, string $password, string $email) {
 		$oldUser = $this->getUser($username);
 		if ($oldUser) {
 			// return 'Duplicate entry, someone with that name already exists.'
 		}
 			
-		$oldEmail = $this->getUserEmail($email);
+		$oldEmail = $this->getUserByEmail($email);
 		if ($oldEmail) {
 			// return 'Duplicate entry, someone with that email already exists.'
+		}
+
+		function validate($item) {
+			return $item;
 		}
 
 		$username = validate($username);
@@ -72,10 +80,10 @@ class Users {
 		$stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
 		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 		$result = $stmt->execute();
-
+var_dump($result);
 		if ($result) {
 			// return 'Account successfully created.';
-			return true;
+			return ["status" => true];
 			var_dump($result);
 		}
 		else

@@ -1,4 +1,7 @@
 <?php include_once('inc/head.php'); ?>
+<?php if ($_GET["status"] == "accountCreated"): ?>
+    <div class="row text-center text-danger">Account created successfully. Please login.</div>
+<?php endif; ?>
 <a href="/" class="home-btn theme-btn theme-a-btn"><img src="/public/assets/img/home.svg"></a>
 <main class="login-page">
 	<img src="/public/assets/img/kermit.jpg">
