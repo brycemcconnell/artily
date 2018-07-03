@@ -68,11 +68,15 @@ class Users {
 		$sql = '
 			INSERT INTO
 				users
+				(
+					username,
+					email,
+					password
+				)
 			VALUES (
-				DEFAULT,
 				:username,
-				:password,
-				:email
+				:email,
+				:password
 			);
 		';
 		$stmt = $this->pdo->prepare($sql);
@@ -84,7 +88,6 @@ var_dump($result);
 		if ($result) {
 			// return 'Account successfully created.';
 			return ["status" => true];
-			var_dump($result);
 		}
 		else
 			// return 'Account creation error.';
