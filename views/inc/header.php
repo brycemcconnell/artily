@@ -22,8 +22,9 @@
 		<span class="header-logo_text">artily</span>
 	</a>
 	<div class="header-artboard_container"><!-- Artboard -->
-		<img class="header-artboard_icon" src="/public/assets/img/test-artboard-icon.png"><!-- Artboard icon -->
-		<div class="header-artboard_name">Home</div><!-- Artboard name/link -->
+		<!-- <img class="header-artboard_icon" src="/public/assets/img/test-artboard-icon.png"> -->
+		<!-- Artboard icon -->
+		<a class="header-artboard_name" href="#">Home</a><!-- Artboard name/link -->
 	</div>
 	<div class="header-search_container"><!-- Search Box -->
 		<form>

@@ -2,6 +2,7 @@
 	position: fixed;
     box-shadow: 2px 0px 8px -4px #777;
     height: calc(100% - 60px);
+    margin-top: 60px;
 }
 
 .sidebar-toggle_btn {

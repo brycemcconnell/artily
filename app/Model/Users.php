@@ -42,41 +42,99 @@ class Users {
 	} 
 
 	public function getUserByEmail(string $email) {
-		return false;
+		$sql = '
+			SELECT
+				id,
+				username,
+				email
+			FROM
+				users
+			WHERE
+				email = :email;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
+		$stmt->execute();
+		$user = $stmt->fetch();
+		return $user;
 	}
 
 	public function createUser(string $username, string $password, string $email) {
-		$oldUser = $this->getUser($username);
-		if ($oldUser) {
-			// return 'Duplicate entry, someone with that name already exists.'
-		}
-			
-		$oldEmail = $this->getUserByEmail($email);
-		if ($oldEmail) {
-			// return 'Duplicate entry, someone with that email already exists.'
-		}
+		/*
+
+		I have split the error checking into two, in order to cancel needless database 
+		queries when the post data was incorrect in the first place
+
+		*/
+
+		$errors = [];
+		// If no email was input
+		if ($email === '') 
+				$email = null;
+
+
+		// Check if the post data is valid first, return errors
 
 		function validate($item) {
 			return $item;
 		}
 
+		// Username must be alpha-numeric, 1-30 characters
+		// email must be an email, php function?
+		// password must be 8-255 characters and have at least one non lowercase alphabetical character (number/symbol)
+
 		$username = validate($username);
-		$email    = validate($email);
+		if ($email !== null) 
+			$email  = validate($email);
 		$password = validate($password);
 
+		if (count($errors)) {
+			return [
+				"status" => false,
+				"errors" => $errors
+			];
+		}
 
+		// The post data was all correct, now check against the database if username/email is already in use.
+		$oldUser = '';
+		$oldUser = $this->getUser($username);
+		if ($oldUser) {
+			// return 'Duplicate entry, someone with that name already exists.'
+			var_dump("old user present");
+			$errors["oldUser"] = true;
+		}
+		
+		$oldEmail = '';
+		if ($email !== null) 
+			$oldEmail = $this->getUserByEmail($email);
+		if ($oldEmail) {
+			// return 'Duplicate entry, someone with that email already exists.'
+			var_dump("old email present");
+			$errors["oldEmail"] = true;
+		}
+
+		if (count($errors)) {
+			return [
+				"status" => false,
+				"errors" => $errors
+			];
+		}
+
+		// Data was all correct, attempt to create database entry.
 		$sql = '
 			INSERT INTO
 				users
 				(
 					username,
 					email,
-					password
+					password,
+					created
 				)
 			VALUES (
 				:username,
 				:email,
-				:password
+				:password,
+				UTC_TIMESTAMP()
 			);
 		';
 		$stmt = $this->pdo->prepare($sql);
@@ -84,7 +142,7 @@ class Users {
 		$stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
 		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 		$result = $stmt->execute();
-var_dump($result);
+		var_dump($result);
 		if ($result) {
 			// return 'Account successfully created.';
 			return ["status" => true];
