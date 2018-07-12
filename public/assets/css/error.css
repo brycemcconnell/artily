@@ -1,0 +1,15 @@
+.error_page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.error_code {
+	font-size: 96px;
+	color: #d33;
+}
+
+.error_message {
+	
+}

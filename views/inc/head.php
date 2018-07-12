@@ -1,4 +1,10 @@
-<?php header('Content-Type: text/html'); ?>
+<?php
+	include_once('svg.php'); 
+	$SVG = new SVGFactory();
+
+	header('Content-Type: text/html');
+?>
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -17,6 +23,13 @@
 		<link href="/public/assets/css/sidebar.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/footer.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/login.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/error.css" rel="stylesheet" type="text/css">
 		<!-- Compiled styles -->
 		<link href="/public/assets/css/styles.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/grid.css" rel="stylesheet" type="text/css">
+		<noscript>
+	    	<link href="/public/assets/css/no-js.css" type="text/css" rel="stylesheet" />
+		</noscript>
 	</head>
+	
+	

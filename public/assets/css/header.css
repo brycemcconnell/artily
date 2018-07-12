@@ -12,6 +12,7 @@
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 1;
 }
 
 .header-logo {
@@ -98,6 +99,8 @@
 	padding: 10px 20px;
 	font-weight: bold;
 	height: 40px;
+	width: auto;
+	line-height: 24px;
 }
 
 .header-user_icon {

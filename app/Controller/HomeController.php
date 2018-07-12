@@ -23,7 +23,20 @@ class HomeController
     	$this->hearts_db = $hearts_db;
     }
 
-    function home_page()
+    function run() {
+        if (isset($_GET["action"])) {
+            switch ($_GET["action"]) {
+                default:
+                    header("Location: /error?code=404");
+                    die();
+                break;
+            }
+        } else {
+            $this->renderHome();
+        }
+    }
+
+    function renderHome()
     {
     	if (array_key_exists('user',$_SESSION)) {
     		$user = $this->getUserData($_SESSION["user"]);

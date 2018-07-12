@@ -62,7 +62,7 @@ class Validation {
         } else if (strlen($value) > 255) {
             return 'Password too long (over 255 characters)';
         } else if (!ctype_alnum($value)) {
-            return 'Password only '
+            return 'Password only ';
         }
 
         return $valid;

@@ -14,6 +14,28 @@ class AccountController {
 		$this->db = $db;
 	}
 
+	public function run(): void
+	{
+		if (isset($_GET["action"])) {
+			switch ($_GET["action"]) {
+				case 'login':
+					$this->login();
+					return;
+				break;
+				case 'logout':
+					$this->logout();
+					return;
+				break;
+				case 'signup':
+					$this->signup();
+					return;
+				break;
+			}
+        }
+        header("Location: /error?code=404");
+   		die();
+	}
+
 	public function login(): void
 	{
 		$password_is_valid = true; //assumed true for first run
@@ -68,10 +90,9 @@ class AccountController {
 
 			// redirect to login page and display success message
 			if ($userCreation["status"] == true) {
-				header("Location: /index.php?action=login&status=accountCreated");
+				header("Location: /account?action=login&status=accountCreated");
 				// $_SESSION['user'] = $user;
 				die();
-
 			}
 			// If this far, there was an error somehow, 
 			$signup_success = false;

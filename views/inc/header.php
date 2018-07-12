@@ -33,26 +33,26 @@
 	</div>
 	<?php if (isset($_SESSION['user'])): ?>
 	<div class="header-user_container"><!-- User dash -->
-		<a href="" class="header-user">
+		<a href="?action=user" class="header-user">
 			<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
 			<div class="header-user_details"><!-- Deets -->
 				<div class="header-user_name"><?= $user["username"]; ?></div><!-- User name -->
 				<div><span class="heart">♥</span><?= $user["userhearts"]; ?></div><!-- User heart count -->
 			</div>
 		</a>
-		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a>
-		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a>
-		<button class="header-user_submit theme-btn">Submit</button><!-- Submit new content -->
+		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a></button>
+		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a></button>
+		<a href="?action=post" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
 		<button class="btn header-user_icon" onclick="toggleUserMenu();"><?= $SVG->arrow_down(); ?></button><!-- Other options, eg. preferences/logout -->
 		<ul class="header-user_menu none">
-			<li><a href=""><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>
-			<li><a href="?action=logout"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Logout</a></li>
+			<li><a href="account?action=preferences"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>
+			<li><a href="account?action=logout"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Logout</a></li>
 		</ul>
 	</div>
 	<?php else: ?>
 	<div class="header-user_container">
-		<a href="?action=login" class="header-user_login theme-btn">Login</a>
-		<a href="?action=signup" class="header-user_login theme-btn">Signup</a>
+		<a href="account?action=login" class="header-user_login theme-btn">Login</a>
+		<a href="account?action=signup" class="header-user_login theme-btn">Signup</a>
 	</div>
 	<?php endif;?>
 	<script>
