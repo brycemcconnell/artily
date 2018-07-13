@@ -1,8 +1,8 @@
-<?php include_once('inc/head.php'); ?>
+<?php include_once('../views/inc/head.php'); ?>
 <a href="/" class="home-btn theme-btn theme-a-btn"><img src="/public/assets/img/home.svg"></a>
 <main class="signup-page">
 	<img src="/public/assets/img/kermit.jpg">
-	<form action="?action=signup" method="POST" novalidate>
+	<form action="account?action=signup" method="POST" novalidate>
 		<div class="signup-input_container">
 			<input class="signup-input" type="text" name="username" placeholder="..." value="<?= $username ?? ''; ?>" required>
 			<input class="signup-input" type="email" name="email" placeholder="Email..." value="<?= $email ?? ''; ?>" required>

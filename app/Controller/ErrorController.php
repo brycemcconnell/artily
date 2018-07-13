@@ -32,6 +32,6 @@ class ErrorController {
 	public function render($code): void
 	{
 		$error = [$code => $this->errorCodes[$code]];
-		include "views/error.php";
+		include "views/error/error.php";
 	}
 }

@@ -33,7 +33,7 @@
 	</div>
 	<?php if (isset($_SESSION['user'])): ?>
 	<div class="header-user_container"><!-- User dash -->
-		<a href="?action=user" class="header-user">
+		<a href="user" class="header-user">
 			<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
 			<div class="header-user_details"><!-- Deets -->
 				<div class="header-user_name"><?= $user["username"]; ?></div><!-- User name -->
@@ -42,7 +42,7 @@
 		</a>
 		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a></button>
 		<button class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a></button>
-		<a href="?action=post" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
+		<a href="post?action=new" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
 		<button class="btn header-user_icon" onclick="toggleUserMenu();"><?= $SVG->arrow_down(); ?></button><!-- Other options, eg. preferences/logout -->
 		<ul class="header-user_menu none">
 			<li><a href="account?action=preferences"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>

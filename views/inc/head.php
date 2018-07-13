@@ -27,6 +27,8 @@
 		<!-- Compiled styles -->
 		<link href="/public/assets/css/styles.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/grid.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/post.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/comments.css" rel="stylesheet" type="text/css">
 		<noscript>
 	    	<link href="/public/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>

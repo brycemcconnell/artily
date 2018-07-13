@@ -13,9 +13,9 @@ the layout doesnt change
 	<div class="sidebar-content sidebar-content_small">
 		<div class="sidebar-section">
 			<ul>
-				<li><a class="sidebar-common_link sidebar-link" href="/"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
-				<li><a class="sidebar-common_link sidebar-link" href="/"><span class="sidebar-icon"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
-				<li><a class="sidebar-common_link sidebar-link" href="/"><span class="sidebar-icon"><?= $SVG->globe('#d33'); ?></span><span class="sidebar-expanded"> All</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="index?view=home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="index?view=trending"><span class="sidebar-icon"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="index?view=all"><span class="sidebar-icon"><?= $SVG->globe('#d33'); ?></span><span class="sidebar-expanded"> All</span></a></li>
 			</ul>
 		</div>
 		<div class="sidebar-section sidebar-expanded">

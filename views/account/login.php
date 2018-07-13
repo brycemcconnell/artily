@@ -1,4 +1,4 @@
-<?php include_once('inc/head.php'); ?>
+<?php include_once('../views/inc/head.php'); ?>
 
 <?php 
 	/*
@@ -14,7 +14,7 @@
 <a href="/" class="home-btn theme-btn theme-a-btn"><img src="/public/assets/img/home.svg"></a>
 <main class="login-page">
 	<img src="/public/assets/img/kermit.jpg">
-	<form action="?action=login" method="POST" novalidate>
+	<form action="account?action=login" method="POST" novalidate>
 		<div class="login-input_container">
 			<input class="login-input" type="text" name="username" placeholder="Username..." value="<?= $username ?? ''; ?>" required>
 			<input class="login-input" type="password" name="password" placeholder="Password..." required>

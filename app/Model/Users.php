@@ -170,6 +170,25 @@ class Users {
 		return $user;
 	}
 
+	public function getUserById(int $id) {
+		$sql = '
+			SELECT
+				id,
+				username,
+				email
+			FROM
+				users
+			WHERE
+				id = :id;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':id', $id, PDO::PARAM_STR);
+		$stmt->execute();
+		$user = $stmt->fetch();
+		return $user;
+	}
+
+
 	public function changePassword(string $username, string $currentpassword, string $newpassword) {
 		$user = $this->authenticateUser($username, $currentpassword);
 		if (!$user)

@@ -1,4 +1,4 @@
-<?php include_once('inc/head.php');?>
+<?php include_once('../views/inc/head.php');?>
 <?php if (isset($error)): ?>
 <main class="error_page">
 	<p class="error_code"><?= key($error); ?></p>

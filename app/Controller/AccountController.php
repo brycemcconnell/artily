@@ -60,7 +60,7 @@ class AccountController {
 			$password_is_valid = false;
 
 		}
-		include 'views/login.php';
+		include 'views/account/login.php';
 	}
 
 	public function logout(): void
@@ -97,6 +97,6 @@ class AccountController {
 			// If this far, there was an error somehow, 
 			$signup_success = false;
 		}
-		include 'views/signup.php';
+		include 'views/account/signup.php';
 	}
 }

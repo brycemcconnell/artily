@@ -1,0 +1,76 @@
+.comment {
+	border-left: 1px solid #aaa;
+	padding-left: 20px;
+	margin-left: 20px;
+}  
+.comment-no_border {
+	border: none;
+	padding: 0;
+	margin: 0;
+}
+.comment-inner {
+    padding: 10px 20px;
+    position: relative;
+}
+.comment-collapse {
+	border: none;
+	padding: 0;
+	margin: 0;
+	background-color: transparent;
+	color: #d33;
+	display: inline;
+	position: relative;
+    top: -2px;
+}
+
+.comment-menu {
+	font-size: 12px;
+    position: absolute;
+    bottom: -5px;
+    left: 40px;
+}
+.hide-comment ~ .comment {
+	display: none;
+}
+
+.cc-close {
+	display: none;
+}
+
+.hide-comment .cc-close {
+	display: inline-block;
+}
+.hide-comment .cc-open {
+	display: none;
+}
+
+.comment-content {
+	display: inline-block;
+}
+
+.hide-comment .comment-content {
+	display: none;
+}
+
+.comment-hidden_helper {
+	display: none;
+}
+
+.hide-comment > .comment-menu > .comment-hidden_helper {
+	display: inline;
+}
+.comment-actions {
+	display: inline;
+}
+.hide-comment > .comment-menu > .comment-actions {
+	display: none;
+}
+
+.hide-comment > .comment-menu {
+	top: 13px;
+	left: 47px;
+}
+
+.hide-comment {
+	padding-bottom: 0px;
+}

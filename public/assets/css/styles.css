@@ -8,12 +8,13 @@
     padding-top: 60px;
     margin-left: calc(60px + 60px);
     margin-right: 60px;
+    padding-bottom: 60px;
 }
 
 .grid-last {
 	text-align: center;
 	color: #777;
-    padding: 90px 0 80px
+    padding: 90px 0 20px
 }
 
 .message {
