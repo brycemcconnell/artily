@@ -64,6 +64,22 @@ class PostController
                     }
                     $this->renderNewPost();
                 break;
+                case "reply":
+                    if (!isset($_GET["id"])) {
+                        // Post id was not provided
+                        redirect_back();
+                        die();
+                    }
+                    if (isset($_POST["replysubmit"])) {
+                        var_dump($_POST);
+                        echo "\n";
+
+                        var_dump($_GET);
+                        echo "\n";
+                        $this->submitNewReply();
+                        return;
+                    }
+                break;
                 default:
                     header("Location: /error?code=404");
                     die();
@@ -77,12 +93,25 @@ class PostController
             die();
         }
     }
+
+    function submitNewReply() {
+        $post_data = array();
+        $post_data["post_id"] = $_GET["id"];
+        $post_data["content"] = $_POST["content"] ?? '';
+        $post_data["user_id"] = $_SESSION["user"]["id"];
+        $post_data["parent_comment_id"] = NULL;
+        var_dump($post_data);
+        $result = $this->comments_db->create_comment($post_data);
+        var_dump($result);
+    }
+
     function renderPostById(int $id) {
         $post = $this->posts_db->getPostById($id);
         if (array_key_exists('user',$_SESSION)) {
             $user = $this->getUserData($_SESSION["user"]);
         }
-        $comments = $this->comments_db->getCommentsByPostId($id);
+        $response = $this->comments_db->getCommentsByPostId($id);
+        $comments = $response["tree"];
         include "views/post/view_post.php";
         die();
     }
@@ -131,12 +160,9 @@ class PostController
 
         $post_data = [
             "artboard_id" => 1,
-            "user_id" => 1,
-            "file" => "",
-            "nsfw" => "",
-            "text" => "",
-            "content" => ""
+            "nsfw" => ""
         ];
+        $post_data["user_id"] = $_SESSION["user"]["id"];
         $post_data["title"] = $_POST["title"];
         $post_data["content"] = $_POST["content"];
         $post_data["file_path"] = $new_file_name;

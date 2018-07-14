@@ -41,7 +41,7 @@ class AccountController {
 		$password_is_valid = true; //assumed true for first run
 
 		if (array_key_exists('user',$_SESSION)) {
-			header("Location: /index.php");
+			redirect_back();
 			die();
 		}
 
@@ -52,8 +52,7 @@ class AccountController {
 
 			if ($user) {
 				$_SESSION['user'] = $user;
-
-				header("Location: /index.php");
+				redirect_back();
 				die();
 
 			}
@@ -66,7 +65,7 @@ class AccountController {
 	public function logout(): void
 	{
 		unset($_SESSION['user']);
-		header("Location: /index.php?status=loggedout");
+		redirect_back();
 		die();
 	}
 

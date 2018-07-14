@@ -1,5 +1,12 @@
-<body class="body-header_compensation">
+<?php
+$return_uri = $_SESSION["last_page"];
+$_SESSION["last_page"] = $_SERVER['REQUEST_URI'];
 
+?>
+<body class="body-header_compensation">
+<a style="display: block; position: absolute;
+top: 60px;
+left: 60px;" href="<?php echo $return_uri; ?>">Back</a>
 <?php if (isset($_GET['status']) && $_GET['status'] == 'loggedout'): ?>
 <div class="message">
 	<div>Successfully logged out.</div>

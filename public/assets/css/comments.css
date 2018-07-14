@@ -1,15 +1,14 @@
 .comment {
-	border-left: 1px solid #aaa;
-	padding-left: 20px;
-	margin-left: 20px;
+	padding-left: 26px;
+	position: relative;
 }  
-.comment-no_border {
+.comment-top {
 	border: none;
 	padding: 0;
 	margin: 0;
 }
 .comment-inner {
-    padding: 10px 20px;
+    padding: 10px 20px 0 26px;
     position: relative;
 }
 .comment-collapse {
@@ -19,33 +18,35 @@
 	background-color: transparent;
 	color: #d33;
 	display: inline;
-	position: relative;
-    top: -2px;
+	position: absolute;
+    top: 5px;
+    left: 0;
 }
 
 .comment-menu {
-	font-size: 12px;
-    position: absolute;
-    bottom: -5px;
-    left: 40px;
+	font-size: 11px;
+    color: #777;
+    padding-bottom: 8px;
 }
 .hide-comment ~ .comment {
 	display: none;
 }
 
-.cc-close {
+.cmt-close {
 	display: none;
 }
 
-.hide-comment .cc-close {
+.hide-comment .cmt-close {
 	display: inline-block;
 }
-.hide-comment .cc-open {
+.hide-comment .cmt-open {
 	display: none;
 }
 
 .comment-content {
 	display: inline-block;
+	line-height: 1.2;
+	padding-bottom: 4px;
 }
 
 .hide-comment .comment-content {
@@ -67,10 +68,48 @@
 }
 
 .hide-comment > .comment-menu {
-	top: 13px;
+	top: 10px;
 	left: 47px;
+	padding-bottom: 0px;
+}
+
+.hide-comment > .comment-collapse {
+	top: 3px;
 }
 
 .hide-comment {
 	padding-bottom: 0px;
+}
+
+.cmt-qr {
+	padding-bottom: 10px;
+}
+
+.cmt-qr_title {
+	margin-bottom: 10px;
+	display: block;
+}
+
+.cmt-qr_text {
+	display: block;
+    width: 100%;
+    max-width: 600px;
+    height: 130px;
+    resize: vertical;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.cmt-srt_menu {
+	padding: 10px 0;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+
+.cmt-vline {
+	position: absolute;
+    width: 100%;
+    height: calc(100% - 30px);
+    border-left: 3px solid #ddd;
+    top: 30px;
 }

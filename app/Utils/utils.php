@@ -72,3 +72,12 @@ function time_elapsed_string($datetime, $full = false) {
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
+
+function redirect_back() {
+
+        if (isset($_SESSION["last_page"])) {
+            header("Location:".$_SESSION['last_page']);
+        } else {
+            header("Location: /index.php");
+        }
+    }

@@ -21,6 +21,7 @@ class Users {
 	public function authenticateUser(string $username, string $password) {
 		$sql = '
 			SELECT
+				users.id,
 				users.username,
 				users.password
 			FROM

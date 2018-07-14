@@ -2,13 +2,18 @@
 	color: #d33;
 }
 
+
 .main {
-	min-height: calc(100% - 60px);
+	min-height: calc(100% - var(--spacing));
     margin-top: -60px;
     padding-top: 60px;
-    margin-left: calc(60px + 60px);
-    margin-right: 60px;
-    padding-bottom: 60px;
+    margin-left: calc(60px + var(--spacing));
+    margin-right: var(--spacing);
+    padding-bottom: var(--spacing);
+}
+
+.main-flex {
+    display: flex;
 }
 
 .grid-last {

@@ -1,7 +1,6 @@
 <?php
 	include_once('svg.php'); 
 	$SVG = new SVGFactory();
-
 	header('Content-Type: text/html');
 ?>
 
@@ -18,6 +17,7 @@
 
 
 		<!-- Development styles for this template -->
+		<link href="/public/assets/css/root.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/theme.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/header.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/sidebar.css" rel="stylesheet" type="text/css">
@@ -29,9 +29,9 @@
 		<link href="/public/assets/css/grid.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/post.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/comments.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/artbar.css" rel="stylesheet" type="text/css">
 		<noscript>
 	    	<link href="/public/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>
 	</head>
-	
 	

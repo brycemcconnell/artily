@@ -1,0 +1,10 @@
+
+.artbar {
+    width: 564px;
+    /* height: 100%; */
+    box-shadow: 0px 8px 20px -4px #0005;
+    display: block;
+    margin-left: var(--spacing);
+    margin-top: var(--spacing);
+    padding: 48px;
+}
