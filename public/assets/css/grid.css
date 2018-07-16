@@ -38,6 +38,10 @@
     initial-letter: 2;
     text-align: justify;
 }
+.item-text_post::first-letter {
+    -webkit-initial-letter: 2;
+    initial-letter: 2;
+}
 
 .item-link {
     position: absolute;
@@ -89,7 +93,6 @@
 }
 
 .grid {
-    padding-top: 60px;
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;

@@ -5,6 +5,7 @@
     height: calc(100% - 60px);
     margin-top: 60px;
     background-color: #fff;
+    z-index: 99;
 }
 
 .sidebar-toggle_btn {
@@ -25,6 +26,21 @@
 	display: block;
 }
 
+
+.sidebar-common_link g {
+	fill: #d33;
+	transition: .1s;
+}
+.sidebar-common_link:hover g {
+	fill: #e66;
+}
+.sidebar-common_link polyline {
+	stroke: #d33;
+	transition: .1s;
+}
+.sidebar-common_link:hover polyline {
+	stroke: #e66;
+}
 
 .sidebar-content a:hover {
 	/*background-color: #eee;*/
@@ -47,6 +63,7 @@
 	display: flex;
     align-items: center;
     font-size: 16px;
+
 }
 
 .sidebar-subtitle {

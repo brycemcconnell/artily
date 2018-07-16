@@ -1,3 +1,3 @@
-<aside class="artbar">
+<aside class="artbar box bb">
 	Artbar
 </aside>

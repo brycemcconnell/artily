@@ -87,6 +87,7 @@ class Comments {
 		        if ($element['parent_comment_id'] == $parentId) {
 		            $children = buildTree($elements, $element['id']);
 		            $element["child_count"] = 0;
+		            $element["user_url"] = "/user/".urlsafe($element["username"]);
 		            $element['children'] = [];
 		            if ($children) {
 		                $element['children'] = $children;
@@ -119,6 +120,32 @@ class Comments {
 		return $response;
 	}
 
+	public function getCommentById(int $id)
+	{
+		$sql = '
+			SELECT
+				comments.*,
+				comment_contents.content,
+				users.username
+			FROM
+				users,
+				comments,
+				comment_contents
+			WHERE
+				comments.id = :id
+			AND
+				comments.id = comment_contents.comment_id
+			AND
+				comments.user_id = users.id;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+		$comment = $stmt->fetch();
+		$comment["user_url"] = "/user/".urlsafe($comment["username"]);
+		$comment["elapsed"] = time_elapsed_string($comment["created"]);
+		return $comment;
+	}
 	public function getCommentsByCommentId(int $id): void
 	{
 

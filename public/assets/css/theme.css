@@ -5,13 +5,16 @@
 html, body {
 	margin: 0;
 	padding: 0;
-	height: 100%;
 	min-width: 320px;
+	height: 100%;
 }
 
 body {
-	font-family: 'Arial', sans-serif;
+	font-family: 'Dejavu Sans', sans-serif;
 	color: #222;
+	background-image: url('../img/bg.png');
+	background-attachment: fixed;
+	position: relative;
 }
 
 a {
@@ -23,6 +26,9 @@ a:hover {
 	/*text-decoration: underline;*/
 }
 
+button {
+	font-family: inherit;
+}
 
 .container {
 	width: 900px;
@@ -41,6 +47,9 @@ ul, li {
 
 .btn {
 	background-color: transparent;
+    border: none;
+    margin: 0;
+    padding: 0;
 }
 .theme-btn {
 	background-color: #d33;
@@ -91,4 +100,34 @@ a:hover {
 
 .none {
 	display: none;
+}
+
+.box {
+	box-shadow: 0px 8px 20px -4px #0005;
+	background-color: #fff;
+}
+
+.bb { border: 1px solid #ddd; }
+.bb1 { border-top: 1px solid #ddd; }
+.bb2 { border-right: 1px solid #ddd; }
+.bb3 { border-bottom: 1px solid #ddd; }
+.bb4 { border-left: 1px solid #ddd; }
+
+.settings-btn svg {
+	fill: #aaa;
+	transition: .2s;
+}
+.settings-btn:hover svg {
+	fill: #777;
+} 
+
+
+:target {
+	animation: target-fade 3s;
+}
+
+@keyframes target-fade {
+	from { background-color: #fed; }
+	50% { background-color: #fed; }
+	to { background-color: transparent; }
 }

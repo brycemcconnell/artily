@@ -2,11 +2,9 @@
 	color: #d33;
 }
 
-
 .main {
-	min-height: calc(100% - var(--spacing));
-    margin-top: -60px;
-    padding-top: 60px;
+	min-height: calc(100% - 60px);    
+    padding-top: calc(60px + var(--spacing));
     margin-left: calc(60px + var(--spacing));
     margin-right: var(--spacing);
     padding-bottom: var(--spacing);
@@ -19,7 +17,7 @@
 .grid-last {
 	text-align: center;
 	color: #777;
-    padding: 90px 0 20px
+    padding: 64px 0 20px
 }
 
 .message {
@@ -33,6 +31,7 @@
     width: 600px;
     animation: fade-out 5s forwards;
     animation-delay: 2s;
+    z-index: 999999;
 }
 
 .message-btn {

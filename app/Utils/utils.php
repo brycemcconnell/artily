@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @param string $action
  * @param string $path
@@ -75,9 +76,16 @@ function time_elapsed_string($datetime, $full = false) {
 
 function redirect_back() {
 
-        if (isset($_SESSION["last_page"])) {
-            header("Location:".$_SESSION['last_page']);
-        } else {
-            header("Location: /index.php");
-        }
+    if (isset($_SESSION["last_page"])) {
+        header("Location:".$_SESSION['last_page']);
+    } else {
+        header("Location: /index.php");
     }
+}
+
+function urlsafe($string) {
+    return filter_var(str_replace(' ', '-', $string), FILTER_SANITIZE_URL);
+}
+function urlsafereverse($string) {
+    return str_replace('-'," ", $string);
+}

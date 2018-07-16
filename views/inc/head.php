@@ -30,6 +30,8 @@
 		<link href="/public/assets/css/post.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/comments.css" rel="stylesheet" type="text/css">
 		<link href="/public/assets/css/artbar.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/debug.css" rel="stylesheet" type="text/css">
+		<link href="/public/assets/css/reply.css" rel="stylesheet" type="text/css">
 		<noscript>
 	    	<link href="/public/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>

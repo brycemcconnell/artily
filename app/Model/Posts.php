@@ -120,6 +120,8 @@ class Posts {
 			if (!empty($post[$key]["post_contents"]))
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
+			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["artboard_name"])."/post/".urlsafe($post[$key]["title"]);
+			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";
 			if ($post[$key]["ratio"] < .5)
@@ -142,9 +144,11 @@ class Posts {
 				posts.id as post_id,
 				users.username,
 				users.id,
-				post_contents.content
+				post_contents.content,
+				artboards.name as artboard_name
 			FROM
 				posts,
+				artboards,
 				users,
 				post_contents
 			WHERE
@@ -152,13 +156,51 @@ class Posts {
 			AND
 				posts.user_id = users.id
 			AND
-				post_contents.post_id = :post_id;
+				post_contents.post_id = :post_id
+			AND
+				artboards.id = posts.artboard_id;
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
 		$stmt->execute();
 		$post = $stmt->fetch();
 		$post["elapsed"] = time_elapsed_string($post["created"]);
+		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
+		$post["user_url"] = "/user/".urlsafe($post["username"]);
+		return $post;
+	}
+
+	public function getPostByTitle(string $post_title) {
+		
+		$sql = '
+			SELECT
+				posts.*,
+				posts.id as post_id,
+				users.username,
+				users.id,
+				post_contents.content as post_contents,
+				artboards.name as artboard_name
+			FROM
+				posts,
+				artboards,
+				users,
+				post_contents
+			WHERE
+				posts.title = :post_title
+			AND
+				posts.user_id = users.id
+			AND
+				post_contents.post_id = posts.id
+			AND
+				artboards.id = posts.artboard_id;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':post_title', urlsafereverse($post_title), PDO::PARAM_STR);
+		$stmt->execute();
+		$post = $stmt->fetch();
+		$post["elapsed"] = time_elapsed_string($post["created"]);
+		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
+		$post["user_url"] = "/user/".urlsafe($post["username"]);
 		return $post;
 	}
 }

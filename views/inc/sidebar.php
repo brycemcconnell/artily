@@ -7,10 +7,10 @@ the layout doesnt change
 
 <aside class="sidebar">
 
-	<button class="sidebar-toggle_btn theme-btn" onclick="toggleSidebar();">
+	<button type="button" class="sidebar-toggle_btn theme-btn" onclick="toggleSidebar();">
 		<img class="sidebar-toggle_btn-img" src="/public/assets/img/sidebar.svg">
 	</button>
-	<div class="sidebar-content sidebar-content_small">
+	<div class="sidebar-content sidebar-content_small bb2">
 		<div class="sidebar-section">
 			<ul>
 				<li><a class="sidebar-common_link sidebar-link" href="index?view=home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
@@ -21,7 +21,7 @@ the layout doesnt change
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
 				<div class="sidebar-subtitle">Collections (10)</div>
-				<button onclick="toggleSection('sidebarCollections')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
+				<button type="button" onclick="toggleSection('sidebarCollections')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
 			</div>
 			<ul class="sidebar-section_list" id="sidebarCollections">
 				<li><a class="sidebar-link" href="">Traditional Art</a></li>
@@ -42,7 +42,7 @@ the layout doesnt change
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
 				<div class="sidebar-subtitle">Artboards (87)</div>
-				<button onclick="toggleSection('sidebarArtboards')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
+				<button type="button" onclick="toggleSection('sidebarArtboards')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
 			</div>
 			<ul class="sidebar-section_list" id="sidebarArtboards">
 				<li><a class="sidebar-link" href="">Zelda</a></li>

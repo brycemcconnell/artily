@@ -12,6 +12,7 @@ Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
+use App\Utils\MYREQ as MYREQ;
 
 use \DateTime;
 use \DateTimeZone;
@@ -65,19 +66,41 @@ class PostController
                     $this->renderNewPost();
                 break;
                 case "reply":
-                    if (!isset($_GET["id"])) {
+                    if (array_key_exists('user',$_SESSION) == false) {
+                        redirect_back();
+                        die();
+                    }
+                    if (!isset(MYREQ::$item)) {
                         // Post id was not provided
                         redirect_back();
                         die();
                     }
-                    if (isset($_POST["replysubmit"])) {
-                        var_dump($_POST);
-                        echo "\n";
-
-                        var_dump($_GET);
-                        echo "\n";
-                        $this->submitNewReply();
+                    if (is_numeric(MYREQ::$item))
+                            $op = $this->posts_db->getPostById(MYREQ::$item);
+                        else
+                            $op = $this->posts_db->getPostByTitle(MYREQ::$item);
+                    if (isset($_POST["quickreplysubmit"])) {
+                        // QUICK REPLY
+                        // Is a reply to the main post
+                        $this->submitNewReply($op["post_id"]);
                         return;
+                    } else {
+                        // Prepare to display a form page
+                        if (isset($_GET["comment"])) {
+                            if (isset($_POST["replysubmit"])) {
+                                $this->submitNewReply($op["post_id"], $_GET["comment"]);
+                                return;
+                            }
+                            // is a reply to a comment inside the post thread
+                            $this->displayReplyForm($op, $_GET["comment"]);
+                        } else {
+                            if (isset($_POST["replysubmit"])) {
+                                $this->submitNewReply($op["post_id"]);
+                                return;
+                            }
+                            // is a reply to the main post
+                            $this->displayReplyForm($op);
+                        }
                     }
                 break;
                 default:
@@ -85,24 +108,41 @@ class PostController
                     die();
                 break;
             }
-        } else if (isset($_GET["id"])) {
+        } else if (isset(MYREQ::$item)) {
             // view id post
-            $this->renderPostById($_GET["id"]);
+            if (is_numeric(MYREQ::$item))
+                $this->renderPostById(MYREQ::$item);
+            else
+                $this->renderPostByTitle(MYREQ::$item);
         } else {
             header("Location: /error?code=404");
             die();
         }
     }
 
-    function submitNewReply() {
+    function displayReplyForm(array $op, int $comment_id = 0) {
+        if ($comment_id !== 0) {
+            // no parent_comment_id
+            $comment = $this->comments_db->getCommentById($comment_id);
+        }
+        // $post = $this->posts_db->getPostByTitle($post_title);
+        if (array_key_exists('user',$_SESSION)) {
+            $user = $this->getUserData($_SESSION["user"]);
+        }
+        include("views/post/reply.php");
+    }
+
+    function submitNewReply(int $id, int $comment_id = NULL) {
         $post_data = array();
-        $post_data["post_id"] = $_GET["id"];
+        $post_data["post_id"] = $id;
         $post_data["content"] = $_POST["content"] ?? '';
         $post_data["user_id"] = $_SESSION["user"]["id"];
-        $post_data["parent_comment_id"] = NULL;
-        var_dump($post_data);
+        $post_data["parent_comment_id"] = $comment_id;
         $result = $this->comments_db->create_comment($post_data);
-        var_dump($result);
+
+        if (isset($result))
+            header("Location: ".MYREQ::$path);
+            die();
     }
 
     function renderPostById(int $id) {
@@ -111,6 +151,18 @@ class PostController
             $user = $this->getUserData($_SESSION["user"]);
         }
         $response = $this->comments_db->getCommentsByPostId($id);
+        $comments = $response["tree"];
+        include "views/post/view_post.php";
+        die();
+    }
+
+    function renderPostByTitle(string $post_title) {
+        $post_title = str_replace('-', ' ', $post_title);
+        $post = $this->posts_db->getPostByTitle($post_title);
+        if (array_key_exists('user',$_SESSION)) {
+            $user = $this->getUserData($_SESSION["user"]);
+        }
+        $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
         include "views/post/view_post.php";
         die();

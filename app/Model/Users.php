@@ -23,7 +23,8 @@ class Users {
 			SELECT
 				users.id,
 				users.username,
-				users.password
+				users.password,
+				users.level
 			FROM
 				users
 			WHERE

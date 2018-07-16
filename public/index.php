@@ -22,6 +22,7 @@ use App\Controller\AccountController as AccountController;
 use App\Controller\ErrorController as ErrorController;
 use App\Controller\PostController as PostController;
 use App\Controller\CommentController as CommentController;
+// use App\Controller\ArtboardController as ArtboardController;
 
 
 use App\Model\Users as Users;
@@ -39,11 +40,13 @@ $AccountController = new AccountController($user_db);
 $ErrorController = new ErrorController();
 $PostController = new PostController($posts_db, $user_db, $hearts_db, $comments_db);
 $CommentController = new CommentController($user_db, $comments_db);
+// $ArtboardController = new ArtboardController();
 
 // $action = $_GET['action'] ?? '';
 
 include_once "app/Router.php";
 use App\Router as Router;
+use App\Utils\MYREQ as MYREQ;
 
 Router::set('index.php', function() {
     global $HomeController;
@@ -57,69 +60,29 @@ Router::set('error', function() {
     global $ErrorController;
     $ErrorController->run();
 });
+// Router::set('artboard', function() {
+//     global $ArtboardController;
+//     $ArtboardController->run();
+// });
 Router::set('post', function() {
     global $PostController;
     $PostController->run();
 });
-Router::set('comment', function() {
-    global $CommentController;
-    $CommentController->run();
-});
+// Router::set('comment', function() {
+//     global $CommentController;
+//     $CommentController->run();
+// });
 /*
 Router::set('api', function() {
     global $APIController;
     $APIController->run();
 });
 */
+
+
 if (Router::$routeFound === false) {
-    header("Location: /error?code=404");
+    // header("Location: /error?code=404");
+    
+    MYREQ::print_debug("No route was found");
     die();
 }
-
-/*
-
-switch ($route) {
-    case '/':
-    case 'home':
-        $HomeController->home_page();
-    break;
-    case 'login':
-
-    break;
-    case 'signup':
-
-    break;
-    default:
-        header("HTTP/1.0 404 Not Found");
-        $HomeController->home_page();
-    break;
-}
-*/
-/*
-switch ($action) {
-	case 'login':
-		if (array_key_exists('user', $_SESSION)) {
-            header("Location: /index.php");
-            die();
-        }
-        $LoginController->login();
-		break;
-	case 'logout':
-        if (!array_key_exists('user', $_SESSION)) {
-            header("Location: /index.php?action=login");
-            die();
-        }
-        $LoginController->logout();
-        break;
-    case 'signup':
-		if (array_key_exists('user', $_SESSION)) {
-            header("Location: /index.php");
-            die();
-        }
-        $SignupController->signup();
-		break;
-    default:
-        $HomeController->home_page();
-        break;
-}
-*/
