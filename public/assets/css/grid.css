@@ -83,13 +83,23 @@
     justify-content: space-between;
 }
 
+.item-detail {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .item-title {
     font-weight: bold;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .item-date {
     color: #999;
     font-size: 12px;
+    white-space: nowrap;
 }
 
 .grid {

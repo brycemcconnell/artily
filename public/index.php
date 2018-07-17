@@ -16,6 +16,7 @@ include_once "app/Controller/AccountController.php";
 include_once "app/Controller/ErrorController.php";
 include_once "app/Controller/PostController.php";
 include_once "app/Controller/CommentController.php";
+include_once "app/Controller/UserController.php";
 
 use App\Controller\HomeController as HomeController;
 use App\Controller\AccountController as AccountController;
@@ -23,6 +24,7 @@ use App\Controller\ErrorController as ErrorController;
 use App\Controller\PostController as PostController;
 use App\Controller\CommentController as CommentController;
 // use App\Controller\ArtboardController as ArtboardController;
+use App\Controller\UserController as UserController;
 
 
 use App\Model\Users as Users;
@@ -41,6 +43,7 @@ $ErrorController = new ErrorController();
 $PostController = new PostController($posts_db, $user_db, $hearts_db, $comments_db);
 $CommentController = new CommentController($user_db, $comments_db);
 // $ArtboardController = new ArtboardController();
+$UserController = new UserController($user_db, $hearts_db, $posts_db);
 
 // $action = $_GET['action'] ?? '';
 
@@ -68,6 +71,14 @@ Router::set('post', function() {
     global $PostController;
     $PostController->run();
 });
+Router::set('user', function() {
+    global $UserController;
+    $UserController->run();
+});
+// Router::set('api', function() {
+    // global $UserController;
+    // $UserController->run();
+// });
 // Router::set('comment', function() {
 //     global $CommentController;
 //     $CommentController->run();

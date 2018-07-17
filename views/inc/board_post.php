@@ -17,7 +17,7 @@ function render_post($post) {
 				<span class="item-date"><?= $post["elapsed"] ?? 0; ?></span>
 			</div>
 			<div class="item-detail_container">
-				<span>Posted on <a href="board/<?= $post["artboard_name"]; ?>"><?= $post["artboard_name"]; ?></a> by <a href="<?= $post["user_url"]; ?>"><?= $post["username"] ?? ""; ?></a></span>
+				<span class="item-detail">Posted on <a href="board/<?= $post["artboard_name"]; ?>"><?= $post["artboard_name"]; ?></a> by <a href="<?= $post["user_url"]; ?>"><?= $post["username"] ?? ""; ?></a></span>
 				<a href="<?= $post["post_url"]; ?>" class="item-comments"><?= $post["comment_count"] ?? 0; ?> Comments</a>
 			</div>
 		</div>

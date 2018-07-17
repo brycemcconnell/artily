@@ -2,6 +2,12 @@
 	display: flex;
 }
 
+@media screen and (max-width: 1200px) {
+	.view_post-wrapper {
+		display: block;
+	}
+}
+
 .view_post {
 	display: flex;
 	flex-direction: column;
@@ -41,6 +47,7 @@
 .post-image img {
 	max-height: 600px;
     max-height: 60vh;
+    max-width: 100%;
 }
 
 .post-image_active img {
@@ -69,4 +76,8 @@
 }
 .post-image_active .post-image_size_icon.shrink {
 	display: block;
+}
+
+.post-btn {
+	padding: 4px 32px;
 }

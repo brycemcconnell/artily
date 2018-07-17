@@ -6,7 +6,6 @@ set_include_path(__DIR__ . PATH_SEPARATOR . get_include_path());
 
 define('APP_ROOT', 'http://artily.local'); //no trailing '/', empty string or fully qualified name for root
 
-
 session_start();
 
 include_once 'secret.php';
@@ -23,5 +22,6 @@ $opt = [
 ];
 
 $pdo = new PDO($dsn, $user, $pass, $opt);
+
 include_once 'app/Utils/utils.php';
 include_once 'app/Utils/MYREQ.php';

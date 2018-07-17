@@ -26,7 +26,7 @@ include_once('../views/inc/head.php');
 					<?php endif; ?>
 				</div>
 				<textarea class="cmt-qr_text" name="content"></textarea>
-				<button type="submit" name="quickreplysubmit">Reply</button>
+				<button class="btn theme-btn post-btn" type="submit" name="quickreplysubmit">Reply</button>
 			</form>
 			<div class="cmt-srt_menu">
 				Reply Count (<?= $response["count"] ?? 0; ?>)

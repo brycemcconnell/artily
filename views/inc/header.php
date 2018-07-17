@@ -51,7 +51,7 @@ left: 60px;" href="<?php echo $return_uri; ?>">Back</a>
 			</a>
 			<button type="button" class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a></button>
 			<button type="button" class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a></button>
-			<a href="post?action=new" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
+			<a href="/post?action=new" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
 			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();"><?= $SVG->arrow_down(); ?></button><!-- Other options, eg. preferences/logout -->
 			<ul class="header-user_menu none">
 				<li><a href="/account?action=preferences"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>

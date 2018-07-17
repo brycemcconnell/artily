@@ -1,10 +1,19 @@
 
 .artbar {
     width: 400px;
-    /* height: 100%; */
+    min-width: 400px;
     box-shadow: 0px 8px 20px -4px #0005;
     display: block;
     margin-left: var(--spacing);
     padding: 48px;
     background-color: #fff;
+}
+
+@media screen and (max-width: 1200px) {
+	.artbar {
+		width: 100%;
+		margin-left: 0;
+		margin-top: var(--spacing);
+		
+	}
 }
