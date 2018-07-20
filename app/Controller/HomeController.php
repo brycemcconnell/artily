@@ -20,6 +20,8 @@ class HomeController
     private $hearts_db;
     private $posts_db;
 
+    private $user;
+
     private $pagePath = '/';
 
     public function __construct(Users $user_db, Hearts $hearts_db, Posts $posts_db) {
@@ -31,11 +33,26 @@ class HomeController
     }
 
     function run() {
+        if (array_key_exists('user',$_SESSION)) {
+            $this->user = $this->getUserData($_SESSION["user"]);
+        }
         if (isset($_GET["action"])) {
             switch ($_GET["action"]) {
                 default:
                     header("Location: /error?code=404");
                     die();
+                break;
+            }
+        } else if (isset($_GET["view"])) {
+            switch ($_GET["view"]) {
+                case "home":
+                    $this->renderHome();
+                break;
+                case "trending":
+                    $this->renderTrending();
+                break;
+                case "all":
+                    $this->renderAll();
                 break;
             }
         } else {
@@ -45,11 +62,33 @@ class HomeController
 
     function renderHome()
     {
+        if (array_key_exists('user',$_SESSION)) {
+            $user = $this->getUserData($_SESSION["user"]);
+        }
+        $page_path = $this->pagePath;
+        $posts = $this->posts_db->getPostsLatest();
+        // $posts = $this->posts_db->getPostsTrending();
+        include "views/home/home.php";
+    }
+
+    function renderTrending()
+    {
+        if (array_key_exists('user',$_SESSION)) {
+            $user = $this->getUserData($_SESSION["user"]);
+        }
+        $page_path = $this->pagePath;
+        $posts = $this->posts_db->getPostsTrending();
+        include "views/home/home.php";
+    }
+
+    function renderAll()
+    {
     	if (array_key_exists('user',$_SESSION)) {
     		$user = $this->getUserData($_SESSION["user"]);
     	}
         $page_path = $this->pagePath;
         $posts = $this->posts_db->getPostsLatest();
+        // $posts = $this->posts_db->getPostsTrending();
         include "views/home/home.php";
     }
 

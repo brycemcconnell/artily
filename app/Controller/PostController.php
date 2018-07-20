@@ -47,6 +47,8 @@ class PostController
     private $max_file_size = 5242880;
     private $upload_dir = "/var/www/artily/public/uploads";
 
+    private $user;
+
     public function __construct(Posts $posts_db, Users $users_db, Hearts $hearts_db, Comments $comments_db) {
     	$this->posts_db = $posts_db;
         $this->users_db = $users_db;
@@ -55,6 +57,26 @@ class PostController
     }
 
     function run() {
+        if (array_key_exists('user',$_SESSION)) {
+            $this->user = $this->getUserData($_SESSION["user"]);
+        }
+        // Create a post_id var
+        $request = MYREQ::$item;
+        $post = null;
+        var_dump($request);
+        if (is_numeric($request) == false) {
+            $post = $this->posts_db->getPostByTitle($request);
+        } else {
+            $post = $this->posts_db->getPostById($request);
+        }
+        var_dump($post);
+
+        if ($post === null) {
+            // No post was found for the request
+            header("Location: /error?code=404");
+            die();
+        }
+
         if (isset($_GET["action"])) {
             switch ($_GET["action"]) {
                 case "new":
@@ -64,6 +86,12 @@ class PostController
                         return;
                     }
                     $this->renderNewPost();
+                break;
+                case "edit":
+                    $this->editPost();
+                break;
+                case "delete":
+                    $this->deletePost($post);
                 break;
                 case "reply":
                     if (array_key_exists('user',$_SESSION) == false) {
@@ -86,15 +114,20 @@ class PostController
                         return;
                     } else {
                         // Prepare to display a form page
-                        if (isset($_GET["comment"])) {
-                            if (isset($_POST["replysubmit"])) {
+                        if (isset($_GET["comment"]))
+                        {
+                            if (isset($_POST["replysubmit"]))
+                            {
                                 $this->submitNewReply($op["post_id"], $_GET["comment"]);
                                 return;
                             }
                             // is a reply to a comment inside the post thread
                             $this->displayReplyForm($op, $_GET["comment"]);
-                        } else {
-                            if (isset($_POST["replysubmit"])) {
+                        }
+                        else
+                        {
+                            if (isset($_POST["replysubmit"]))
+                            {
                                 $this->submitNewReply($op["post_id"]);
                                 return;
                             }
@@ -108,14 +141,51 @@ class PostController
                     die();
                 break;
             }
-        } else if (isset(MYREQ::$item)) {
-            // view id post
-            if (is_numeric(MYREQ::$item))
-                $this->renderPostById(MYREQ::$item);
-            else
-                $this->renderPostByTitle(MYREQ::$item);
+        }
+
+        // No action defined, display the post
+        var_dump($post);
+        die();
+        // $this->renderPostById($post["post_id"]);
+    }
+
+    private function updatePost() {
+
+        if (isset($_POST["confirmupdate"])) {
+            // update logic
+            // $this->posts_db->updatePost($post["post_id"]);
+            // Pop up message of update success
+            // Render post view page
         } else {
-            header("Location: /error?code=404");
+            // Show update page
+            // Render the post
+            // A form with textarea etc underneath that contains the post contents
+            // Submit button with name 'confirmupdate'
+            $this->renderUpdate();
+        }
+    }
+
+    private function deletePost($post) {
+        if (array_key_exists('user',$_SESSION) == false || $_SESSION["user"]["id"] !== $post["user_id"]) {
+            // Is the user logged in, and if so are they the post author
+            http_response_code(401);
+            header("Location: /error?code=401");
+            die();
+        }
+        if (isset($_POST["confirmdelete"]) && isset($_POST["submitdelete"])) {
+            // Delete logic
+            $this->posts_db->deletePostById($post["post_id"]);
+            // Render success message
+            // Redirect to the artboard index page after 3 seconds?
+            $board = MYREQ::$board;
+            header("Location: /board/$board?status=postdeleted");
+            die();
+        } else {
+            // Show confirmation page
+            // Render the post, with a confirmation form submit button name of 'confirmdelete'
+            // Also with a checkbox ARE YOU SURE???
+            // Header shouldn't change
+            include_once('views/post/delete_post.php');
             die();
         }
     }
@@ -146,14 +216,16 @@ class PostController
     }
 
     function renderPostById(int $id) {
-        $post = $this->posts_db->getPostById($id);
+        var_dump($id);
+        echo "hello";
+        // $post = $this->posts_db->getPostById($id);
         if (array_key_exists('user',$_SESSION)) {
             $user = $this->getUserData($_SESSION["user"]);
         }
         $response = $this->comments_db->getCommentsByPostId($id);
         $comments = $response["tree"];
-        include "views/post/view_post.php";
-        die();
+        // include "views/post/view_post.php";
+        // die();
     }
 
     function renderPostByTitle(string $post_title) {
@@ -226,7 +298,7 @@ class PostController
         // Add all data to database
         $result = $this->posts_db->create_post($post_data);
         // Redirect to the new post
-        header("Location: /post?id=$result&status=postsuccess");
+        header("Location: /post/$result?status=postsuccess");
         die();
     }
 
@@ -238,11 +310,6 @@ class PostController
             die();
         }
         include "views/post/new_post.php";
-    }
-
-
-    function renderHome()
-    {
     }
 
     public function getUserData($userSession) {

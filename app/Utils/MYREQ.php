@@ -11,12 +11,17 @@ class MYREQ {
 	static $page;
 	static $path;
 	static $item;
+	static $verb;
+	static $query;
+	static $board;
 
 	static function init() {
 		$temp_url = parse_url($_SERVER["REQUEST_URI"]);
 		MYREQ::$path = $temp_url["path"];
 		MYREQ::$values = array_filter(explode("/", substr(MYREQ::$path, 1)));
 		MYREQ::$count = count(MYREQ::$values);
+		MYREQ::$verb = $_SERVER["REQUEST_METHOD"];
+		MYREQ::$query = $_SERVER["QUERY_STRING"];
 
 		switch (MYREQ::$count) {
 			case 0:
@@ -34,6 +39,7 @@ class MYREQ {
 				MYREQ::$item = MYREQ::$values[2];
 			break;
 			case 4:
+				MYREQ::$board = MYREQ::$values[1];
 				MYREQ::$page = MYREQ::$values[2];
 				MYREQ::$item = MYREQ::$values[3];
 			break;
@@ -65,6 +71,9 @@ class MYREQ {
 	    print_r("page:           " . MYREQ::$page . "\n");
 	    print_r("path:           " . MYREQ::$path . "\n");
 	    print_r("item:           " . MYREQ::$item . "\n");
+	    print_r("verb:           " . MYREQ::$verb . "\n");
+	    print_r("query:           " . MYREQ::$query . "\n");
+	    print_r("board:           " . MYREQ::$board . "\n");
 	    echo "</pre>";
 	}
 }

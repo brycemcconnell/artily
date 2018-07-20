@@ -72,39 +72,9 @@ class Posts {
 	
 	public function getPostsLatest() {
 		$sql = '
-			SELECT
-				posts.created,
-				posts.title,
-				posts.artboard_id,
-				posts.file_path,
-				posts.file_name,
-				posts.file_type,
-				IF (posts.file_path IS NULL, LEFT (post_contents.content, 300), "") AS post_contents,
-				posts.nsfw,
-				posts.width,
-				posts.height,
-				posts.id as post_id,
-				users.username,
-				users.id as user_id,
-				artboards.name as artboard_name,
-				COUNT(comments.post_id) as comment_count
-			FROM
-				post_contents,
-				artboards,
-				users,
-				posts
-			LEFT JOIN
-				comments ON posts.id = comments.post_id
-			WHERE
-				users.id = posts.user_id
-			AND
-				artboards.id = posts.artboard_id
-			AND
-				post_contents.post_id = posts.id
-			GROUP BY
-				posts.id, users.id
-			ORDER BY 
-				posts.created DESC
+			SELECT * FROM `Posts_All`
+			ORDER BY
+				created DESC
 			LIMIT
 				20;
 		';
@@ -134,7 +104,42 @@ class Posts {
 			
 		}
 		return $post;
+	}
 
+	public function getPostsTrending() {
+		$sql = '
+			SELECT * FROM `Posts_All`
+			ORDER BY 
+				LOG10(heart_count + comment_count + 1) * 86400 / .3 + UNIX_TIMESTAMP(created) DESC
+			LIMIT
+				20;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute();
+		$post = $stmt->fetchAll();
+		function get_image_ratio($width, $height) {
+			if (!empty($width) && !empty($height))
+				return $width / $height;
+			return 1;
+		}
+		foreach ($post as $key => $value) {
+			if (!empty($post[$key]["post_contents"]))
+				$post[$key]["post_contents"] .= "...";
+			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
+			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["artboard_name"])."/post/".urlsafe($post[$key]["title"]);
+			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
+			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
+			$post[$key]["class"] = "";
+			if ($post[$key]["ratio"] < .5)
+				$post[$key]["class"] = "item-v2";
+			else if ($post[$key]["ratio"] > 1.5)
+				$post[$key]["class"] = "item-h2";
+			else 
+				if (rand(0,4) == 4)
+					$post[$key]["class"] = "item-h2 item-v2";
+			
+		}
+		return $post;
 	}
 
 	public function getPostById(int $post_id) {
@@ -164,6 +169,7 @@ class Posts {
 		$stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
 		$stmt->execute();
 		$post = $stmt->fetch();
+		$post["op_id"] = $post["user_id"];
 		$post["elapsed"] = time_elapsed_string($post["created"]);
 		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
 		$post["user_url"] = "/user/".urlsafe($post["username"]);
@@ -202,5 +208,24 @@ class Posts {
 		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
 		$post["user_url"] = "/user/".urlsafe($post["username"]);
 		return $post;
+	}
+
+
+	/*
+		@param int $id The post id.
+		@return bool True if success, false if not.
+	*/
+	public function deletePostById(int $id)
+	{
+		$sql = '
+			UPDATE FROM
+				posts
+			WHERE
+				posts.id = :id
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
+		$stmt->execute();
+		return $stmt->fetch();
 	}
 }

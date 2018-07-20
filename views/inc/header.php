@@ -1,7 +1,7 @@
 <?php
 $return_uri = $_SESSION["last_page"] ?? "";
 $_SESSION["last_page"] = $_SERVER['REQUEST_URI'];
-
+use App\Utils\MYREQ;
 ?>
 <body>
 <?php if (!empty($return_uri)): ?>
@@ -45,8 +45,8 @@ left: 60px;" href="<?php echo $return_uri; ?>">Back</a>
 			<a href="user" class="header-user">
 				<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
-					<div class="header-user_name"><?= $user["username"]; ?></div><!-- User name -->
-					<div><span class="heart">♥</span><?= $user["userhearts"]; ?></div><!-- User heart count -->
+					<div class="header-user_name"><?= $this->user["username"]; ?></div><!-- User name -->
+					<div><span class="heart">♥</span><?= $this->user["userhearts"]; ?></div><!-- User heart count -->
 				</div>
 			</a>
 			<button type="button" class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a></button>

@@ -5,6 +5,10 @@
 			  isset($_GET["action"]) == false && $_SESSION["user"]["level"] > 0)
 			): ?>
 		<button type="button" class="settings-btn btn"><?= $SVG->gear("#aaa"); ?></button>
+		<ul>
+			<li><a href="?action=edit">Edit</a></li>
+			<li><a href="?action=delete">Delete</a></li>
+		</ul>
 	<?php endif; ?>
 </div>
 <div class="post-details">
@@ -12,7 +16,7 @@
 </div>
 <div class="post-content">
 	<?php
-	if (isset($post["file_path"])): 
+	if (!empty($post["file_path"])): 
 	?>
 	<div class="post-image" onclick="toggleImageSize(this);">
 		<img src="<?= '/public/uploads/'.$post["file_path"]; ?>" alt="<?= $post["file_name"].'.'.$post["file_type"] ?>">

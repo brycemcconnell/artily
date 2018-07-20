@@ -5,7 +5,7 @@
 A recursive function for displaying nested comments
 
 */
-function render_comments($elements, $depth = 0) {
+function render_comments($elements, $op_id, $depth = 0) {
 	foreach ($elements as $element):
 		if ($element["parent_comment_id"] == NULL)
 			$depth = 0;
@@ -13,6 +13,10 @@ function render_comments($elements, $depth = 0) {
 		if (isset($_SESSION["user"]) && $element["user_id"] == $_SESSION["user"]["id"]) {
 			$user_comment = "user_comment";
 		} 
+		$op_comment_class = "";
+		if ($op_id == $element["user_id"]) {
+			$op_comment_class = "cmt-op";
+		}
 		$comment_class = $depth == 0 ? "comment comment-top" : "comment";
 		?>
 
@@ -25,7 +29,7 @@ function render_comments($elements, $depth = 0) {
 				</div>
 				<div class="comment-menu">
 					<span class="comment-hidden_helper">Hidden</span>
-					<span><?= $element["elapsed"]; ?> by <a href="<?= $element["user_url"]; ?>"><?= $element["username"]; ?></a></span>
+					<span><?= $element["elapsed"]; ?> by <a href="<?= $element["user_url"];?>" class="<?= $op_comment_class; ?>" ><?= $element["username"]; ?></a></span>
 					<span class="cmt-dot">-</span>
 					(<?= count($element["children"]); ?>) Replies
 					<div class="comment-actions">
@@ -42,10 +46,11 @@ function render_comments($elements, $depth = 0) {
 		<?php
 		if (count($element["children"])) {
 			$depth += 1;
-			render_comments($element["children"], $depth);
+			render_comments($element["children"], $op_id, $depth);
 		}
 		?>
 </ul><?php
 	endforeach; 
-} 
-render_comments($comments);
+}
+$op_id = $post["user_id"];
+render_comments($comments, $op_id);
