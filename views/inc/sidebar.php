@@ -4,6 +4,27 @@ Change sidebar width to fixed 60px, and when expanding float over the grid so th
 the layout doesnt change
 
  -->
+ <?php
+$collections = [
+    [
+        "name" => "cats"
+    ],
+    [
+        "name" => "dogs"
+    ]
+];
+$boards = [
+	[
+        "name" => "kittens"
+    ],
+    [
+        "name" => "cats"
+    ],
+    [
+        "name" => "puppers"
+    ],
+];
+ ?>
 
 <aside class="sidebar">
 
@@ -20,86 +41,27 @@ the layout doesnt change
 		</div>
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
-				<div class="sidebar-subtitle">Collections (10)</div>
+				<div class="sidebar-subtitle">Collections (<?= count($collections); ?>)</div>
 				<button type="button" onclick="toggleSection('sidebarCollections')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
 			</div>
 			<ul class="sidebar-section_list" id="sidebarCollections">
-				<li><a class="sidebar-link" href="">Traditional Art</a></li>
-				<li><a class="sidebar-link" href="">Contemporary Art</a></li>
-				<li><a class="sidebar-link" href="">Video Games</a></li>
-				<li><a class="sidebar-link" href="">User Interface</a></li>
-				<li><a class="sidebar-link" href="">Design</a></li>
-				<li><a class="sidebar-link" href="">Furniture</a></li>
-				<li><a class="sidebar-link" href="">Architecture</a></li>
-				<li><a class="sidebar-link" href="">Web Design</a></li>
-				<li><a class="sidebar-link" href="">3d Graphics</a></li>
-				<li><a class="sidebar-link" href="">Fanart</a></li>
-				<li><a class="sidebar-link" href="">Animated Gifs</a></li>
-				<li><a class="sidebar-link" href="">Blender</a></li>
+				<?php foreach($collections as $c): ?>
+				<li><a class="sidebar-link" href="/collection/<?= $c["name"]; ?>"><?= $c["name"]; ?></a></li>
+				<?php endforeach; ?>
 			</ul>
 			<a href="collection?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
 		</div>
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
-				<div class="sidebar-subtitle">Artboards (87)</div>
+				<div class="sidebar-subtitle">Artboards (<?= count($boards); ?>)</div>
 				<button type="button" onclick="toggleSection('sidebarArtboards')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
 			</div>
 			<ul class="sidebar-section_list" id="sidebarArtboards">
-				<li><a class="sidebar-link" href="">Zelda</a></li>
-				<li><a class="sidebar-link" href="">Pokemon</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Zelda</a></li>
-				<li><a class="sidebar-link" href="">Pokemon</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Zelda</a></li>
-				<li><a class="sidebar-link" href="">Pokemon</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
-				<li><a class="sidebar-link" href="">Zelda</a></li>
-				<li><a class="sidebar-link" href="">Pokemon</a></li>
-				<li><a class="sidebar-link" href="">Starcraft</a></li>
-				<li><a class="sidebar-link" href="">Anno</a></li>
-				<li><a class="sidebar-link" href="">Minecraft</a></li>
-				<li><a class="sidebar-link" href="">League of Legends</a></li>
-				<li><a class="sidebar-link" href="">Mario Kart</a></li>
-				<li><a class="sidebar-link" href="">Bomberman</a></li>
+				<?php foreach($boards as $b): ?>
+				<li><a class="sidebar-link" href="/board/<?= $b["name"]; ?>"><?= $b["name"]; ?></a></li>
+				<?php endforeach; ?>
 			</ul>
-			<a href="artboard?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
+			<a href="board?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
 		</div>
 	</div>
 	<script>

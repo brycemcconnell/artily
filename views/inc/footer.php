@@ -7,8 +7,8 @@
 </footer>
 <div class="debug box bb none">
 	<?php 
-		use App\Utils\MYREQ as MYREQ;
-		MYREQ::print_debug("default");
+		use App\Core\Request as Request;
+		Request::print_debug("default");
 	?>
 </div>
 <script>
@@ -16,6 +16,19 @@
 		document.querySelector('.debug').classList.toggle('none');
 	}
 	
+	// Close floating menus when clicking outside them
+	window.addEventListener('mouseup', (e) => {
+		let divs = [...document.querySelectorAll('.floating-menu:not(.none-withjs)')];
+		console.log(e)
+		divs.forEach(div => {
+			let coords = div.getBoundingClientRect();
+			if ((e.clientX > coords.left && e.clientX < coords.right &&
+				 e.clientY < coords.bottom && e.clientY > coords.top) == false) {
+				div.classList.add('none-withjs');
+				console.log('hit', coords, e.clientX, e.clientY);
+			}
+		});
+	});
 
 </script>
 </body>

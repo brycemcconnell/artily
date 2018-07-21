@@ -1,17 +1,20 @@
 <?php
 
-
 namespace App\Controller;
 
 class ErrorController {
+
 	private $errorCodes;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$this->errorCodes = [
 			400 => 'Bad Request',
 			401 => 'Unauthorized',
 			403 => 'Forbidden',
 			404 => 'Not Found',
+			418 => "☕",
+			420 => "🔥",
 			500 => 'Internal Server Error',
 			502 => 'Bad Gateway',
 			503 => 'Service Unavailable',
@@ -32,6 +35,7 @@ class ErrorController {
 	public function render($code): void
 	{
 		$error = [$code => $this->errorCodes[$code]];
+		$big = $code == 418 || $code == 420 ? "big-text" : "";
 		include "views/error/error.php";
 	}
 }

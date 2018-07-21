@@ -72,5 +72,26 @@ xml;
 </svg>
 xml;
 	}
+	public function edit($color = "#000") {
+		return <<<xml
+<svg height="16" width="16" viewBox="0 0 600 600">
+  <g stroke="$color" fill="none">
+   <path d="m70.064 422.35 374.27-374.26 107.58 107.58-374.26 374.27-129.56 21.97z" stroke-width="30"/>
+   <path d="m70.569 417.81 110.61 110.61" stroke-width="25"/>
+   <path d="m491.47 108.37-366.69 366.68" stroke-width="25"/>
+   <path d="m54.222 507.26 40.975 39.546" stroke-width="25"/>
+  </g>
+</svg>
+xml;
+	}
+	public function garbage($color = "#000")
+	{
+		return <<<xml
+<svg viewBox="0 0 433 433" height="14" width="14">
+	<path d="M371.5,38h-98.384V0H159.884v38H61.5v90h20v305h270V128h20V38z M189.884,30h53.231v8h-53.231V30z M91.5,68h250v30h-250V68z
+	 M241.5,128v275h-50V128H241.5z M111.5,128h50v275h-50V128z M321.5,403h-50V128h50V403z"/>
+</svg>
+xml;
+	}
 }
 

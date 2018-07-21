@@ -8,20 +8,20 @@ define('APP_ROOT', 'http://artily.local'); //no trailing '/', empty string or fu
 
 session_start();
 
-include_once 'secret.php';
-$host = 'localhost';
-$db = 'artily';
-$user = USERNAME;
-$pass = PASSWORD;
-$charset = 'utf8mb4';
+// $host = 'localhost';
+// $db = 'artily';
+// $user = USERNAME;
+// $pass = PASSWORD;
+// $charset = 'utf8mb4';
 
-$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-$opt = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-];
+// $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+// $opt = [
+//     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+//     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+// ];
 
-$pdo = new PDO($dsn, $user, $pass, $opt);
+// $pdo = new PDO($dsn, $user, $pass, $opt);
 
 include_once 'app/Utils/utils.php';
-include_once 'app/Utils/MYREQ.php';
+
+

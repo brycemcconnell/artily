@@ -3,16 +3,11 @@
 
 namespace App\Controller;
 
-include_once('app/Model/Users.php');
-include_once('app/Model/Hearts.php');
-include_once('app/Model/Posts.php');
-include_once('app/Model/Comments.php');
-
 Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
-use App\Utils\MYREQ as MYREQ;
+use App\Core\Request as Request;
 
 use \DateTime;
 use \DateTimeZone;
@@ -54,39 +49,46 @@ class PostController
         $this->users_db = $users_db;
         $this->hearts_db = $hearts_db;
         $this->comments_db = $comments_db;
-    }
+    // }
 
-    function run() {
+    // function run() {
         if (array_key_exists('user',$_SESSION)) {
             $this->user = $this->getUserData($_SESSION["user"]);
         }
+
+        if (isset($_GET["action"]) && $_GET["action"] == 'new') {
+            if (isset($_POST["submitPost"])) {
+                $this->submitNewPost();
+                return;
+            }
+            $this->renderNewPost();
+            die();
+        }
+
         // Create a post_id var
-        $request = MYREQ::$item;
+        $request = Request::$item;
         $post = null;
-        var_dump($request);
-        if (is_numeric($request) == false) {
+        if (is_numeric($request) == false && $request !== null) {
             $post = $this->posts_db->getPostByTitle($request);
-        } else {
+        }
+        if (is_numeric($request) == true && $request !== null) {
             $post = $this->posts_db->getPostById($request);
         }
-        var_dump($post);
-
         if ($post === null) {
             // No post was found for the request
+            http_response_code(404);
+            header("Location: /error?code=404");
+            die();
+        }
+
+        if (isset($post["deleted"])) {
+            http_response_code(404);
             header("Location: /error?code=404");
             die();
         }
 
         if (isset($_GET["action"])) {
             switch ($_GET["action"]) {
-                case "new":
-                    // create a new post
-                    if (isset($_POST["submitPost"])) {
-                        $this->submitNewPost();
-                        return;
-                    }
-                    $this->renderNewPost();
-                break;
                 case "edit":
                     $this->editPost();
                 break;
@@ -98,15 +100,15 @@ class PostController
                         redirect_back();
                         die();
                     }
-                    if (!isset(MYREQ::$item)) {
+                    if (!isset(Request::$item)) {
                         // Post id was not provided
                         redirect_back();
                         die();
                     }
-                    if (is_numeric(MYREQ::$item))
-                            $op = $this->posts_db->getPostById(MYREQ::$item);
+                    if (is_numeric(Request::$item))
+                            $op = $this->posts_db->getPostById(Request::$item);
                         else
-                            $op = $this->posts_db->getPostByTitle(MYREQ::$item);
+                            $op = $this->posts_db->getPostByTitle(Request::$item);
                     if (isset($_POST["quickreplysubmit"])) {
                         // QUICK REPLY
                         // Is a reply to the main post
@@ -144,9 +146,9 @@ class PostController
         }
 
         // No action defined, display the post
-        var_dump($post);
-        die();
-        // $this->renderPostById($post["post_id"]);
+        // var_dump($post);
+        // die();
+        $this->renderPost($post);
     }
 
     private function updatePost() {
@@ -174,18 +176,19 @@ class PostController
         }
         if (isset($_POST["confirmdelete"]) && isset($_POST["submitdelete"])) {
             // Delete logic
-            $this->posts_db->deletePostById($post["post_id"]);
+            $result = $this->posts_db->deletePostById($post["post_id"]);
             // Render success message
             // Redirect to the artboard index page after 3 seconds?
-            $board = MYREQ::$board;
-            header("Location: /board/$board?status=postdeleted");
+            $board = Request::$board;
+            var_dump($result);
+            // header("Location: /board/$board?status=postdeleted");
             die();
         } else {
             // Show confirmation page
             // Render the post, with a confirmation form submit button name of 'confirmdelete'
             // Also with a checkbox ARE YOU SURE???
             // Header shouldn't change
-            include_once('views/post/delete_post.php');
+            include_once('views/posts/delete_post.php');
             die();
         }
     }
@@ -199,7 +202,7 @@ class PostController
         if (array_key_exists('user',$_SESSION)) {
             $user = $this->getUserData($_SESSION["user"]);
         }
-        include("views/post/reply.php");
+        include("views/posts/reply.php");
     }
 
     function submitNewReply(int $id, int $comment_id = NULL) {
@@ -211,21 +214,19 @@ class PostController
         $result = $this->comments_db->create_comment($post_data);
 
         if (isset($result))
-            header("Location: ".MYREQ::$path);
+            header("Location: ".Request::$path);
             die();
     }
 
-    function renderPostById(int $id) {
-        var_dump($id);
-        echo "hello";
+    function renderPost($post) {
         // $post = $this->posts_db->getPostById($id);
         if (array_key_exists('user',$_SESSION)) {
             $user = $this->getUserData($_SESSION["user"]);
         }
-        $response = $this->comments_db->getCommentsByPostId($id);
+        $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
-        // include "views/post/view_post.php";
-        // die();
+        include "views/posts/view_post.php";
+        die();
     }
 
     function renderPostByTitle(string $post_title) {
@@ -236,7 +237,7 @@ class PostController
         }
         $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
-        include "views/post/view_post.php";
+        include "views/posts/view_post.php";
         die();
     }
 
@@ -250,21 +251,21 @@ class PostController
             if (!empty($file["error"])) {
                 $error = $file["error"];
                 echo $this->error_messages[$error];
-                include "views/post/new_post.php";
+                include "views/posts/new_post.php";
                 die();
             }
 
             // File size error
             if ($file["size"] > $this->max_file_size) {
                 echo "File size is too large (max 5mb)";
-                include "views/post/new_post.php";
+                include "views/posts/new_post.php";
                 die();
             }
 
             // File extension error
             if (in_array($file_type, $this->permitted) == false || exif_imagetype($file["tmp_name"]) == false) {
                 echo "The file '$file_name' is not a permitted file format";
-                include "views/post/new_post.php";
+                include "views/posts/new_post.php";
                 die();
             }
 
@@ -283,22 +284,30 @@ class PostController
         }
 
         $post_data = [
-            "artboard_id" => 1,
-            "nsfw" => ""
+            "board_id" => 1,
+            "nsfw" => "",
+            "file_path" => "",
+            "file_name" => "",
+            "file_type" => "",
+            "width" => "",
+            "height" => ""
         ];
         $post_data["user_id"] = $_SESSION["user"]["id"];
         $post_data["title"] = $_POST["title"];
         $post_data["content"] = $_POST["content"];
-        $post_data["file_path"] = $new_file_name;
-        $post_data["file_name"] = pathinfo($file["name"], PATHINFO_FILENAME);
-        $post_data["file_type"] = pathinfo($file["name"], PATHINFO_EXTENSION);
-        $file_size = getimagesize($this->upload_dir .'/'. $new_file_name);
-        $post_data["width"] = $file_size[0];
-        $post_data["height"] = $file_size[1];
+        if ($file["name"]) {
+            $post_data["file_path"] = $new_file_name;
+            $post_data["file_name"] = pathinfo($file["name"], PATHINFO_FILENAME);
+            $post_data["file_type"] = pathinfo($file["name"], PATHINFO_EXTENSION);
+            $file_size = getimagesize($this->upload_dir .'/'. $new_file_name);
+            $post_data["width"] = $file_size[0];
+            $post_data["height"] = $file_size[1];
+        }
         // Add all data to database
         $result = $this->posts_db->create_post($post_data);
         // Redirect to the new post
-        header("Location: /post/$result?status=postsuccess");
+        var_dump($result);
+        header("Location: /posts/$result?status=postsuccess");
         die();
     }
 
@@ -309,7 +318,7 @@ class PostController
             header("Location: /error?code=401");
             die();
         }
-        include "views/post/new_post.php";
+        include "views/posts/new_post.php";
     }
 
     public function getUserData($userSession) {

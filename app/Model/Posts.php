@@ -23,7 +23,7 @@ class Posts {
 				posts (
 				    title,
 					created,
-					artboard_id,
+					board_id,
 					user_id,
 					file_path,
 					file_name,
@@ -35,7 +35,7 @@ class Posts {
 			VALUES (
 				:title,
 				UTC_TIMESTAMP(),
-				:artboard_id,
+				:board_id,
 				:user_id,
 				:file_path,
 				:file_name,
@@ -57,7 +57,7 @@ class Posts {
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':title', $post["title"], PDO::PARAM_STR);
-		$stmt->bindValue(':artboard_id', $post["artboard_id"], PDO::PARAM_STR);
+		$stmt->bindValue(':board_id', $post["board_id"], PDO::PARAM_STR);
 		$stmt->bindValue(':user_id', $post["user_id"], PDO::PARAM_STR);
 		$stmt->bindValue(':file_path', $post["file_path"], PDO::PARAM_STR);
 		$stmt->bindValue(':file_name', $post["file_name"], PDO::PARAM_STR);
@@ -90,7 +90,7 @@ class Posts {
 			if (!empty($post[$key]["post_contents"]))
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["artboard_name"])."/post/".urlsafe($post[$key]["title"]);
+			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
 			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";
@@ -126,7 +126,7 @@ class Posts {
 			if (!empty($post[$key]["post_contents"]))
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["artboard_name"])."/post/".urlsafe($post[$key]["title"]);
+			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
 			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";
@@ -146,24 +146,24 @@ class Posts {
 		$sql = '
 			SELECT
 				posts.*,
-				posts.id as post_id,
+				posts.post_id as post_id,
 				users.username,
 				users.id,
 				post_contents.content,
-				artboards.name as artboard_name
+				boards.name as board_name
 			FROM
 				posts,
-				artboards,
+				boards,
 				users,
 				post_contents
 			WHERE
-				posts.id = :post_id
+				posts.post_id = :post_id
 			AND
 				posts.user_id = users.id
 			AND
 				post_contents.post_id = :post_id
 			AND
-				artboards.id = posts.artboard_id;
+				boards.id = posts.board_id;
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
@@ -171,7 +171,7 @@ class Posts {
 		$post = $stmt->fetch();
 		$post["op_id"] = $post["user_id"];
 		$post["elapsed"] = time_elapsed_string($post["created"]);
-		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
+		$post["post_url"] = "/board/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
 		$post["user_url"] = "/user/".urlsafe($post["username"]);
 		return $post;
 	}
@@ -181,14 +181,14 @@ class Posts {
 		$sql = '
 			SELECT
 				posts.*,
-				posts.id as post_id,
+				posts.post_id as post_id,
 				users.username,
 				users.id,
 				post_contents.content as post_contents,
-				artboards.name as artboard_name
+				boards.name as board_name
 			FROM
 				posts,
-				artboards,
+				boards,
 				users,
 				post_contents
 			WHERE
@@ -196,16 +196,16 @@ class Posts {
 			AND
 				posts.user_id = users.id
 			AND
-				post_contents.post_id = posts.id
+				post_contents.post_id = posts.post_id
 			AND
-				artboards.id = posts.artboard_id;
+				boards.id = posts.board_id;
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':post_title', urlsafereverse($post_title), PDO::PARAM_STR);
 		$stmt->execute();
 		$post = $stmt->fetch();
 		$post["elapsed"] = time_elapsed_string($post["created"]);
-		$post["post_url"] = "/board/".urlsafe($post["artboard_name"])."/post/".urlsafe($post["title"]);
+		$post["post_url"] = "/board/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
 		$post["user_url"] = "/user/".urlsafe($post["username"]);
 		return $post;
 	}
@@ -213,19 +213,21 @@ class Posts {
 
 	/*
 		@param int $id The post id.
-		@return bool True if success, false if not.
+		@return int 0 on failure, n as the amount of rows affected
 	*/
 	public function deletePostById(int $id)
 	{
 		$sql = '
-			UPDATE FROM
+			UPDATE
 				posts
+			SET
+				deleted = UTC_TIMESTAMP()
 			WHERE
-				posts.id = :id
+				posts.post_id = :id
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':id', $id, PDO::PARAM_INT);
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->rowCount();
 	}
 }

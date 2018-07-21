@@ -1,7 +1,7 @@
 <?php
 $return_uri = $_SESSION["last_page"] ?? "";
 $_SESSION["last_page"] = $_SERVER['REQUEST_URI'];
-use App\Utils\MYREQ;
+use App\Core\Request;
 ?>
 <body>
 <?php if (!empty($return_uri)): ?>
@@ -49,11 +49,10 @@ left: 60px;" href="<?php echo $return_uri; ?>">Back</a>
 					<div><span class="heart">♥</span><?= $this->user["userhearts"]; ?></div><!-- User heart count -->
 				</div>
 			</a>
-			<button type="button" class="btn header-user_icon" onclick=""><img src="/public/assets/img/mail.png"></a></button>
-			<button type="button" class="btn header-user_icon" onclick=""><img src="/public/assets/img/chat.png"></a></button>
+			<a href="/messages" class="btn header-user_icon"><img src="/public/assets/img/mail.png"></a>
 			<a href="/post?action=new" class="header-user_submit theme-btn theme-a-btn">Submit</a><!-- Submit new content -->
 			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();"><?= $SVG->arrow_down(); ?></button><!-- Other options, eg. preferences/logout -->
-			<ul class="header-user_menu none">
+			<ul class="header-user_menu none-withjs floating-menu">
 				<li><a href="/account?action=preferences"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences</a></li>
 				<li><a href="/account?action=logout"><span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Logout</a></li>
 			</ul>
@@ -67,7 +66,7 @@ left: 60px;" href="<?php echo $return_uri; ?>">Back</a>
 	<?php endif;?>
 	<script>
 		function toggleUserMenu() {
-			document.querySelector('.header-user_menu').classList.toggle('none');
+			document.querySelector('.header-user_menu').classList.toggle('none-withjs');
 		}
 	</script>
 </header>

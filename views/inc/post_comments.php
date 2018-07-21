@@ -6,6 +6,7 @@ A recursive function for displaying nested comments
 
 */
 function render_comments($elements, $op_id, $depth = 0) {
+	// This code probably shouldn't be here
 	foreach ($elements as $element):
 		if ($element["parent_comment_id"] == NULL)
 			$depth = 0;

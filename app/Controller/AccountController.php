@@ -3,8 +3,6 @@
 
 namespace App\Controller;
 
-include_once('app/Model/Users.php');
-
 Use App\Model\Users as Users;
 
 class AccountController {

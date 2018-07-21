@@ -22,7 +22,7 @@ class Hearts {
 			SELECT
 				COUNT(*)
 			FROM
-				hearts
+				post_hearts
 			WHERE
 				user_id = :user_id;
 		';

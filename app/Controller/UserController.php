@@ -3,14 +3,10 @@
 
 namespace App\Controller;
 
-include_once('app/Model/Users.php');
-include_once('app/Model/Hearts.php');
-include_once('app/Model/Posts.php');
-
 Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
-use App\Utils\MYREQ as MYREQ;
+use App\Core\Request as Request;
 
 class UserController
 {

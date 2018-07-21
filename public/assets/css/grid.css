@@ -150,7 +150,7 @@
         display: grid;
         grid-auto-rows: 300px;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        grid-gap: 20px;
+        grid-gap: 10px;
         justify-content: center;
         grid-auto-flow: dense;
         margin-left: 0;

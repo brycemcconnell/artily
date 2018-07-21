@@ -1,95 +1,69 @@
 <?php
 
-
 namespace App\Controller;
-
-include_once('app/Model/Users.php');
-include_once('app/Model/Hearts.php');
-include_once('app/Model/Posts.php');
 
 Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 
+Use App\Core\Request as Request;
+
+Use PDO;
+
 class HomeController
 {
-    /**
-     *
-     */
     private $user_db;
     private $hearts_db;
     private $posts_db;
 
     private $user;
 
-    private $pagePath = '/';
+    public function __construct(\PDO $pdo)
+    {
+    	$this->user_db = new Users($pdo);
+        $this->hearts_db = new Hearts($pdo);
+    	$this->posts_db = new Posts($pdo);
 
-    public function __construct(Users $user_db, Hearts $hearts_db, Posts $posts_db) {
-
-    	$this->user_db = $user_db;
-        $this->hearts_db = $hearts_db;
-    	$this->posts_db = $posts_db;
-
-    }
-
-    function run() {
         if (array_key_exists('user',$_SESSION)) {
             $this->user = $this->getUserData($_SESSION["user"]);
         }
-        if (isset($_GET["action"])) {
-            switch ($_GET["action"]) {
-                default:
-                    header("Location: /error?code=404");
-                    die();
-                break;
-            }
-        } else if (isset($_GET["view"])) {
-            switch ($_GET["view"]) {
-                case "home":
-                    $this->renderHome();
-                break;
-                case "trending":
-                    $this->renderTrending();
-                break;
-                case "all":
-                    $this->renderAll();
-                break;
-            }
-        } else {
-            $this->renderHome();
+    }
+
+    public function index($query = ["view" => "home"]): void
+    {
+        $view = $query["view"] ?? null;
+        switch ($view) {
+            case 'all':
+                $this->renderLatest();
+            break;
+            case 'trending':
+                $this->renderTrending();
+            break;
+            case 'home':
+                $this->renderHome();
+            break;
+            default:
+                header("Location: /error?code=404");
+            break;
         }
     }
 
-    function renderHome()
+    private function renderHome()
     {
-        if (array_key_exists('user',$_SESSION)) {
-            $user = $this->getUserData($_SESSION["user"]);
-        }
-        $page_path = $this->pagePath;
         $posts = $this->posts_db->getPostsLatest();
-        // $posts = $this->posts_db->getPostsTrending();
-        include "views/home/home.php";
+        include Request::$api."/home/home.php";
     }
 
-    function renderTrending()
+    private function renderLatest()
     {
-        if (array_key_exists('user',$_SESSION)) {
-            $user = $this->getUserData($_SESSION["user"]);
-        }
-        $page_path = $this->pagePath;
+        $posts = $this->posts_db->getPostsLatest();
+        include Request::$api."/home/home.php";
+    }
+
+    private function renderTrending()
+    {
         $posts = $this->posts_db->getPostsTrending();
-        include "views/home/home.php";
-    }
-
-    function renderAll()
-    {
-    	if (array_key_exists('user',$_SESSION)) {
-    		$user = $this->getUserData($_SESSION["user"]);
-    	}
-        $page_path = $this->pagePath;
-        $posts = $this->posts_db->getPostsLatest();
-        // $posts = $this->posts_db->getPostsTrending();
-        include "views/home/home.php";
+        include Request::$api."/home/home.php";
     }
 
     public function getUserData($userSession) {
