@@ -54,10 +54,10 @@ class Router {
 		die();
 	}
 
-	/*
-		@param string $uri
-		@param string $query
-		@param function $func
+	/**
+	 *	@param string $uri
+	 *	@param string $query
+	 *	@param function $func
 	*/
 	public static function get($uri, $query, $func): void
 	{
@@ -68,10 +68,10 @@ class Router {
 		self::request($uri, $query, $func);
 	}
 
-	/*
-		@param string $uri
-		@param string $query
-		@param function $func
+	/**
+	 *	@param string $uri
+	 *	@param string $query
+	 *	@param function $func
 	*/
 	public static function post($uri, $query, $func): void
 	{
