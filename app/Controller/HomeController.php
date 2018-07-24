@@ -12,7 +12,7 @@ Use PDO;
 
 class HomeController
 {
-    private $user_db;
+    private $users_db;
     private $hearts_db;
     private $posts_db;
 
@@ -20,7 +20,7 @@ class HomeController
 
     public function __construct(\PDO $pdo)
     {
-    	$this->user_db = new Users($pdo);
+    	$this->users_db = new Users($pdo);
         $this->hearts_db = new Hearts($pdo);
     	$this->posts_db = new Posts($pdo);
 
@@ -67,7 +67,7 @@ class HomeController
     }
 
     public function getUserData($userSession) {
-    	$user = $this->user_db->getUser($userSession["username"]);
+    	$user = $this->users_db->getUser($userSession["username"]);
 
     	$user["userhearts"] = $this->hearts_db->getHeartsByUserId($user["id"]);
     	return $user;

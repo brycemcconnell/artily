@@ -168,8 +168,14 @@ class PostController
     }
 
     private function deletePost($post) {
-        if (array_key_exists('user',$_SESSION) == false || $_SESSION["user"]["id"] !== $post["user_id"]) {
-            // Is the user logged in, and if so are they the post author
+        if (array_key_exists('user',$_SESSION) == false) { 
+            // User isn't logged in
+            http_response_code(403);
+            header("Location: /error?code=403");
+            die();
+        }
+        if ($_SESSION["user"]["id"] !== $post["user_id"]) {
+            // User isn't the author, thus unauthorized
             http_response_code(401);
             header("Location: /error?code=401");
             die();
@@ -314,8 +320,8 @@ class PostController
     function renderNewPost() {
         if (array_key_exists('user',$_SESSION) == false) {
             // $user = $this->getUserData($_SESSION["user"]);
-            http_response_code(401);
-            header("Location: /error?code=401");
+            http_response_code(403);
+            header("Location: /error?code=403");
             die();
         }
         include "views/posts/new_post.php";

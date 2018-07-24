@@ -4,37 +4,59 @@
 namespace App\Controller;
 
 Use App\Model\Users as Users;
+Use App\Model\Hearts as Hearts;
 
 class AccountController {
-	private $db;
 
-	public function __construct(Users $db) {
-		$this->db = $db;
-	}
+	private $users_db;
+	private $hearts_db;
 
-	public function run(): void
-	{
-		if (isset($_GET["action"])) {
-			switch ($_GET["action"]) {
-				case 'login':
-					$this->login();
-					return;
-				break;
-				case 'logout':
-					$this->logout();
-					return;
-				break;
-				case 'signup':
-					$this->signup();
-					return;
-				break;
-			}
+	private $user;
+
+	public function __construct(\PDO $pdo) {
+		$this->users_db = new Users($pdo);
+		$this->hearts_db = new Hearts($pdo);
+
+		if (array_key_exists('user',$_SESSION)) {
+            $this->user = $this->getUserData($_SESSION["user"]);
         }
-        header("Location: /error?code=404");
-   		die();
 	}
 
-	public function login(): void
+	public function index(): void
+	{
+		$this->showAccount();
+	}
+
+	public function action($query): void
+	{
+		$action = $query["action"] ?? null;
+        switch ($action) {
+            case 'login':
+                $this->login();
+            break;
+            case 'logout':
+                $this->logout();
+            break;
+            case 'signup':
+                $this->signup();
+            break;
+            default:
+                header("Location: /error?code=404");
+            break;
+        }
+	}
+
+	private function showAccount(): void
+	{
+		if (array_key_exists('user',$_SESSION) == false) {
+			http_response_code(403);
+			header("Location: /error?code=403");
+			die();
+		}
+		include 'views/account/index.php';
+	}
+
+	private function login(): void
 	{
 		$password_is_valid = true; //assumed true for first run
 
@@ -46,7 +68,7 @@ class AccountController {
 		if (isset($_POST['submitLogin'])) {
 			$password = filter_input(INPUT_POST, 'password');
 			$username = filter_input(INPUT_POST, 'username');
-			$user = $this->db->authenticateUser($username, $password);
+			$user = $this->users_db->authenticateUser($username, $password);
 
 			if ($user) {
 				$_SESSION['user'] = $user;
@@ -60,14 +82,14 @@ class AccountController {
 		include 'views/account/login.php';
 	}
 
-	public function logout(): void
+	private function logout(): void
 	{
 		unset($_SESSION['user']);
 		redirect_back();
 		die();
 	}
 
-	public function signup(): void
+	private function signup(): void
 	{
 		$signup_success = true; //assumed true for first run
 
@@ -83,7 +105,7 @@ class AccountController {
 			$email = filter_input(INPUT_POST, 'email');
 
 			// Will return a status true or false, if false contains errors array
-			$userCreation = $this->db->createUser($username, $password, $email);
+			$userCreation = $this->users_db->createUser($username, $password, $email);
 
 			// redirect to login page and display success message
 			if ($userCreation["status"] == true) {
@@ -96,4 +118,12 @@ class AccountController {
 		}
 		include 'views/account/signup.php';
 	}
+
+	public function getUserData($userSession)
+	{
+    	$user = $this->users_db->getUser($userSession["username"]);
+
+    	$user["userhearts"] = $this->hearts_db->getHeartsByUserId($user["id"]);
+    	return $user;
+    }
 }

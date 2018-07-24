@@ -2,6 +2,7 @@
 	include_once('svg.php'); 
 	$SVG = new SVGFactory();
 	header('Content-Type: text/html');
+	$redirect = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
 
 <!doctype html>

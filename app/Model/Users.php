@@ -7,18 +7,23 @@ include_once('app/Utils/Validation.php');
 use PDO;
 use App\Utils\Validation as Validation;
 
-class Users {
+class Users
+{
+
 	private $pdo;
 
-	public function __construct(\PDO $pdo) {
+	public function __construct(\PDO $pdo)
+	{
 		$this->pdo = $pdo;
 	}
 
-	public function close(): void {
+	public function close(): void
+	{
 		$this->pdo = null;
 	}
 
-	public function authenticateUser(string $username, string $password) {
+	public function authenticateUser(string $username, string $password)
+	{
 		$sql = '
 			SELECT
 				users.id,

@@ -41,14 +41,14 @@ Home
 ******************************************************************/
 Router::get('index.php', '', function($db) {
     // Controller = HomeController
-    // Method = default (read)
     $Controller = new HomeController($db->pdo);
+    // Method = default (read)
     $Controller->index();
 });
 Router::get('index.php', 'view', function($db) {
     // Controller = HomeController
-    // Method = view (new|trending|all)
     $Controller = new HomeController($db->pdo);
+    // Method = view (new|trending|all)
     $Controller->index(Request::$query);
 });
 
@@ -212,19 +212,25 @@ Router::post('collections/{id}', 'action', function() {
 Accounts
 
 ******************************************************************/
-Router::get('account', '', function() {
+Router::get('account', '', function($db) {
     // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
     // Method = default (read)
+    $Controller->index();
     // Note: This should show some account details, eg: email, created,
     // username, and edit/delete account buttons
 });
-Router::get('account', 'action', function() {
+Router::get('account', 'action', function($db) {
     // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
     // Method = action (login|logout|signup|edit|delete)
+    $Controller->action(Request::$query);
 });
-Router::post('account', 'action', function() {
+Router::post('account', 'action', function($db) {
     // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
     // Method = action (login|logout|signup|edit|delete)
+    $Controller->action(Request::$query);
 });
 
 /******************************************************************
@@ -286,9 +292,5 @@ Router::post('messages/{id}', 'action', function() {
 Debug
 
 ******************************************************************/
-if (Router::$routeFound === false) {
-    // header("Location: /error?code=404");
-    
-    Request::print_debug("No route was found");
-    die();
-}
+// header("Location: /error?code=404");
+Request::print_debug("No route was found");

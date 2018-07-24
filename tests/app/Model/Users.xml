@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<dataset>
+    <table name="Users">
+        <column>id</column>
+        <column>username</column>
+        <column>email</column>
+        <column>password</column>
+        <row>
+            <value>1</value>
+            <value>admin</value>
+            <value>admin@artily.test</value>
+            <value>somestring</value>
+        </row>
+        <row>
+            <value>2</value>
+            <value>bob</value>
+            <null />
+            <value>somestring</value>
+        </row>
+    </table>
+</dataset>

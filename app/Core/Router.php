@@ -10,21 +10,12 @@ use App\Core\Database as Database;
 
 class Router {
 
-	public static $routes = array();
-	public static $routeFound = false;
-
-	public static function set($route, $function) {
-		self::$routes[$route] = $function;
-
-		// print_r(self::$routes);
-		$url = Request::$page ?? 'index.php';
-		if ($url == $route) {
-		// 	var_dump($route);
-			$function->__invoke();
-			self::$routeFound = true;
-		}
-	}
-	public static function request($uri, $query, $func): void
+	/**
+	 *	@param string $uri
+	 *	@param string $query
+	 *	@param function $func
+	*/
+	private static function request($uri, $query, $func): void
 	{
 		// Check if the request uri matches route uri
 		if (Request::$page !== $uri)
@@ -46,10 +37,7 @@ class Router {
 			}
 		}
 
-		// All checks complete, if this far route found
-		self::$routeFound = true;
-		// Do that action
-		// $controller = $func->__invoke();
+		// All checks complete, route was a match
 		$func->__invoke(new Database());
 		die();
 	}

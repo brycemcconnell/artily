@@ -8,13 +8,17 @@
 	*/
 	if (isset($_GET["status"]) && $_GET["status"] == "accountCreated"):
 ?>
-<div class="row text-center text-danger">Account created successfully. Please login.</div>
+<div class="row text-center text-danger">
+	Account created successfully. Please login.
+</div>
 <?php endif; ?>
 
-<a href="/" class="home-btn theme-btn theme-a-btn"><img src="/public/assets/img/home.svg"></a>
+<a href="/" class="home-btn theme-btn theme-a-btn">
+	<img src="/public/assets/img/home.svg">
+</a>
 <main class="login-page">
 	<img src="/public/assets/img/kermit.jpg">
-	<form action="account?action=login" method="POST" novalidate>
+	<form action="account?action=login&redirect=<?= $redirect; ?>" method="POST" novalidate>
 		<div class="login-input_container">
 			<input class="login-input" type="text" name="username" placeholder="Username..." value="<?= $username ?? ''; ?>" required>
 			<input class="login-input" type="password" name="password" placeholder="Password..." required>
