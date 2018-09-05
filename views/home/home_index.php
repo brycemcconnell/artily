@@ -1,6 +1,6 @@
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
-<?php include_once('../views/inc/board_post.php'); ?>
+<?php include_once('../views/home/inc/board_post.php'); ?>
 
 <main class="main">
 	<div class="grid">

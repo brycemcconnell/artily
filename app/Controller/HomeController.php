@@ -51,19 +51,19 @@ class HomeController
     private function renderHome()
     {
         $posts = $this->posts_db->getPostsLatest();
-        include Request::$api."/home/home.php";
+        include Request::$api."/home/home_index.php";
     }
 
     private function renderLatest()
     {
         $posts = $this->posts_db->getPostsLatest();
-        include Request::$api."/home/home.php";
+        include Request::$api."/home/home_index.php";
     }
 
     private function renderTrending()
     {
         $posts = $this->posts_db->getPostsTrending();
-        include Request::$api."/home/home.php";
+        include Request::$api."/home/home_index.php";
     }
 
     public function getUserData($userSession) {

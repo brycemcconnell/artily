@@ -90,8 +90,8 @@ class Posts {
 			if (!empty($post[$key]["post_contents"]))
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
-			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
+			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
+			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";
 			if ($post[$key]["ratio"] < .5)
@@ -126,8 +126,8 @@ class Posts {
 			if (!empty($post[$key]["post_contents"]))
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/board/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
-			$post[$key]["user_url"] = "/user/".urlsafe($post[$key]["username"]);
+			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
+			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";
 			if ($post[$key]["ratio"] < .5)
@@ -171,8 +171,8 @@ class Posts {
 		$post = $stmt->fetch();
 		$post["op_id"] = $post["user_id"];
 		$post["elapsed"] = time_elapsed_string($post["created"]);
-		$post["post_url"] = "/board/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
-		$post["user_url"] = "/user/".urlsafe($post["username"]);
+		$post["post_url"] = "/boards/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
+		$post["user_url"] = "/users/".urlsafe($post["username"]);
 		return $post;
 	}
 
@@ -205,8 +205,8 @@ class Posts {
 		$stmt->execute();
 		$post = $stmt->fetch();
 		$post["elapsed"] = time_elapsed_string($post["created"]);
-		$post["post_url"] = "/board/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
-		$post["user_url"] = "/user/".urlsafe($post["username"]);
+		$post["post_url"] = "/boards/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
+		$post["user_url"] = "/users/".urlsafe($post["username"]);
 		return $post;
 	}
 

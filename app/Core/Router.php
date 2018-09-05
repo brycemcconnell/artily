@@ -10,6 +10,17 @@ use App\Core\Database as Database;
 
 class Router {
 
+	private static function startsWith($haystack, $needle)
+	{
+		$length = strlen($needle);
+		return (substr($haystack, 0, $length) === $needle);
+	}
+
+	private static function endsWith($haystack, $needle)
+	{
+		return substr($haystack, -strlen($needle)) === $needle;
+	}
+
 	/**
 	 *	@param string $uri
 	 *	@param string $query
@@ -17,9 +28,40 @@ class Router {
 	*/
 	private static function request($uri, $query, $func): void
 	{
-		// Check if the request uri matches route uri
-		if (Request::$page !== $uri)
+		// Separate this route's values into an array, just like Request::$values
+		$route_values = array_filter(explode("/", substr($uri, 0)));
+
+		// Some ease of use stuff
+		$parts_given = count(Request::$values);
+		$matches_needed = count($route_values);
+		$matches = 0;
+
+		// If the request argument count isn't the argument count of the route, it must be a different route
+		if ($parts_given != $matches_needed) {
 			return;
+		}
+
+		// Iterate over route values and compare with request values if necessary
+		foreach ($route_values as $key => $value) {
+
+			// Check if the current part of the route uri is a wildcard, if so any request value is fine
+			if (Router::startsWith($value, '{') && Router::endsWith($value, '}')) {
+				$matches += 1;
+				continue;
+			}
+
+			// Check if current part of the request uri is equal to the equivalent part of the route
+			if (Request::$values[$key] === $route_values[$key]) {
+				$matches += 1;
+			}
+		}
+
+		// If part of the request URI didn't match this route uri
+		if ($matches !== $matches_needed) {
+			return;
+		}
+
+		// Success, this is the correct route.
 		
 		// Check if there is a query in the request
 		if (empty(Request::$query) == false) {
@@ -37,7 +79,7 @@ class Router {
 			}
 		}
 
-		// All checks complete, route was a match
+		// All checks complete, invoke route logic
 		$func->__invoke(new Database());
 		die();
 	}

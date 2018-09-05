@@ -44,11 +44,12 @@ class PostController
 
     private $user;
 
-    public function __construct(Posts $posts_db, Users $users_db, Hearts $hearts_db, Comments $comments_db) {
-    	$this->posts_db = $posts_db;
-        $this->users_db = $users_db;
-        $this->hearts_db = $hearts_db;
-        $this->comments_db = $comments_db;
+    public function __construct(\PDO $pdo) {
+    	$this->posts_db = new Posts($pdo);
+        $this->users_db = new Users($pdo);
+        $this->hearts_db = new Hearts($pdo);
+        $this->comments_db = new Comments($pdo);
+
     // }
 
     // function run() {

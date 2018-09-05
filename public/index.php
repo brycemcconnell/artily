@@ -39,13 +39,13 @@ use App\Core\Request as Request;
 Home
 
 ******************************************************************/
-Router::get('index.php', '', function($db) {
+Router::get('', '', function($db) {
     // Controller = HomeController
     $Controller = new HomeController($db->pdo);
     // Method = default (read)
     $Controller->index();
 });
-Router::get('index.php', 'view', function($db) {
+Router::get('', 'view', function($db) {
     // Controller = HomeController
     $Controller = new HomeController($db->pdo);
     // Method = view (new|trending|all)
@@ -136,10 +136,12 @@ Router::get('boards/{id}/posts', 'sort', function() {
     // Note: this is sorting the posts on a board
 });
 Router::get('boards/{id}/posts', 'action', function() {
+    
     // Controller = BoardController
     // Method = action (new)
 });
 Router::post('boards/{id}/posts', 'action', function() {
+
     // Controller = BoardController
     // Method = action (new)
 });
@@ -149,7 +151,10 @@ Router::post('boards/{id}/posts', 'action', function() {
 (boards)/posts
 
 ******************************************************************/
-Router::get('boards/{id}/posts/{id}', '', function() {
+Router::get('boards/{id}/posts/{id}', '', function($db) {
+    $Controller = new PostController($db->pdo);
+    // Method = default (read)
+    $Controller->index();
     // Controller = PostController
     // Method = default (read)
 });

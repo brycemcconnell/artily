@@ -1,0 +1,9 @@
+
+nbproject/
+.idea/
+/public/photos/
+/public/uploads/
+*.ico
+.resources/
+secret.php
+/vendor
