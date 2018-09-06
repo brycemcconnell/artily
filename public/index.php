@@ -67,6 +67,11 @@ Router::get('error', 'code', function() {
 Users 
 
 ******************************************************************/
+Router::get('me', '', function() {
+    // A special route that takes the user to their user page, rather than eg. /users/bryce
+    // Controller = UserController
+    // Method = default (read)
+});
 Router::get('users', '', function() {
     // Controller = UserController
     // Method = default (read)
@@ -137,12 +142,29 @@ Router::get('boards/{id}/posts', 'sort', function() {
 });
 Router::get('boards/{id}/posts', 'action', function() {
     
-    // Controller = BoardController
+    // Controller = BoardController/PostController?
     // Method = action (new)
 });
 Router::post('boards/{id}/posts', 'action', function() {
 
-    // Controller = BoardController
+    // Controller = BoardController/PostController?
+    // Method = action (new)
+});
+
+/******************************************************************
+
+/posts
+
+******************************************************************/
+Router::get('posts', 'action', function() {
+    // Give an option to input a board name
+    // Maybe this should be a different controller? eh..
+    // Controller = BoardController/PostController?
+    // Method = action (new)
+});
+
+Router::post('posts', 'action', function() {
+    // Controller = BoardController/PostController?
     // Method = action (new)
 });
 

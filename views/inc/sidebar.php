@@ -46,10 +46,10 @@ $boards = [
 			</div>
 			<ul class="sidebar-section_list" id="sidebarCollections">
 				<?php foreach($collections as $c): ?>
-				<li><a class="sidebar-link" href="/collection/<?= $c["name"]; ?>"><?= $c["name"]; ?></a></li>
+				<li><a class="sidebar-link" href="/collections/<?= $c["name"]; ?>"><?= $c["name"]; ?></a></li>
 				<?php endforeach; ?>
 			</ul>
-			<a href="collection?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
+			<a href="/collections?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
 		</div>
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
@@ -58,10 +58,20 @@ $boards = [
 			</div>
 			<ul class="sidebar-section_list" id="sidebarArtboards">
 				<?php foreach($boards as $b): ?>
-				<li><a class="sidebar-link" href="/board/<?= $b["name"]; ?>"><?= $b["name"]; ?></a></li>
+				<li><a class="sidebar-link" href="/boards/<?= $b["name"]; ?>"><?= $b["name"]; ?></a></li>
 				<?php endforeach; ?>
 			</ul>
-			<a href="board?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
+			<a href="/boards?action=new" class="sidebar-create theme-btn theme-a-btn">Create New</a>
+		</div>
+		<div class="sidebar-section sidebar-expanded">
+			<ul class="sidebar-section_list">
+				<li><a class="sidebar-link" href="/">artily.saber</a></li>
+				<li><span class="sidebar-link">Some tagline here</span></li>
+				<li><a class="sidebar-link" href="/support">Support</a></li>
+				<li><a class="sidebar-link" href="/contact">Contact</a></li>
+				<li><a class="sidebar-link" href="/about">About</a></li>
+				<li><span class="sidebar-link">Bryce A. McConnell, 2018</span></li>
+			</ul>
 		</div>
 	</div>
 	<script>

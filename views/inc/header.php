@@ -39,7 +39,7 @@ use App\Core\Request;
 		</div>
 		<?php if (isset($_SESSION['user'])): ?>
 		<div class="header-user_container"><!-- User dash -->
-			<a href="user" class="header-user">
+			<a href="/me" class="header-user">
 				<img class="header-user_avatar" src="/public/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
 					<div class="header-user_name"><?= $this->user["username"]; ?></div><!-- User name -->
@@ -49,7 +49,7 @@ use App\Core\Request;
 			<a href="/messages" class="btn header-user_icon">
 				<img src="/public/assets/img/mail.png">
 			</a>
-			<a href="/post?action=new" class="header-user_submit theme-btn theme-a-btn">
+			<a href="/posts?action=new" class="header-user_submit theme-btn theme-a-btn">
 				Submit
 			</a><!-- Submit new content -->
 			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();">
