@@ -7,7 +7,7 @@ Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
-use App\Core\Request as Request;
+use App\Core\Router as Router;
 
 use \DateTime;
 use \DateTimeZone;
@@ -57,7 +57,7 @@ class PostController
         }
     }
 
-    public function index(int $id): void
+    public function index(string $name): void
 	{   
         // If a post id was given show the post info
         // To see the comments see the comments route
@@ -122,7 +122,7 @@ class PostController
         }
 
         // Create a post_id var
-        $request = Request::$item;
+        $request = Router::$items["post_id"];
         $post = null;
         if (is_numeric($request) == false && $request !== null) {
             $post = $this->posts_db->getPostByTitle($request);
@@ -156,15 +156,15 @@ class PostController
                         redirect_back();
                         die();
                     }
-                    if (!isset(Request::$item)) {
+                    if (!isset($request)) {
                         // Post id was not provided
                         redirect_back();
                         die();
                     }
-                    if (is_numeric(Request::$item))
-                            $op = $this->posts_db->getPostById(Request::$item);
+                    if (is_numeric($request))
+                            $op = $this->posts_db->getPostById($request);
                         else
-                            $op = $this->posts_db->getPostByTitle(Request::$item);
+                            $op = $this->posts_db->getPostByTitle($request);
                     if (isset($_POST["quickreplysubmit"])) {
                         // QUICK REPLY
                         // Is a reply to the main post
@@ -243,7 +243,7 @@ class PostController
             $result = $this->posts_db->deletePostById($post["post_id"]);
             // Render success message
             // Redirect to the artboard index page after 3 seconds?
-            $board = Request::$board;
+            $board = Router::$items["board_id"];
             var_dump($result);
             // header("Location: /board/$board?status=postdeleted");
             die();

@@ -1,6 +1,9 @@
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
 
+
+<script src="/assets/js/heartPost.js"></script>
+
 <main class="main">
 	<button id="list_view">List View</button>
 	<button id="grid_view">Grid View</button>

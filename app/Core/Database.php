@@ -15,7 +15,8 @@ class Database {
 
 	public $pdo;
 
-	public function __construct() {
+	public function __construct()
+	{
 		$dsn = "mysql:host=$this->host;dbname=$this->db;charset=$this->charset";
 		$opt = [
 		    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

@@ -10,6 +10,8 @@ use App\Core\Database as Database;
 
 class Router {
 
+	static $items = [];
+
 	private static function startsWith($haystack, $needle)
 	{
 		$length = strlen($needle);
@@ -46,6 +48,8 @@ class Router {
 
 			// Check if the current part of the route uri is a wildcard, if so any request value is fine
 			if (Router::startsWith($value, '{') && Router::endsWith($value, '}')) {
+				// echo 'wildcard:<br>Key: '.trim($value, "{}").'<br>Val: '.Request::$values[$key].'<br>';
+				Router::$items[trim($value, "{}")] = Request::$values[$key];
 				$matches += 1;
 				continue;
 			}

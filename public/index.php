@@ -15,12 +15,14 @@ include_once "app/Controller/HomeController.php";
 include_once "app/Controller/AccountController.php";
 include_once "app/Controller/ErrorController.php";
 include_once "app/Controller/PostController.php";
+include_once "app/Controller/API_PostController.php";
 include_once "app/Controller/UserController.php";
 
 use App\Controller\HomeController as HomeController;
 use App\Controller\AccountController as AccountController;
 use App\Controller\ErrorController as ErrorController;
 use App\Controller\PostController as PostController;
+use App\Controller\API_PostController as API_PostController;
 use App\Controller\UserController as UserController;
 
 include_once "app/Model/Users.php";
@@ -44,18 +46,52 @@ Router::get('api/authenticate', '', function() {
     }
 });
 
-Router::post('api/posts/heart', '', function() {
+Router::post('api/posts/addheart', '', function($db) {
     $_POST = json_decode(file_get_contents('php://input'), true);
     if (isset($_SESSION["user"]) && isset($_POST["post_id"])) {
-        header('Content-Type: application/json');
-        echo json_encode([
-            "user_id" => $_SESSION["user"]["id"],
-            "post_id" => $_POST["post_id"]
-        ]);
+        $user_id = $_SESSION["user"]["id"];
+        $post_id = $_POST["post_id"];
+        $Controller = new API_PostController($db->pdo);
+        $result = $Controller->addHeart($user_id, $post_id);
+        if ($result) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                "status" => "Successfully added heart",
+                "user_id" => $user_id,
+                "post_id" => $post_id
+            ]);
+        } else {
+            header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            echo json_encode("There was an sql error");
+        }
     } else {
+        header($_SERVER["SERVER_PROTOCOL"]." 401 Unauthorized");
         echo json_encode("You're not logged in");
     }
-    
+});
+
+Router::post('api/posts/removeheart', '', function($db) {
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    if (isset($_SESSION["user"]) && isset($_POST["post_id"])) {
+        $user_id = $_SESSION["user"]["id"];
+        $post_id = $_POST["post_id"];
+        $Controller = new API_PostController($db->pdo);
+        $result = $Controller->removeHeart($user_id, $post_id);
+        if ($result) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                "status" => "Successfully removed heart",
+                "user_id" => $user_id,
+                "post_id" => $post_id
+            ]);
+        } else {
+            header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            echo json_encode("There was an sql error");
+        }
+    } else {
+        header($_SERVER["SERVER_PROTOCOL"]." 401 Unauthorized");
+        echo json_encode("You're not logged in");
+    }
 });
 
 Router::post('api/test/json', '', function() {
@@ -211,10 +247,11 @@ Router::post('posts', 'action', function() {
 (boards)/posts
 
 ******************************************************************/
-Router::get('boards/{id}/posts/{id}', '', function($db) {
+Router::get('boards/{board_id}/posts/{post_id}', '', function($db) {
     $Controller = new PostController($db->pdo);
     // Method = default (read)
-    $Controller->index();
+    var_dump(Router::$items);
+    $Controller->index(Router::$items["post_id"]);
     // Controller = PostController
     // Method = default (read)
 });

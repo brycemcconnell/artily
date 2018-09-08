@@ -50,7 +50,7 @@ class HomeController
 
     private function renderHome()
     {
-        $posts = $this->posts_db->getPostsLatest();
+        $posts = $this->posts_db->userGetPostsLatest($_SESSION["user"]["id"]);
         include "views/home/home_index.php";
     }
 

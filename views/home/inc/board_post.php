@@ -1,9 +1,11 @@
 <?php
 // function render_post($post) {
 	$post = $posts[$key];
+	// var_dump($post);
+	// die();
 	?>
 	<div class="item box bb <?= $post["class"]; ?>">
-	<div id="h<?= $post["post_id"];?>" class="item-heart">
+	<div id="h<?= $post["post_id"];?>" data-post-id="<?= $post["post_id"];?>" class="item-heart <?= $post["user_hearted"] ? 'item-heart_active' : ''; ?>">
 		<!-- ♥ -->
 		<?= $SVG->heart(); ?>
 	</div>
@@ -11,37 +13,8 @@
 		{
 			const h = document.getElementById('h<?= $post["post_id"];?>');
 			h.onclick = function() {
-				console.log('h<?= $post["post_id"];?>');
-				h.classList.toggle('item-heart_active');
-
-				var data = {
-					"post_id": "<?= $post["post_id"];?>"
-				};
-				fetch('http://artily.saber/api/posts/heart', {
-					method: "POST",
-					body: JSON.stringify(data),
-					headers:{
-						'Content-Type': 'application/json'
-					}
-				}).then(res => {
-					console.log(res);
-					return res.json();
-				})
-				  .then(response => console.log('Success:', response))
-				  .catch(err => console.log(err)); 
-			
-			/* 	fetch('http://artily.saber/api/posts/heart', {
-					method: "POST",
-					body: JSON.stringify(data),
-					headers:{
-						'Content-Type': 'application/json'
-					}
-				}).then(res => {
-					console.log(res);
-					return res.json();
-				})
-				  .then(response => console.log('Success:', response))
-				  .catch(err => console.log(err)); */
+				const active = h.classList.contains('item-heart_active') ? true : false;
+				heartPost(h, active);
 			} 
 		}
 	</script>

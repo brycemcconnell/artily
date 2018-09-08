@@ -6,11 +6,7 @@ class Request {
 
 	static $values;
 	static $count;
-	static $page;
 	static $path;
-	static $item;
-	// static $query;
-	static $board;
 
 	static $method;
 	static $query;
@@ -25,31 +21,6 @@ class Request {
 		if (isset($_SERVER["QUERY_STRING"]))
 			parse_str($_SERVER["QUERY_STRING"], $array);
 		Request::$query = $array;
-
-		switch (Request::$count) {
-			case 0:
-				Request::$page = "index.php";
-			break;
-			case 1:
-				Request::$page = Request::$values[0];
-			break;
-			case 2:
-				Request::$page = Request::$values[0];
-				Request::$item = Request::$values[1];
-			break;
-			case 3:
-				Request::$page = Request::$values[1];
-				Request::$item = Request::$values[2];
-			break;
-			case 4:
-				Request::$board = Request::$values[1];
-				Request::$page = Request::$values[2];
-				Request::$item = Request::$values[3];
-			break;
-			default:
-				Request::$page = end(Request::$values);
-			break;
-		}
 	}
 
 	static function print_debug($reason) {
@@ -71,10 +42,7 @@ class Request {
 	   	print_r("values:\n");
 	   	var_dump(Request::$values);
 	    print_r("count:          " . Request::$count . "\n");
-	    print_r("page:           " . Request::$page . "\n");
 	    print_r("path:           " . Request::$path . "\n");
-	    print_r("item:           " . Request::$item . "\n");
-	    print_r("board:           " . Request::$board . "\n");
 	    echo "</pre>";
 	}
 }

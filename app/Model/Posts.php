@@ -69,6 +69,58 @@ class Posts {
 		$stmt->execute();
 		return $this->pdo->lastInsertId();
 	}
+
+	public function userGetPostsLatest(int $user_id) {
+		$sql = '
+			SELECT
+		   		Posts_All.*,
+		   		(
+			  		SELECT
+				 		count(post_hearts.post_id)
+					FROM
+				 		post_hearts 
+					WHERE
+						(
+							(post_hearts.user_id = :user_id) 
+						AND
+							(post_hearts.post_id = Posts_All.post_id)
+						)
+				) AS `user_hearted` 
+			FROM
+				Posts_All
+			ORDER BY
+				created DESC
+			LIMIT
+				20;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		$stmt->execute();
+		$post = $stmt->fetchAll();
+		function get_image_ratio($width, $height) {
+			if (!empty($width) && !empty($height))
+				return $width / $height;
+			return 1;
+		}
+		foreach ($post as $key => $value) {
+			if (!empty($post[$key]["post_contents"]))
+				$post[$key]["post_contents"] .= "...";
+			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
+			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
+			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
+			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
+			$post[$key]["class"] = "";
+			if ($post[$key]["ratio"] < .5)
+				$post[$key]["class"] = "item-v2";
+			else if ($post[$key]["ratio"] > 1.5)
+				$post[$key]["class"] = "item-h2";
+			else 
+				if (rand(0,4) == 4)
+					$post[$key]["class"] = "item-h2 item-v2";
+			
+		}
+		return $post;
+	}
 	
 	public function getPostsLatest() {
 		$sql = '

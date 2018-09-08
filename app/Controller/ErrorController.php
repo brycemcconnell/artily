@@ -34,6 +34,7 @@ class ErrorController {
 			$this->error_code => $this->errorCodes[$this->error_code]
 		];
 		$big = $this->error_code == 418 || $this->error_code == 420 ? "big-text" : "";
+		header($_SERVER["SERVER_PROTOCOL"]." $this->error_code"); 
 		include "views/error/error.php";
 	}
 }
