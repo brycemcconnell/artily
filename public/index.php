@@ -34,21 +34,58 @@ use App\Core\Router as Router;
 use App\Core\Request as Request;
 
 
+Router::get('api/authenticate', '', function() {
+    header('Content-Type: application/json');
+    if (isset($_SESSION["user"])) {
+        //
+        echo json_encode("Logged in as ".$_SESSION["user"]["username"]);
+    } else {
+        echo json_encode("You're not logged in");
+    }
+});
+
+Router::post('api/posts/heart', '', function() {
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    if (isset($_SESSION["user"]) && isset($_POST["post_id"])) {
+        header('Content-Type: application/json');
+        echo json_encode([
+            "user_id" => $_SESSION["user"]["id"],
+            "post_id" => $_POST["post_id"]
+        ]);
+    } else {
+        echo json_encode("You're not logged in");
+    }
+    
+});
+
+Router::post('api/test/json', '', function() {
+    // var_dump($_POST);
+    // $_POST["test"] = 'test';
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    header('Content-Type: application/json');
+    echo json_encode($_POST);
+});
+
+Router::post('api/test/json', '', function() {
+    // var_dump($_POST);
+    // $_POST["test"] = 'test';
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    header('Content-Type: application/json');
+    echo json_encode($_POST);
+});
 /******************************************************************
 
 Home
 
 ******************************************************************/
 Router::get('', '', function($db) {
-    // Controller = HomeController
     $Controller = new HomeController($db->pdo);
-    // Method = default (read)
+    // Display the index page
     $Controller->index();
 });
-Router::get('', 'view', function($db) {
-    // Controller = HomeController
+Router::get('', 'sort', function($db) {
     $Controller = new HomeController($db->pdo);
-    // Method = view (new|trending|all)
+    // Display the index page with a type of sort
     $Controller->index(Request::$query);
 });
 
@@ -58,8 +95,9 @@ Errors
 
 ******************************************************************/
 Router::get('error', 'code', function() {
-    // Controller = ErrorController
-    // Method = display {code}
+    $Controller = new ErrorController(Request::$query);
+    // Display the error page
+    $Controller->render();
 });
 
 /******************************************************************
@@ -186,7 +224,9 @@ Router::get('boards/{id}/posts/{id}', 'sort', function() {
     // Note: this is sorting the comments on the post
 });
 Router::get('boards/{id}/posts/{id}', 'action', function() {
+    $Controller = new PostController($db->pdo);
     // Controller = PostController
+    $Controller->action(Request::$query);
     // Method = action (reply|edit|delete)
     // Note: the reply action may also have a second query 'comment',
     // this should be handled inside the controller

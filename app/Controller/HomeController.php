@@ -29,10 +29,10 @@ class HomeController
         }
     }
 
-    public function index($query = ["view" => "home"]): void
+    public function index($query = ["sort" => "home"]): void
     {
-        $view = $query["view"] ?? null;
-        switch ($view) {
+        $sort = $query["sort"] ?? null;
+        switch ($sort) {
             case 'all':
                 $this->renderLatest();
             break;
@@ -51,19 +51,19 @@ class HomeController
     private function renderHome()
     {
         $posts = $this->posts_db->getPostsLatest();
-        include Request::$api."/home/home_index.php";
+        include "views/home/home_index.php";
     }
 
     private function renderLatest()
     {
         $posts = $this->posts_db->getPostsLatest();
-        include Request::$api."/home/home_index.php";
+        include "views/home/home_index.php";
     }
 
     private function renderTrending()
     {
         $posts = $this->posts_db->getPostsTrending();
-        include Request::$api."/home/home_index.php";
+        include "views/home/home_index.php";
     }
 
     public function getUserData($userSession) {

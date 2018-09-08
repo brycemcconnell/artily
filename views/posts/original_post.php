@@ -24,7 +24,7 @@
 	if (!empty($post["file_path"])): 
 	?>
 	<div class="post-image" onclick="toggleImageSize(this);">
-		<img src="<?= '/public/uploads/'.$post["file_path"]; ?>" alt="<?= $post["file_name"].'.'.$post["file_type"] ?>">
+		<img src="<?= '/uploads/'.$post["file_path"]; ?>" alt="<?= $post["file_name"].'.'.$post["file_type"] ?>">
 		<div class="post-image_sizer">
 			<div class="post-image_size_icon expand"><?= $SVG->expand('#fff'); ?></div>
 			<div class="post-image_size_icon shrink"><?= $SVG->shrink('#fff'); ?></div>

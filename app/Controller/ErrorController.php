@@ -4,38 +4,36 @@ namespace App\Controller;
 
 class ErrorController {
 
-	private $errorCodes;
+	private $errorCodes = [
+		400 => 'Bad Request',
+		401 => 'Unauthorized',
+		403 => 'Forbidden',
+		404 => 'Not Found',
+		418 => "☕",
+		420 => "🔥",
+		500 => 'Internal Server Error',
+		502 => 'Bad Gateway',
+		503 => 'Service Unavailable',
+		504 => 'Gateway Timeout'
+	];
 
-	public function __construct()
-	{
-		$this->errorCodes = [
-			400 => 'Bad Request',
-			401 => 'Unauthorized',
-			403 => 'Forbidden',
-			404 => 'Not Found',
-			418 => "☕",
-			420 => "🔥",
-			500 => 'Internal Server Error',
-			502 => 'Bad Gateway',
-			503 => 'Service Unavailable',
-			504 => 'Gateway Timeout'
-		];
-	}
+	private $error_code;
 
-	public function run(): void
+	public function __construct($query)
 	{
-		if (isset($_GET["code"]) && array_key_exists($_GET["code"], $this->errorCodes)) {
-			$this->render($_GET["code"]);
-			return;
+		$this->error_code = 404;
+		if (isset($query["code"]) && array_key_exists($query["code"], $this->errorCodes)) {
+			$this->error_code = $query["code"];
 		}
-        header("Location: /error?code=404");
-   		die();
 	}
 
-	public function render($code): void
+	public function render(): void
 	{
-		$error = [$code => $this->errorCodes[$code]];
-		$big = $code == 418 || $code == 420 ? "big-text" : "";
+		
+        $error = [
+			$this->error_code => $this->errorCodes[$this->error_code]
+		];
+		$big = $this->error_code == 418 || $this->error_code == 420 ? "big-text" : "";
 		include "views/error/error.php";
 	}
 }

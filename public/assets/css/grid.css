@@ -10,6 +10,31 @@
     font-size: 12px;
 }
 
+.item-heart {
+    position: absolute;
+    top: 0;
+    right: -48px;
+    z-index: 1;
+    transition: .2s;
+    cursor: pointer;
+}
+
+.item:hover .item-heart {
+    transform: translateX(-48px);
+}
+
+.item-heart svg {
+    transition: .2s;
+}
+
+.item-heart:hover svg {
+    fill: #ffbcbc80;
+}
+
+.item-heart_active svg {
+    fill: #a11
+}
+
 .item img {
     width: 100%;
     height: auto;
@@ -21,6 +46,7 @@
 .item img,
 .item-text_post {
     transition: .2s;
+    background-color: #fff;
 }
 
 .item:hover img,
@@ -81,6 +107,10 @@
 .item-detail_container {
     display: flex;
     justify-content: space-between;
+}
+
+.item-action_menu {
+    display: none;
 }
 
 .item-detail {

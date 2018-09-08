@@ -7,7 +7,7 @@ use PDO;
 include_once 'secret.php';
 
 class Database {
-	private $host = 'localhost';
+	private $host = 'localhost:3306';
 	private $db = 'artily';
 	private $user = USERNAME;
 	private $pass = PASSWORD;

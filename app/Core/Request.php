@@ -14,18 +14,17 @@ class Request {
 
 	static $method;
 	static $query;
-	static $api;
 
 	static function init() {
-		$temp_url = parse_url($_SERVER["REQUEST_URI"]);
-		Request::$path = $temp_url["path"];
+		Request::$path = parse_url($_SERVER["REQUEST_URI"])["path"];
 		Request::$values = array_filter(explode("/", substr(Request::$path, 1)));
 		Request::$count = count(Request::$values);
 		Request::$method = $_SERVER["REQUEST_METHOD"];
 		// Request::$query = $_SERVER["QUERY_STRING"];
-		parse_str($_SERVER["QUERY_STRING"], $array);
+		$array = [];
+		if (isset($_SERVER["QUERY_STRING"]))
+			parse_str($_SERVER["QUERY_STRING"], $array);
 		Request::$query = $array;
-		Request::$api = 'views';
 
 		switch (Request::$count) {
 			case 0:

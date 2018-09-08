@@ -44,19 +44,74 @@ class PostController
 
     private $user;
 
-    public function __construct(\PDO $pdo) {
+    public function __construct(\PDO $pdo)
+    {
+        // parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
         $this->users_db = new Users($pdo);
         $this->hearts_db = new Hearts($pdo);
         $this->comments_db = new Comments($pdo);
 
-    // }
-
-    // function run() {
         if (array_key_exists('user',$_SESSION)) {
             $this->user = $this->getUserData($_SESSION["user"]);
         }
+    }
 
+    public function index(int $id): void
+	{   
+        // If a post id was given show the post info
+        // To see the comments see the comments route
+
+        // If no post id, show a list of posts on the current board
+		$this->bla();
+	}
+
+	public function action($query): void
+	{
+		$action = $query["action"] ?? null;
+        switch ($action) {
+            case 'new':
+                $this->new();
+            break;
+            case 'reply':
+                $this->logout();
+            break;
+            case 'edit':
+                $this->signup();
+            break;
+            case 'delete':
+                $this->signup();
+            break;
+            default:
+                header("Location: /error?code=404");
+            break;
+        }
+	}
+	public function sort($query): void
+	{
+		$action = $query["sort"] ?? null;
+        switch ($action) {
+            case 'new':
+                $this->new();
+            break;
+            case 'old':
+                $this->logout();
+            break;
+            case 'trending':
+                $this->signup();
+            break;
+            case 'top_comments':
+                $this->signup();
+            break;
+            case 'top_hearts':
+                $this->signup();
+            break;
+            default:
+                header("Location: /error?code=404");
+            break;
+        }
+	}
+    public function bla() {
         if (isset($_GET["action"]) && $_GET["action"] == 'new') {
             if (isset($_POST["submitPost"])) {
                 $this->submitNewPost();
@@ -168,6 +223,8 @@ class PostController
         }
     }
 
+
+    
     private function deletePost($post) {
         if (array_key_exists('user',$_SESSION) == false) { 
             // User isn't logged in

@@ -6,8 +6,8 @@ namespace App\Controller;
 Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 
-class AccountController {
-
+class AccountController
+{
 	private $users_db;
 	private $hearts_db;
 

@@ -29,14 +29,14 @@ $boards = [
 <aside class="sidebar">
 
 	<button type="button" class="sidebar-toggle_btn theme-btn" onclick="toggleSidebar();">
-		<img class="sidebar-toggle_btn-img" src="/public/assets/img/sidebar.svg">
+		<img class="sidebar-toggle_btn-img" src="/assets/img/sidebar.svg">
 	</button>
 	<div class="sidebar-content sidebar-content_small bb2">
 		<div class="sidebar-section">
 			<ul>
-				<li><a class="sidebar-common_link sidebar-link" href="/?view=home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
-				<li><a class="sidebar-common_link sidebar-link" href="/?view=trending"><span class="sidebar-icon"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
-				<li><a class="sidebar-common_link sidebar-link" href="/?view=all"><span class="sidebar-icon"><?= $SVG->globe('#d33'); ?></span><span class="sidebar-expanded"> All</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="/?sort=home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="/?sort=trending"><span class="sidebar-icon"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="/?sort=all"><span class="sidebar-icon"><?= $SVG->globe('#d33'); ?></span><span class="sidebar-expanded"> All</span></a></li>
 			</ul>
 		</div>
 		<div class="sidebar-section sidebar-expanded">

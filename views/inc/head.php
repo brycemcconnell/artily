@@ -1,5 +1,5 @@
 <?php
-	include_once('svg.php'); 
+	include('svg.php'); 
 	$SVG = new SVGFactory();
 	header('Content-Type: text/html');
 	$redirect = "//$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -18,23 +18,24 @@
 
 
 		<!-- Development styles for this template -->
-		<link href="/public/assets/css/root.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/theme.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/header.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/sidebar.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/footer.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/login.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/error.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/root.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/theme.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/header.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/sidebar.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/footer.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/login.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/error.css" rel="stylesheet" type="text/css">
 		<!-- Compiled styles -->
-		<link href="/public/assets/css/styles.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/grid.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/post.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/comments.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/artbar.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/debug.css" rel="stylesheet" type="text/css">
-		<link href="/public/assets/css/reply.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/styles.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/grid.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/post.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/comments.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/artbar.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/debug.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/reply.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/grid--list.css" rel="stylesheet" type="text/css">
 		<noscript>
-	    	<link href="/public/assets/css/no-js.css" type="text/css" rel="stylesheet" />
+	    	<link href="/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>
 	</head>
 	

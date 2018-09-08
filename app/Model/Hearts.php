@@ -32,4 +32,26 @@ class Hearts {
 		$hearts = $stmt->fetchColumn();
 		return $hearts;
 	}
+
+	public function heartPost(int $user_id, int $post_id)
+	{
+		$sql = '
+			INSERT INTO
+				post_heats			
+			VALUES
+				:user_id,
+				:post_id;
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		$stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
+		$stmt->execute();
+		$result = $conn->lastInsertId();
+		return $result;
+	}
+
+	public function heartComment(int $user_id, int $comment_id)
+	{
+
+	}
 }
