@@ -10,7 +10,7 @@ include_once('../views/inc/head.php');
 ?>
 
 <?php include_once('../views/inc/header.php');?>
-<main class="main">
+<main class="main main-with_artbar">
 	<!-- <div class="banner">I am a banners</div> -->
 	<div class="view_post-wrapper">
 		<div class="view_post box bb">
@@ -34,7 +34,6 @@ include_once('../views/inc/head.php');
 			</div>
 			<?php include_once('../views/inc/post_comments.php'); ?>
 		</div>
-		<?php include_once('../views/inc/artbar.php'); ?>
 		<script>
 			function collapseChildren(item) {
 				if (item.offsetParent) {
@@ -48,6 +47,7 @@ include_once('../views/inc/head.php');
 		
 			
 	</div>
+	<?php include_once('../views/inc/artbar.php'); ?>
 </main>
 <?php include_once('../views/inc/sidebar.php');?>
 <?php include_once('../views/inc/footer.php');?>

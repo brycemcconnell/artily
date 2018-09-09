@@ -1,5 +1,8 @@
 
 .artbar {
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: -1;
     width: 400px;
     min-width: 400px;
     box-shadow: 0px 8px 20px -4px #0005;
@@ -11,9 +14,11 @@
 
 @media screen and (max-width: 1200px) {
 	.artbar {
-		width: 100%;
+        width: 100%;
+        min-width: 280px;
 		margin-left: 0;
-		margin-top: var(--spacing);
-		
-	}
+        margin-top: var(--spacing);
+        grid-column: 1;
+        grid-row: -1;
+    }
 }

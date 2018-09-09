@@ -43,7 +43,7 @@ use App\Core\Request;
 				<img class="header-user_avatar" src="/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
 					<div class="header-user_name"><?= $_SESSION['user']["username"]; ?></div><!-- User name -->
-					<div><span class="heart">♥</span><?= $this->user["userhearts"]; ?></div><!-- User heart count -->
+					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"]; ?></span></div><!-- User heart count -->
 				</div>
 			</a>
 			<a href="/messages" class="btn header-user_icon">

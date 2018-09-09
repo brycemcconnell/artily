@@ -22,12 +22,41 @@ class Boards {
   {
     try {
       $sql = '
-        SELECT * FROM boards WHERE name = :board_name;
+        SELECT
+          boards.*,
+          board_contents.description,
+          users.username AS created_by_name,
+          (
+            SELECT
+              Count(board_id)
+            FROM
+              board_subscriptions
+            WHERE
+              board_subscriptions.board_id = boards.id
+          ) AS board_subscription_count
+        FROM
+          boards
+        LEFT JOIN
+          board_contents
+        ON
+          boards.id = board_contents.board_id
+        LEFT JOIN
+          board_subscriptions
+        ON
+          boards.id = board_subscriptions.board_id
+        LEFT JOIN
+          users
+        ON
+          boards.created_by = users.id
+        WHERE
+          name = :board_name;
       ';
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':board_name', $board_name, PDO::PARAM_STR);
       $stmt->execute();
       $result = $stmt->fetch();
+      
+      $result["elapsed"] = time_elapsed_string($result["created"]);
 
       return $result;
 

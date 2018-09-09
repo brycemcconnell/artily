@@ -13,7 +13,7 @@ $posts = $board_posts;
 
 <script src="/assets/js/heartPost.js"></script>
 
-<main class="main">
+<main class="main main-with_artbar">
 
 	<div id="main" class="grid grid--list">
 		<?php
@@ -24,8 +24,9 @@ $posts = $board_posts;
 		?>
 	</div>
 	<div class="grid-last">There seems to be nothing left...</div>
- 
+  <?php include_once('../views/inc/artbar.php'); ?>
 </main>
+
 <?php include_once('../views/common/board_sort.php'); ?>
 <?php include_once('../views/inc/sidebar.php'); ?>
 <?php include_once('../views/inc/footer.php'); ?>

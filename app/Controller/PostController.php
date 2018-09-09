@@ -5,6 +5,7 @@ namespace App\Controller;
 
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
+Use App\Model\Boards as Boards;
 use App\Core\Router as Router;
 
 use App\Controller\BaseController as BaseController;
@@ -46,6 +47,7 @@ class PostController extends BaseController
         parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
         $this->comments_db = new Comments($pdo);
+        $this->boards_db = new Boards($pdo);
     }
 
     public function render(string $name): void
@@ -103,6 +105,9 @@ class PostController extends BaseController
         }
 	}
     public function bla() {
+        
+        
+
         if (isset($_GET["action"]) && $_GET["action"] == 'new') {
             if (isset($_POST["submitPost"])) {
                 $this->submitNewPost();
@@ -114,6 +119,8 @@ class PostController extends BaseController
 
         // Create a post_id var
         $request = Router::$items["post_id"];
+
+        
         $post = null;
         if (is_numeric($request) == false && $request !== null) {
             $post = $this->posts_db->getPostByTitle($request);
@@ -274,6 +281,9 @@ class PostController extends BaseController
     }
 
     function renderPost($post) {
+
+        $board_data = $this->boards_db->getBoardByName(Router::$items["board_id"]);
+        
         $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
         include "views/posts/view_post.php";

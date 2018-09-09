@@ -37,7 +37,7 @@ $post = $posts[$key];
 			<span class="item-date"><?= $post["elapsed"] ?? 0; ?></span>
 		</div>
 		<div class="item-detail_container">
-			<span class="item-detail">Posted on <a href="/boards/<?= $post["board_name"]; ?>"><?= $post["board_name"]; ?></a> by <a href="<?= $post["user_url"]; ?>"><?= $post["username"] ?? ""; ?></a></span>
+			<span class="item-detail">Posted on <a href="/boards/<?= $post["board_name"]; ?>"><?= $post["board_name"]; ?></a> by <a href="<?= $post["user_url"]; ?>" data-user-id="<?= $post["user_id"]; ?>"><?= $post["username"] ?? ""; ?></a></span>
 			<a href="<?= $post["post_url"]; ?>" class="item-comments">
 				<?= $post["comment_count"] ?? 0; ?> Comments
 			</a>

@@ -10,6 +10,18 @@
     margin-bottom: var(--spacing);
 }
 
+.main-with_artbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto 1fr;
+}
+
+@media screen and (max-width: 1200px) {
+    .main-with_artbar {
+        grid-template-columns: 1fr;
+    }
+}
+
 .main-flex {
     display: flex;
 }
