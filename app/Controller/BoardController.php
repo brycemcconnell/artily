@@ -3,49 +3,45 @@
 
 namespace App\Controller;
 
-Use App\Model\Users as Users;
-Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
 use App\Core\Request as Request;
+
+use App\Controller\BaseController as BaseController;
 
 use \DateTime;
 use \DateTimeZone;
 
 
-class BoardController
+class BoardController extends BaseController
 {
     /**
      *
      */
-    private $posts_db;
-    private $users_db;
-    private $hearts_db;
     private $comments_db;
-    
-    private $user;
 
     public function __construct(\PDO $pdo)
     {
-        // parent::__construct($pdo);
-    	$this->posts_db = new Posts($pdo);
-        $this->users_db = new Users($pdo);
-        $this->hearts_db = new Hearts($pdo);
+        parent::__construct($pdo);
         $this->comments_db = new Comments($pdo);
-
-        if (array_key_exists('user',$_SESSION)) {
-            $this->user = $this->getUserData($_SESSION["user"]);
-        }
     }
 
     public function index($query)
     {
-        // If an board id is present, show that board info page (no posts)
-        // In order to see a list of posts go to posts route
-        $this->viewBoard($query);
-
-        // Otherwise show all boards
+        // Show list of all boards
         $this->board_index();
+    }
+
+    public function render(string $board_name)
+    {
+        $board_data = $this->boards_db->getBoardByName($board_name);
+        if (isset($_SESSION["user"])) {
+            $board_posts = $this->boards_db->userGetBoardPostsById($_SESSION["user"]["id"], $board_data["id"]);
+        } else {
+            $board_posts = $this->boards_db->getBoardPostsById($board_data["id"]);
+        }
+        
+        include "views/boards/view_board.php";
     }
 
     public function action($query)
@@ -62,11 +58,4 @@ class BoardController
 
     }
 
-    private function viewBoard($query)
-    {
-        // If query is int
-        $this->boards_db->getBoardById($query);
-        // If query is string
-        $this->boards_db->getBoardByName($query);
-    }
 }

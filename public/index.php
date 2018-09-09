@@ -11,12 +11,15 @@ ini_set('display_errors', 1);
 
 include_once '../config.php';
 
+include_once "app/Controller/BaseController.php";
 include_once "app/Controller/HomeController.php";
 include_once "app/Controller/AccountController.php";
 include_once "app/Controller/ErrorController.php";
 include_once "app/Controller/PostController.php";
 include_once "app/Controller/API_PostController.php";
 include_once "app/Controller/UserController.php";
+include_once "app/Controller/BoardController.php";
+
 
 use App\Controller\HomeController as HomeController;
 use App\Controller\AccountController as AccountController;
@@ -24,11 +27,14 @@ use App\Controller\ErrorController as ErrorController;
 use App\Controller\PostController as PostController;
 use App\Controller\API_PostController as API_PostController;
 use App\Controller\UserController as UserController;
+use App\Controller\BoardController as BoardController;
+
 
 include_once "app/Model/Users.php";
 include_once "app/Model/Hearts.php";
 include_once "app/Model/Posts.php";
 include_once "app/Model/Comments.php";
+include_once "app/Model/Boards.php";
 
 include_once "app/Core/Router.php";
 include_once 'app/Core/Request.php';
@@ -192,7 +198,9 @@ Router::get('boards', 'sort', function() {
     // Controller = BoardController
     // Method = sort (new|old|trending|top)
 });
-Router::get('boards/{id}', '', function() {
+Router::get('boards/{board_id}', '', function($db) {
+    $Controller = new BoardController($db->pdo);
+    $Controller->render(Router::$items["board_id"]);
     // Controller = BoardController
     // Method = default (read)
     // Show 
@@ -250,8 +258,8 @@ Router::post('posts', 'action', function() {
 Router::get('boards/{board_id}/posts/{post_id}', '', function($db) {
     $Controller = new PostController($db->pdo);
     // Method = default (read)
-    var_dump(Router::$items);
-    $Controller->index(Router::$items["post_id"]);
+    // var_dump(Router::$items);
+    $Controller->render(Router::$items["post_id"]);
     // Controller = PostController
     // Method = default (read)
 });

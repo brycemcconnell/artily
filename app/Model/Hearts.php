@@ -20,9 +20,9 @@ class Hearts {
 	public function getHeartsByUserId(int $user_id) {
 		$sql = '
 			SELECT
-				COUNT(*)
+				SUM(heart_count)
 			FROM
-				post_hearts
+				Posts_All
 			WHERE
 				user_id = :user_id;
 		';

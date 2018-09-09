@@ -1,0 +1,27 @@
+.board_sorter {
+  position: absolute;
+  top: -2vw;
+  left: calc(100px + var(--spacing));
+  display: flex;
+}
+
+.board_sorter-btn {
+  width: 40px;
+  height: 40px;
+  background-color: var(--main-color);
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.board_sorter-btn svg {
+  fill: #ff7373;
+}
+
+.board_sorter-btn--active svg {
+  fill: #fff;
+}
+
+.board_sorter-btn:hover {
+  background-color: var(--main-color-hightlight); 
+}

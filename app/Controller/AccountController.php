@@ -6,20 +6,12 @@ namespace App\Controller;
 Use App\Model\Users as Users;
 Use App\Model\Hearts as Hearts;
 
-class AccountController
+class AccountController extends BaseController
 {
-	private $users_db;
-	private $hearts_db;
 
-	private $user;
-
-	public function __construct(\PDO $pdo) {
-		$this->users_db = new Users($pdo);
-		$this->hearts_db = new Hearts($pdo);
-
-		if (array_key_exists('user',$_SESSION)) {
-            $this->user = $this->getUserData($_SESSION["user"]);
-        }
+	public function __construct(\PDO $pdo)
+	{
+		parent::__construct($pdo);
 	}
 
 	public function index(): void
@@ -119,11 +111,5 @@ class AccountController
 		include 'views/account/signup.php';
 	}
 
-	public function getUserData($userSession)
-	{
-    	$user = $this->users_db->getUser($userSession["username"]);
-
-    	$user["userhearts"] = $this->hearts_db->getHeartsByUserId($user["id"]);
-    	return $user;
-    }
+	
 }

@@ -2,31 +2,22 @@
 
 namespace App\Controller;
 
-Use App\Model\Users as Users;
-Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 
 Use App\Core\Request as Request;
 
+use App\Controller\BaseController as BaseController;
+
 Use PDO;
 
-class HomeController
+class HomeController extends BaseController
 {
-    private $users_db;
-    private $hearts_db;
     private $posts_db;
-
-    private $user;
 
     public function __construct(\PDO $pdo)
     {
-    	$this->users_db = new Users($pdo);
-        $this->hearts_db = new Hearts($pdo);
+    	parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
-
-        if (array_key_exists('user',$_SESSION)) {
-            $this->user = $this->getUserData($_SESSION["user"]);
-        }
     }
 
     public function index($query = ["sort" => "home"]): void
@@ -50,7 +41,11 @@ class HomeController
 
     private function renderHome()
     {
-        $posts = $this->posts_db->userGetPostsLatest($_SESSION["user"]["id"]);
+        if (isset($_SESSION["user"])) {
+            $posts = $this->posts_db->userGetPostsLatest($_SESSION["user"]["id"]);
+        } else {
+            $posts = $this->posts_db->getPostsLatest();
+        }
         include "views/home/home_index.php";
     }
 
@@ -64,12 +59,5 @@ class HomeController
     {
         $posts = $this->posts_db->getPostsTrending();
         include "views/home/home_index.php";
-    }
-
-    public function getUserData($userSession) {
-    	$user = $this->users_db->getUser($userSession["username"]);
-
-    	$user["userhearts"] = $this->hearts_db->getHeartsByUserId($user["id"]);
-    	return $user;
     }
 }

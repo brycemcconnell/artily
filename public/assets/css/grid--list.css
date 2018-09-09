@@ -39,8 +39,6 @@
 
 .grid--list .item-heart {
     position: static;
-    background-color: #d33;
-    padding: 8px 4px;
 }
 
 .grid--list .item:hover .item-heart {
@@ -59,4 +57,9 @@
 .grid--list .item-heart svg {
     width: 32px;
     height: 32px;
+}
+
+.grid--list .item-heart_container {
+    position: static;
+    background-color: #d33;
 }

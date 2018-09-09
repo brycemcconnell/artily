@@ -19,13 +19,13 @@
 	// Close floating menus when clicking outside them
 	window.addEventListener('mouseup', (e) => {
 		let divs = [...document.querySelectorAll('.floating-menu:not(.none-withjs)')];
-		console.log(e)
+		// console.log(e)
 		divs.forEach(div => {
 			let coords = div.getBoundingClientRect();
 			if ((e.clientX > coords.left && e.clientX < coords.right &&
 				 e.clientY < coords.bottom && e.clientY > coords.top) == false) {
 				div.classList.add('none-withjs');
-				console.log('hit', coords, e.clientX, e.clientY);
+				// console.log('hit', coords, e.clientX, e.clientY);
 			}
 		});
 	});

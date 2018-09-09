@@ -30,7 +30,7 @@ use App\Core\Request;
 		<div class="header-artboard_container"><!-- Artboard -->
 			<!-- <img class="header-artboard_icon" src="/assets/img/test-artboard-icon.png"> -->
 			<!-- Artboard icon -->
-			<a class="header-artboard_name" href="<?= $artboard ?? '/' ?>"><?= $artboard ?? "Home"; ?></a><!-- Artboard name/link -->
+			<a class="header-artboard_name" href="<?= $board ?? '/' ?>"><?= $board ?? "Home"; ?></a><!-- Artboard name/link -->
 		</div>
 		<div class="header-search_container"><!-- Search Box -->
 			<form>
@@ -42,7 +42,7 @@ use App\Core\Request;
 			<a href="/me" class="header-user">
 				<img class="header-user_avatar" src="/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
-					<div class="header-user_name"><?= $this->user["username"]; ?></div><!-- User name -->
+					<div class="header-user_name"><?= $_SESSION['user']["username"]; ?></div><!-- User name -->
 					<div><span class="heart">♥</span><?= $this->user["userhearts"]; ?></div><!-- User heart count -->
 				</div>
 			</a>

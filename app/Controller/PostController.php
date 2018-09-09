@@ -3,24 +3,22 @@
 
 namespace App\Controller;
 
-Use App\Model\Users as Users;
-Use App\Model\Hearts as Hearts;
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
 use App\Core\Router as Router;
+
+use App\Controller\BaseController as BaseController;
 
 use \DateTime;
 use \DateTimeZone;
 
 
-class PostController
+class PostController extends BaseController
 {
     /**
      *
      */
     private $posts_db;
-    private $users_db;
-    private $hearts_db;
     private $comments_db;
     private $error_messages = [
         "Upload successful",
@@ -42,22 +40,15 @@ class PostController
     private $max_file_size = 5242880;
     private $upload_dir = "/var/www/artily/public/uploads";
 
-    private $user;
 
     public function __construct(\PDO $pdo)
     {
-        // parent::__construct($pdo);
+        parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
-        $this->users_db = new Users($pdo);
-        $this->hearts_db = new Hearts($pdo);
         $this->comments_db = new Comments($pdo);
-
-        if (array_key_exists('user',$_SESSION)) {
-            $this->user = $this->getUserData($_SESSION["user"]);
-        }
     }
 
-    public function index(string $name): void
+    public function render(string $name): void
 	{   
         // If a post id was given show the post info
         // To see the comments see the comments route
@@ -283,10 +274,6 @@ class PostController
     }
 
     function renderPost($post) {
-        // $post = $this->posts_db->getPostById($id);
-        if (array_key_exists('user',$_SESSION)) {
-            $user = $this->getUserData($_SESSION["user"]);
-        }
         $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
         include "views/posts/view_post.php";
@@ -383,12 +370,5 @@ class PostController
             die();
         }
         include "views/posts/new_post.php";
-    }
-
-    public function getUserData($userSession) {
-    	$user = $this->users_db->getUser($userSession["username"]);
-
-    	$user["userhearts"] = $this->hearts_db->getHeartsByUserId($user["id"]);
-    	return $user;
     }
 }

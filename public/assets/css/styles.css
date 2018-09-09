@@ -4,10 +4,10 @@
 
 .main {
 	min-height: calc(100% - 60px);    
-    padding-top: calc(60px + var(--spacing));
+    margin-top: calc(60px + var(--spacing));
     margin-left: calc(60px + var(--spacing));
     margin-right: var(--spacing);
-    padding-bottom: var(--spacing);
+    margin-bottom: var(--spacing);
 }
 
 .main-flex {

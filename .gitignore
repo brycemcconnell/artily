@@ -4,7 +4,7 @@ nbproject/
 /public/photos/
 /public/uploads/
 *.ico
-.resources/
+.code-resources/
 secret.php
 /vendor
 /.vscode/

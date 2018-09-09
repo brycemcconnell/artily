@@ -17,7 +17,7 @@ class SVGFactory {
 
 	public function arrow_down($color = "#000") {
 		return <<<xml
-<svg viewBox="0 0 24 24" height="14px" width="14px"><polyline fill="none" points="21,8.5 12,17.5 3,8.5 " stroke="'.$color.'" stroke-miterlimit="10" stroke-width="2"/></svg>
+<svg viewBox="0 0 24 24" height="14px" width="14px"><polyline fill="none" points="21,8.5 12,17.5 3,8.5 " stroke="$color" stroke-miterlimit="10" stroke-width="2"/></svg>
 xml;
 	}
 	public function home($color = "#000") {
@@ -114,6 +114,58 @@ xml;
 		return <<<xml
 <svg viewBox="0 0 48 48" height="48" width="48" fill="#fff0" stroke-width="3" stroke="#fff">
 	<path  d="M 23.924948,9.0032158 C 32.227971,0.70019061 43.638272,8.3531236 43.563217,16.227494 C 43.494602,23.426038 38.008283,26.873511 24.225169,39.677567 C 9.7983996,27.766131 4.7153311,25.019309 4.7903867,16.478476 C 4.8654422,7.6374205 14.633621,1.0021667 23.924948,9.0032158 z"/>
+</svg>
+xml;
+	}
+
+	public function grid()
+	{
+		return <<<xml
+<svg viewbox="0 0 24 24" height="24" width="24">
+	<g>
+		<rect x="9" y="9" width="6" height="6"/>
+		<rect x="0" y="0" width="6" height="6"/>
+		<rect x="9" y="18" width="6" height="6"/>
+		<rect x="0" y="9" width="6" height="6"/>
+		<rect x="0" y="18" width="6" height="6"/>
+		<rect x="18" y="0" width="6" height="6"/>
+		<rect x="9" y="0" width="6" height="6"/>
+		<rect x="18" y="9" width="6" height="6"/>
+		<rect x="18" y="18" width="6" height="6"/>
+	</g>
+</svg>
+xml;
+	}
+/*
+    <rect x="128" y="128" width="85.333" height="85.333"/>
+		<rect x="0" y="0" width="85.333" height="85.333"/>
+		<rect x="128" y="256" width="85.333" height="85.333"/>
+		<rect x="0" y="128" width="85.333" height="85.333"/>
+		<rect x="0" y="256" width="85.333" height="85.333"/>
+		<rect x="256" y="0" width="85.333" height="85.333"/>
+		<rect x="128" y="0" width="85.333" height="85.333"/>
+		<rect x="256" y="128" width="85.333" height="85.333"/>
+		<rect x="256" y="256" width="85.333" height="85.333"/>
+		*/
+	public function hamburger()
+	{
+		return <<<xml
+<svg width="24" height="24" viewBox="0 0 24 24">
+	<path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z"/>
+</svg>
+xml;
+	}
+
+	public function list()
+	{
+		return <<<xml
+<svg xwidth="24" height="24" viewBox="0 0 24 24">
+	<rect x="0" y="0" width="6" height="6"/>
+	<rect x="8" y="0" width="16" height="6"/>
+	<rect x="0" y="9" width="6" height="6"/>
+	<rect x="8" y="9" width="16" height="6"/>
+	<rect x="0" y="18" width="6" height="6"/>
+	<rect x="8" y="18" width="16" height="6"/>
 </svg>
 xml;
 	}

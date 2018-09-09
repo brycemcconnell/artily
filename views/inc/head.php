@@ -34,6 +34,7 @@
 		<link href="/assets/css/debug.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/reply.css" rel="stylesheet" type="text/css">
 		<link href="/assets/css/grid--list.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/board_sorter.css" rel="stylesheet" type="text/css">
 		<noscript>
 	    	<link href="/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>
