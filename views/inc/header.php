@@ -49,7 +49,7 @@ use App\Core\Request;
 			<a href="/messages" class="btn header-user_icon">
 				<img src="/assets/img/mail.png">
 			</a>
-			<a href="/posts?action=new" class="header-user_submit theme-btn theme-a-btn">
+			<a href="/new_post" class="header-user_submit theme-btn theme-a-btn">
 				Submit
 			</a><!-- Submit new content -->
 			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();">

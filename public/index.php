@@ -152,9 +152,9 @@ Router::get('me', '', function() {
     // Controller = UserController
     // Method = default (read)
 });
-Router::get('users', '', function() {
-    // Controller = UserController
-    // Method = default (read)
+Router::get('users', '', function($db) {
+    $Controller = new UserController($db->pdo);
+    $Controller->index();
 });
 Router::get('users/{id}', '', function() {
     // Controller = UserController
@@ -182,8 +182,10 @@ Router::get('users/{id}/posts', '', function() {
 Boards
 
 ******************************************************************/
-Router::get('boards', '', function() {
+Router::get('boards', '', function($db) {
     // Controller = BoardController
+    $Controller = new BoardController($db->pdo);
+    $Controller->index();
     // Method = default (read)
 });
 Router::get('boards', 'action', function() {
@@ -238,6 +240,15 @@ Router::post('boards/{id}/posts', 'action', function() {
 /posts
 
 ******************************************************************/
+Router::get('new_post', '', function($db) {
+    $Controller = new PostController($db->pdo);
+    $Controller->renderNewPost();
+});
+
+Router::post('new_post', '', function($db) {
+    $Controller = new PostController($db->pdo);
+    $Controller->submitNewPost();
+});
 Router::get('posts', 'action', function() {
     // Give an option to input a board name
     // Maybe this should be a different controller? eh..

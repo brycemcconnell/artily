@@ -24,26 +24,28 @@ class Request {
 	}
 
 	static function print_debug($reason) {
-	    echo "<pre>";
-	    echo "$reason\n";
-	    echo "Dumping some info...\n";
-	    echo "\n";
-	    echo "Get Request:\n";
-	    var_dump($_GET);
-	    echo "\n";
-	    echo "Server vars\n";
-	    print_r("REDIRECT_URL:          " . $_SERVER["REDIRECT_URL"] . "\n");
-	    print_r("REDIRECT_QUERY_STRING: " . ($_SERVER["REDIRECT_QUERY_STRING"] ?? "") . "\n");
-	    print_r("REQUEST_METHOD:        " . $_SERVER["REQUEST_METHOD"] . "\n");
-	    print_r("QUERY_STRING:          " . $_SERVER["QUERY_STRING"] . "\n");
-	    print_r("REQUEST_URI:           " . $_SERVER["REQUEST_URI"] . "\n");
-	    echo "\n";
-	    echo "Request vars\n";
-	   	print_r("values:\n");
-	   	var_dump(Request::$values);
-	    print_r("count:          " . Request::$count . "\n");
-	    print_r("path:           " . Request::$path . "\n");
-	    echo "</pre>";
+		echo "<pre>";
+		echo "$reason\n";
+		echo "Dumping some info...\n";
+		echo "\n";
+		echo "Get Request:\n";
+		var_dump($_GET);
+		echo "\n";
+		echo "Server vars\n";
+		print_r("REDIRECT_URL:          " . $_SERVER["REDIRECT_URL"] . "\n");
+		print_r("REDIRECT_QUERY_STRING: " . ($_SERVER["REDIRECT_QUERY_STRING"] ?? "") . "\n");
+		print_r("REQUEST_METHOD:        " . $_SERVER["REQUEST_METHOD"] . "\n");
+		print_r("QUERY_STRING:          " . $_SERVER["QUERY_STRING"] . "\n");
+		print_r("REQUEST_URI:           " . $_SERVER["REQUEST_URI"] . "\n");
+		echo "\n";
+		echo "Request vars\n";
+		print_r("values:\n");
+		var_dump(Request::$values);
+		print_r("count:          " . Request::$count . "\n");
+		print_r("path:           " . Request::$path . "\n");
+		echo "<br>SERVER:<br>";
+		var_dump($_SERVER);
+		echo "</pre>";
 	}
 }
 

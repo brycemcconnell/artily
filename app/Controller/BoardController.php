@@ -26,10 +26,12 @@ class BoardController extends BaseController
         $this->comments_db = new Comments($pdo);
     }
 
-    public function index($query)
+    public function index()
     {
         // Show list of all boards
-        $this->board_index();
+        $boards = $this->boards_db->getBoards();
+        
+        include "views/boards/board_index.php";
     }
 
     public function render(string $board_name)
@@ -42,14 +44,6 @@ class BoardController extends BaseController
         }
         
         include "views/boards/view_board.php";
-    }
-
-    public function action($query)
-    {  
-        // If a board is present, handle it's actions
-
-        // Otherwise handle index actions (eg. creating new board)
-
     }
 
     public function sort($query)

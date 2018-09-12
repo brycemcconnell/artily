@@ -46,6 +46,9 @@ function time_elapsed_string($datetime, $full = false) {
     @todo - Fix this for future values becoming corrupt
     Instead, perhaps just say 'from the future'
     */
+    if ($datetime == NULL) {
+        return "an eternity ago";
+    }
     $now = new DateTime("now", new DateTimeZone('UTC'));
     $ago = new DateTime($datetime, new DateTimeZone('UTC'));
     $diff = $now->diff($ago);

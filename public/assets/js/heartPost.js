@@ -1,5 +1,5 @@
-const addHeartURI = 'http://artily.saber/api/posts/addheart';
-const removeHeartURI = 'http://artily.saber/api/posts/removeheart';
+const addHeartURI = `//${window.location.host}/api/posts/addheart`;
+const removeHeartURI = `//${window.location.host}/api/posts/removeheart`;
 
 /**
  * Return a promise from an uri endpoint and throw if error

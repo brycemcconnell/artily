@@ -20,9 +20,13 @@ class SVGFactory {
 <svg viewBox="0 0 24 24" height="14px" width="14px"><polyline fill="none" points="21,8.5 12,17.5 3,8.5 " stroke="$color" stroke-miterlimit="10" stroke-width="2"/></svg>
 xml;
 	}
-	public function home($color = "#000") {
+	public function home() {
 		return <<<xml
-		<svg viewBox="0 0 16 16" width="24" height="24"><g fill="none" stroke="none" stroke-width="1"><g fill="$color"><path d="M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8"/></g></g></svg>
+<svg viewBox="0 0 16 16" width="24" height="24">
+	<g>
+		<path d="M16,8 L14,8 L14,16 L10,16 L10,10 L6,10 L6,16 L2,16 L2,8 L0,8 L8,0 L16,8 Z M16,8"/>
+	</g>
+</svg>
 xml;
 	}
 	public function trend($color = "#000") {
@@ -136,17 +140,21 @@ xml;
 </svg>
 xml;
 	}
-/*
-    <rect x="128" y="128" width="85.333" height="85.333"/>
-		<rect x="0" y="0" width="85.333" height="85.333"/>
-		<rect x="128" y="256" width="85.333" height="85.333"/>
-		<rect x="0" y="128" width="85.333" height="85.333"/>
-		<rect x="0" y="256" width="85.333" height="85.333"/>
-		<rect x="256" y="0" width="85.333" height="85.333"/>
-		<rect x="128" y="0" width="85.333" height="85.333"/>
-		<rect x="256" y="128" width="85.333" height="85.333"/>
-		<rect x="256" y="256" width="85.333" height="85.333"/>
-		*/
+
+	public function grid2x2()
+	{
+		return <<<xml
+<svg viewbox="0 0 24 24" height="24" width="24">
+	<g>
+		<rect x="0" y="0" width="10" height="10"/>
+		<rect x="12" y="0" width="10" height="10"/>
+		<rect x="12" y="12" width="10" height="10"/>
+		<rect x="0" y="12" width="10" height="10"/>
+	</g>
+</svg>
+xml;
+	}
+
 	public function hamburger()
 	{
 		return <<<xml
@@ -166,6 +174,25 @@ xml;
 	<rect x="8" y="9" width="16" height="6"/>
 	<rect x="0" y="18" width="6" height="6"/>
 	<rect x="8" y="18" width="16" height="6"/>
+</svg>
+xml;
+	}
+
+	public function folder()
+	{
+		return <<<xml
+<svg height="24" width="24">
+	<path d="M0 0 L8 0 L8 2 L24 2 L24 24 L0 24 Z" />
+</svg>
+xml;
+	}
+
+	public function person()
+	{
+		return <<<xml
+<svg height="24" width="24">
+	<rect x="6" y="0" width="12" height="12"/>
+  <rect x="0" y="14" width="24" height="14"/>
 </svg>
 xml;
 	}

@@ -9,7 +9,6 @@
 	<div id="main" class="grid grid--list">
 		<?php
 		foreach ($posts as $key => $value) {
-			// render_post($posts[$key]);
 			include('../views/home/inc/board_post.php');
 		}
 		?>

@@ -139,6 +139,12 @@
     color: #999;
     font-size: 12px;
     white-space: nowrap;
+    position: relative;
+    z-index: 9;
+}
+
+.item-date:hover {
+    font-style: italic;
 }
 
 .grid {

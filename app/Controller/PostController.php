@@ -302,7 +302,14 @@ class PostController extends BaseController
         die();
     }
 
-    function submitNewPost() {
+    public function submitNewPost()
+    {
+        if (array_key_exists('user',$_SESSION) == false) {
+            http_response_code(403);
+            header("Location: /error?code=403");
+            die();
+        }
+
         $file = $_FILES["image"];
         $file_name = basename($file["tmp_name"]);
         $file_type = $file["type"];
@@ -356,6 +363,7 @@ class PostController extends BaseController
         $post_data["user_id"] = $_SESSION["user"]["id"];
         $post_data["title"] = $_POST["title"];
         $post_data["content"] = $_POST["content"];
+        $post_data["board_name"] = "default";
         if ($file["name"]) {
             $post_data["file_path"] = $new_file_name;
             $post_data["file_name"] = pathinfo($file["name"], PATHINFO_FILENAME);
@@ -368,13 +376,13 @@ class PostController extends BaseController
         $result = $this->posts_db->create_post($post_data);
         // Redirect to the new post
         var_dump($result);
-        header("Location: /posts/$result?status=postsuccess");
+        header("Location: /boards/".$post_data["board_name"]."/posts/".$post_data["title"]."?status=postsuccess");
         die();
     }
 
-    function renderNewPost() {
+    function renderNewPost()
+    {
         if (array_key_exists('user',$_SESSION) == false) {
-            // $user = $this->getUserData($_SESSION["user"]);
             http_response_code(403);
             header("Location: /error?code=403");
             die();

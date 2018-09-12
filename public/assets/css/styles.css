@@ -59,3 +59,7 @@
     margin-top: 20px;
     margin-left: 20px;
 }
+
+.svg-no_fill svg {
+    fill: none !important;
+}

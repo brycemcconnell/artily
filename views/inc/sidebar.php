@@ -35,8 +35,14 @@ $boards = [
 		<div class="sidebar-section">
 			<ul>
 				<li><a class="sidebar-common_link sidebar-link" href="/?sort=home" title="Home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>
-				<li><a class="sidebar-common_link sidebar-link" href="/?sort=trending" title="Trending"><span class="sidebar-icon"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="/?sort=trending" title="Trending"><span class="sidebar-icon svg-no_fill"><?= $SVG->trend('#d33'); ?></span><span class="sidebar-expanded"> Trending</span></a></li>
 				<li><a class="sidebar-common_link sidebar-link" href="/?sort=all" title="All Posts"><span class="sidebar-icon"><?= $SVG->globe('#d33'); ?></span><span class="sidebar-expanded"> All</span></a></li>
+			</ul>
+		</div>
+		<div class="sidebar-section">
+			<ul>
+				<li><a class="sidebar-common_link sidebar-link" href="/boards" title="All Boards"><span class="sidebar-icon"><?= $SVG->grid2x2(); ?></span><span class="sidebar-expanded"> All Boards</span></a></li>
+				<li><a class="sidebar-common_link sidebar-link" href="/users" title="All Users"><span class="sidebar-icon"><?= $SVG->person(); ?></span><span class="sidebar-expanded"> All Users</span></a></li>
 			</ul>
 		</div>
 		<div class="sidebar-section sidebar-expanded">

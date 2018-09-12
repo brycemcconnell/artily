@@ -3,26 +3,25 @@
 
 namespace App\Controller;
 
-Use App\Model\Users as Users;
-Use App\Model\Hearts as Hearts;
-Use App\Model\Posts as Posts;
+
 use App\Core\Request as Request;
 
-class UserController
+class UserController extends BaseController
 {
     /**
      *
      */
-    private $user_db;
-    private $hearts_db;
-    private $posts_db;
 
-    public function __construct(Users $user_db, Hearts $hearts_db, Posts $posts_db) {
+    public function __construct(\PDO $pdo)
+    {
+        parent::__construct($pdo);
+    }
 
-    	$this->user_db = $user_db;
-        $this->hearts_db = $hearts_db;
-    	$this->posts_db = $posts_db;
+    public function index()
+    {
+        $users = $this->users_db->getUsers();
 
+        include "views/users/user_index.php";
     }
 
     function run() {

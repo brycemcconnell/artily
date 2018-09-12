@@ -240,4 +240,41 @@ class Users
 		else
 			return 'An error occured.';
 	}
+
+	/**
+	 * Return all users
+	 * @return void
+	 */
+	public function getUsers()
+	{
+		try {
+      // Note: Distinct here is kind of hacky, really we want the query to return the correct number of rows either way
+      // Perhaps this is because of the subquery, or the joins, not sure
+      $sql = '
+				SELECT
+					username,
+					created,
+					level
+				FROM
+					users
+				WHERE
+					deleted IS NULL
+      ';
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->execute();
+      $result = $stmt->fetchAll();
+      
+      for ($i=0; $i < count($result); $i++) { 
+        $result[$i]["elapsed"] = time_elapsed_string($result[$i]["created"]);
+			}
+		
+			return $result;
+			
+    } catch(\PDOException $e) {
+      echo "oops! an error getting the board info<br><pre>";
+      var_dump($e);
+      echo "</pre>";
+      die();
+    }
+	}
 }

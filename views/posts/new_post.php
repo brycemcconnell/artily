@@ -10,7 +10,7 @@ include_once('../views/inc/head.php');
 ?>
 <?php include_once('../views/inc/header.php');?>
 <main class="main">
-	<form class="post-new_form box bb" action="post?action=new" method="POST" enctype="multipart/form-data" novalidate>
+	<form class="post-new_form box bb" action="" method="POST" enctype="multipart/form-data" novalidate>
 	<div>Submit a new post</div>
 	<?php if (isset($board)): ?>
 		<div>Posting to: <input class="input-text" type="text" name="board" value="<?= $board; ?>" readonly></div>

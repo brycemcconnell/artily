@@ -27,11 +27,11 @@
 }
 
 
-.sidebar-common_link g {
+.sidebar-common_link svg {
 	fill: #d33;
 	transition: .1s;
 }
-.sidebar-common_link:hover g {
+.sidebar-common_link:hover svg {
 	fill: #e66;
 }
 .sidebar-common_link polyline {
@@ -80,7 +80,9 @@
 .sidebar-icon:hover {
 	text-decoration: none;
 }
-
+.sidebar-icon svg {
+	fill: #d33;
+}
 
 
 .sidebar-subtitle_container {
