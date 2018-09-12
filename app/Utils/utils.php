@@ -82,7 +82,7 @@ function redirect_back() {
     if (isset($_GET["redirect"])) {
         header("Location:".$_GET["redirect"]);
     } else {
-        header("Location: /index.php");
+        header("Location: /");
     }
 }
 

@@ -2,7 +2,7 @@
 <a href="/" class="home-btn theme-btn theme-a-btn"><img src="/assets/img/home.svg"></a>
 <main class="signup-page">
 	<img src="/assets/img/kermit.jpg">
-	<form action="account?action=signup" method="POST" novalidate>
+	<form action="/signup?<?= $redirect; ?>" method="POST" novalidate>
 		<div class="signup-input_container">
 			<input class="signup-input" type="text" name="username" placeholder="..." value="<?= $username ?? ''; ?>" required>
 			<input class="signup-input" type="email" name="email" placeholder="Email..." value="<?= $email ?? ''; ?>" required>
@@ -11,7 +11,7 @@
 		</div>
 	</form>
 
-	<?php if ($signup_success === false): ?>
+	<?php if (isset($signup_success) && $signup_success === false): ?>
 	    <div class="row text-center text-danger">Signup failure.</div>
 	    <?php isset($userCreation["errors"]) ? var_dump($userCreation) : ""; ?>
 	<?php endif; ?>

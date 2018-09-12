@@ -43,7 +43,7 @@ use App\Core\Request;
 				<img class="header-user_avatar" src="/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
 					<div class="header-user_name"><?= $_SESSION['user']["username"]; ?></div><!-- User name -->
-					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"]; ?></span></div><!-- User heart count -->
+					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"] ?? "0"; ?></span></div><!-- User heart count -->
 				</div>
 			</a>
 			<a href="/messages" class="btn header-user_icon">
@@ -57,12 +57,12 @@ use App\Core\Request;
 			</button><!-- Other options, eg. preferences/logout -->
 			<ul class="header-user_menu none-withjs floating-menu">
 				<li>
-					<a href="/account?action=preferences">
+					<a href="/account/preferences">
 						<span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Preferences
 					</a>
 				</li>
 				<li>
-					<a href="/account?action=logout&redirect=<?= $redirect; ?>">
+					<a href="/logout?<?= $redirect; ?>">
 						<span class="svg-icon"><?= $SVG->arrow_down(); ?></span>Logout
 					</a>
 				</li>
@@ -70,8 +70,8 @@ use App\Core\Request;
 		</div>
 		<?php else: ?>
 		<div class="header-user_container">
-			<a href="/account?action=login&redirect=<?= $redirect; ?>" class="header-user_login theme-btn">Login</a>
-			<a href="/account?action=signup" class="header-user_login theme-btn">Signup</a>
+			<a href="/login?<?= $redirect; ?>" class="header-user_login theme-btn">Login</a>
+			<a href="/signup" class="header-user_login theme-btn">Signup</a>
 		</div>
 	</div>
 	<?php endif;?>

@@ -66,22 +66,7 @@ class Router {
 		}
 
 		// Success, this is the correct route.
-		
-		// Check if there is a query in the request
-		if (empty(Request::$query) == false) {
-			// There is a query request!
-			// Check if there is a query in the route
-			if (empty($query)) { 
-				// This route has no query, it must be wrong
-				return;
-			}
-			// This route has a query!
-			// Check if this route's query is inside the request query
-			if (array_key_exists($query, Request::$query) == false) {
-				// This route's query is not in the request query!
-				return;
-			}
-		}
+	
 
 		// All checks complete, invoke route logic
 		$func->__invoke(new Database());

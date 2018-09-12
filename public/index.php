@@ -343,17 +343,35 @@ Router::get('account', '', function($db) {
     // Note: This should show some account details, eg: email, created,
     // username, and edit/delete account buttons
 });
-Router::get('account', 'action', function($db) {
+Router::get('login', '', function($db) {
     // Controller = AccountController
     $Controller = new AccountController($db->pdo);
     // Method = action (login|logout|signup|edit|delete)
-    $Controller->action(Request::$query);
+    $Controller->renderLogin();
 });
-Router::post('account', 'action', function($db) {
+Router::post('login', '', function($db) {
     // Controller = AccountController
     $Controller = new AccountController($db->pdo);
     // Method = action (login|logout|signup|edit|delete)
-    $Controller->action(Request::$query);
+    $Controller->processLogin();
+});
+Router::get('logout', '', function($db) {
+    // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
+    // Method = action (login|logout|signup|edit|delete)
+    $Controller->logout();
+});
+Router::get('signup', '', function($db) {
+    // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
+    // Method = action (login|logout|signup|edit|delete)
+    $Controller->renderSignup();
+});
+Router::post('signup', '', function($db) {
+    // Controller = AccountController
+    $Controller = new AccountController($db->pdo);
+    // Method = action (login|logout|signup|edit|delete)
+    $Controller->processSignup();
 });
 
 /******************************************************************
