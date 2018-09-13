@@ -21,24 +21,7 @@
 		<title>artily</title>
 
 
-		<!-- Development styles for this template -->
-		<link href="/assets/css/root.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/theme.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/header.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/sidebar.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/footer.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/login.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/error.css" rel="stylesheet" type="text/css">
-		<!-- Compiled styles -->
-		<link href="/assets/css/styles.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/grid.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/post.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/comments.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/artbar.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/debug.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/reply.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/grid--list.css" rel="stylesheet" type="text/css">
-		<link href="/assets/css/board_sorter.css" rel="stylesheet" type="text/css">
+		<link href="/assets/css/main.css" rel="stylesheet" type="text/css">
 		<noscript>
 	    	<link href="/assets/css/no-js.css" type="text/css" rel="stylesheet" />
 		</noscript>
