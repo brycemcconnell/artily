@@ -143,6 +143,7 @@ class Posts {
 				$post[$key]["post_contents"] .= "...";
 			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
 			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
+			$post[$key]["perma_url"] = "/posts/".urlsafe($post[$key]["post_id"]);
 			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
 			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
 			$post[$key]["class"] = "";

@@ -43,7 +43,7 @@ $post = $posts[$key];
 			</a>
 		</div>
 		<div class="item-detail_container item-action_menu">
-			View - Share - Report - Hide - Add to collection...
+			<a href="<?= $post["perma_url"]; ?>">Permalink</a> - <a href="/share/posts/<?= $post["post_id"];?>">Share</a> - <a href="/report/posts/<?= $post["post_id"];?>">Report</a> - <a href="javascript:void()" class="js--hide-post" role="button">Hide</a> - <a href="<?= $post["perma_url"]; ?>/add_to">Add to collection...</a>
 		</div>
 	</div>
 

@@ -19,11 +19,13 @@ body {
 
 a {
 	text-decoration: none;
-	/*color: #28d;*/
+	transition: .1s;
+	color: var(--main-color-dark);
 }
 
 a:hover {
-	/*text-decoration: underline;*/
+	color: var(--main-color-highlight);
+	text-decoration: underline;
 }
 
 button {
@@ -52,7 +54,7 @@ ul, li {
     padding: 0;
 }
 .theme-btn {
-	background-color: #d33;
+	background-color: var(--main-color);
 	border: none;
 	color: #fff;
 	transition: background-color .3s;
@@ -61,15 +63,6 @@ ul, li {
 
 .theme-btn:hover {
 	background-color: #e44;
-}
-
-a {
-	transition: .1s;
-	color: #a22;
-}
-
-a:hover {
-	color: #e66;
 }
 
 .theme-a-btn {

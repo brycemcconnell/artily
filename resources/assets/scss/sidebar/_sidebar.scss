@@ -28,14 +28,14 @@
 
 
 .sidebar-common_link svg {
-	fill: #d33;
+	fill: var(--main-color);
 	transition: .1s;
 }
 .sidebar-common_link:hover svg {
 	fill: #e66;
 }
 .sidebar-common_link polyline {
-	stroke: #d33;
+	stroke: var(--main-color);
 	transition: .1s;
 }
 .sidebar-common_link:hover polyline {
@@ -81,7 +81,7 @@
 	text-decoration: none;
 }
 .sidebar-icon svg {
-	fill: #d33;
+	fill: var(--main-color);
 }
 
 

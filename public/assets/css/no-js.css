@@ -5,7 +5,7 @@
   cursor: default; }
 
 .sidebar-toggle_btn:hover {
-  background-color: #d33; }
+  background-color: var(--main-color); }
 
 .sidebar-content_small .sidebar-icon {
   margin-right: 10px; }

@@ -3,8 +3,9 @@ How does this look to you
 */
 :root {
   --spacing: 2vw;
+  --main-color: #d33;
   --main-color-highlight: #e44;
-  --main-color: #d33; }
+  --main-color-dark: #a22; }
 
 * {
   box-sizing: border-box; }
@@ -24,10 +25,12 @@ body {
 
 a {
   text-decoration: none;
-  /*color: #28d;*/ }
+  transition: .1s;
+  color: var(--main-color-dark); }
 
 a:hover {
-  /*text-decoration: underline;*/ }
+  color: var(--main-color-highlight);
+  text-decoration: underline; }
 
 button {
   font-family: inherit; }
@@ -51,7 +54,7 @@ ul, li {
   padding: 0; }
 
 .theme-btn {
-  background-color: #d33;
+  background-color: var(--main-color);
   border: none;
   color: #fff;
   transition: background-color .3s;
@@ -59,13 +62,6 @@ ul, li {
 
 .theme-btn:hover {
   background-color: #e44; }
-
-a {
-  transition: .1s;
-  color: #a22; }
-
-a:hover {
-  color: #e66; }
 
 .theme-a-btn {
   display: block;
@@ -178,7 +174,7 @@ a:hover {
   align-items: center; }
 
 .header-logo {
-  background-color: #d33;
+  background-color: var(--main-color);
   height: 100%;
   width: 280px;
   min-width: 280px;
@@ -242,7 +238,7 @@ a:hover {
   font-weight: bold; }
 
 .header-user_submit {
-  background-color: #d33;
+  background-color: var(--main-color);
   color: #fff;
   margin-left: auto;
   margin-right: 10px;
@@ -286,7 +282,7 @@ a:hover {
 
 .header-user_menu a:hover {
   color: #fff;
-  background-color: #d33; }
+  background-color: var(--main-color); }
 
 .header-user_login {
   height: 40px;
@@ -323,14 +319,14 @@ a:hover {
   display: block; }
 
 .sidebar-common_link svg {
-  fill: #d33;
+  fill: var(--main-color);
   transition: .1s; }
 
 .sidebar-common_link:hover svg {
   fill: #e66; }
 
 .sidebar-common_link polyline {
-  stroke: #d33;
+  stroke: var(--main-color);
   transition: .1s; }
 
 .sidebar-common_link:hover polyline {
@@ -364,7 +360,7 @@ a:hover {
   text-decoration: none; }
 
 .sidebar-icon svg {
-  fill: #d33; }
+  fill: var(--main-color); }
 
 .sidebar-subtitle_container {
   display: flex;
@@ -402,7 +398,7 @@ a:hover {
   padding: 4px 0; }
 
 .footer {
-  background-color: #d33;
+  background-color: var(--main-color);
   color: #fff;
   height: 60px;
   display: flex;
@@ -444,10 +440,10 @@ a:hover {
 
 .error_code {
   font-size: 96px;
-  color: #d33; }
+  color: var(--main-color); }
 
 .heart {
-  color: #d33; }
+  color: var(--main-color); }
 
 .main {
   min-height: calc(100% - 60px);
@@ -477,7 +473,7 @@ a:hover {
   left: calc(50% - 300px);
   display: flex;
   background-color: #fff;
-  border: 3px solid #d33;
+  border: 3px solid var(--main-color);
   padding: 20px;
   box-shadow: 0px 10px 59px -18px #000;
   width: 600px;
@@ -502,6 +498,22 @@ a:hover {
 .svg-no_fill svg {
   fill: none !important; }
 
+.fade_out {
+  animation: 1s fade_out forwards; }
+
+@keyframes fade_out {
+  from {
+    opacity: 1; }
+  to {
+    opacity: 0; } }
+.move_up {
+  animation: 1s move_up; }
+
+@keyframes move_up {
+  from {
+    transform: translateY(0); }
+  to {
+    transform: translateY(-100%); } }
 .item {
   box-shadow: 0px 8px 20px -4px #0005;
   background-color: #ddd;
@@ -863,7 +875,7 @@ a:hover {
 
 .post-options a:hover {
   color: #fff;
-  background-color: #d33; }
+  background-color: var(--main-color); }
 
 .comment {
   padding-left: 26px;
@@ -883,7 +895,7 @@ a:hover {
   padding: 0;
   margin: 0;
   background-color: transparent;
-  color: #d33;
+  color: var(--main-color);
   display: inline;
   position: absolute;
   top: 5px;
@@ -1106,7 +1118,7 @@ a:hover {
 
 .grid--list .item-heart_container {
   position: static;
-  background-color: #d33; }
+  background-color: var(--main-color); }
 
 .board_sorter {
   position: absolute;

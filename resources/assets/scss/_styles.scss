@@ -1,5 +1,5 @@
 .heart {
-	color: #d33;
+	color: var(--main-color);
 }
 
 .main {
@@ -37,7 +37,7 @@
     left: calc(50% - 300px);
     display: flex;
     background-color: #fff;
-    border: 3px solid #d33;
+    border: 3px solid var(--main-color);
     padding: 20px;
     box-shadow: 0px 10px 59px -18px #000;
     width: 600px;
@@ -62,4 +62,22 @@
 
 .svg-no_fill svg {
     fill: none !important;
+}
+
+.fade_out {
+    animation: 1s fade_out forwards;
+}
+
+@keyframes fade_out {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+.move_up {
+    animation: 1s move_up;
+}
+
+@keyframes move_up {
+    from {transform: translateY(0)}
+    to {transform: translateY(-100%)}
 }

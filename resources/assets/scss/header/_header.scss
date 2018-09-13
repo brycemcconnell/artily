@@ -19,7 +19,7 @@
 }
 
 .header-logo {
-	background-color: #d33;
+	background-color: var(--main-color);
 	height: 100%;
 	width: 280px;
 	min-width: 280px;
@@ -94,7 +94,7 @@
 }
 
 .header-user_submit {
-	background-color: #d33;
+	background-color: var(--main-color);
 	color: #fff;
 	margin-left: auto;
 	margin-right: 10px;
@@ -144,7 +144,7 @@
 
 .header-user_menu a:hover {
 	color: #fff;
-	background-color: #d33;
+	background-color: var(--main-color);
 }
 
 .header-user_login {

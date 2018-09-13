@@ -8,3 +8,4 @@ nbproject/
 secret.php
 /vendor
 /.vscode/
+.sass-cache/
