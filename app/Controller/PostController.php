@@ -5,7 +5,6 @@ namespace App\Controller;
 
 Use App\Model\Posts as Posts;
 Use App\Model\Comments as Comments;
-Use App\Model\Boards as Boards;
 use App\Core\Router as Router;
 
 use App\Controller\BaseController as BaseController;
@@ -47,7 +46,6 @@ class PostController extends BaseController
         parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
         $this->comments_db = new Comments($pdo);
-        $this->boards_db = new Boards($pdo);
     }
 
     public function render(string $name): void
@@ -363,7 +361,21 @@ class PostController extends BaseController
         $post_data["user_id"] = $_SESSION["user"]["id"];
         $post_data["title"] = $_POST["title"];
         $post_data["content"] = $_POST["content"];
-        $post_data["board_name"] = "default";
+        $post_data["board_name"] = $_POST["board"];
+
+        // Check if there's a board with that name in the database
+
+        $board_info = $this->boards_db->getBoardByName($post_data["board_name"]);
+
+        if ($board_info == false) {
+            // No board ID found, this board doesn't exist, redirect and send error message
+            echo "The board ".$post_data["board_name"]." does not exist.";
+            include "views/posts/new_post.php";
+            die();
+        }
+
+        $post_data["board_id"] = $board_info["id"];
+
         if ($file["name"]) {
             $post_data["file_path"] = $new_file_name;
             $post_data["file_name"] = pathinfo($file["name"], PATHINFO_FILENAME);
@@ -375,8 +387,9 @@ class PostController extends BaseController
         // Add all data to database
         $result = $this->posts_db->create_post($post_data);
         // Redirect to the new post
-        var_dump($result);
-        header("Location: /boards/".$post_data["board_name"]."/posts/".$post_data["title"]."?status=postsuccess");
+        // var_dump($result);
+        
+        header("Location: /boards/".urlsafe($post_data["board_name"])."/posts/".urlsafe($post_data["title"])."?status=postsuccess");
         die();
     }
 

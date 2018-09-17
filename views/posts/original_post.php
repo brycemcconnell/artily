@@ -6,8 +6,8 @@
 			): ?>
 		<button type="button" class="settings-btn btn" onclick="togglePostMenu();"><?= $SVG->gear("#aaa"); ?></button>
 		<ul class="post-options bb box none-withjs floating-menu">
-			<li><a href="?action=edit"><span class="svg-icon"><?= $SVG->edit();?></span>Edit</a></li>
-			<li><a href="?action=delete"><span class="svg-icon"><?= $SVG->garbage();?></span>Delete</a></li>
+			<li><a href="./edit"><span class="svg-icon"><?= $SVG->edit();?></span>Edit</a></li>
+			<li><a href="./delete"><span class="svg-icon"><?= $SVG->garbage();?></span>Delete</a></li>
 		</ul>
 		<script>
 		function togglePostMenu() {

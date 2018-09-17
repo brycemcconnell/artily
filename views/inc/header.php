@@ -33,8 +33,11 @@ use App\Core\Request;
 			<a class="header-artboard_name" href="<?= $board ?? '/' ?>"><?= $board ?? "Home"; ?></a><!-- Artboard name/link -->
 		</div>
 		<div class="header-search_container"><!-- Search Box -->
-			<form>
+			<form class="header-search_form">
 				<input class="header-search_input" type="search" placeholder="Find something new...">
+				<button class="header-search_input-btn">
+					<?= $SVG->search();?>
+				</button>
 			</form>
 		</div>
 		<?php if (isset($_SESSION['user'])): ?>
@@ -46,15 +49,22 @@ use App\Core\Request;
 					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"] ?? "0"; ?></span></div><!-- User heart count -->
 				</div>
 			</a>
+			<a href="/something" class="btn header-user_icon">
+				<span class="svg-icon"><?= $SVG->arrow_down();?></span>
+			</a>
 			<a href="/messages" class="btn header-user_icon">
 				<img src="/assets/img/mail.png">
 			</a>
+			<!-- Submit new content -->
 			<a href="/new_post" class="header-user_submit theme-btn theme-a-btn">
-				Submit
-			</a><!-- Submit new content -->
+				<span class="n900">Submit</span>
+				<span class="y900"><?= $SVG->pencil();?></span>
+			</a>
+			<!-- Open options -->
 			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();">
 				<?= $SVG->arrow_down(); ?>
-			</button><!-- Other options, eg. preferences/logout -->
+			</button>
+			<!-- Other options, eg. preferences/logout -->
 			<ul class="header-user_menu none-withjs floating-menu">
 				<li>
 					<a href="/account/preferences">
@@ -81,4 +91,5 @@ use App\Core\Request;
 		}
 	</script>
 </header>
+<div class="shadow"></div>
 

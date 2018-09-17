@@ -7,6 +7,7 @@
 
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
+<?php include_once('../views/common/board_sort.php'); ?>
 
 <main class="main">
 
@@ -22,6 +23,5 @@
 	<div class="grid-last">There seems to be nothing left...</div>
 </main>
 
-<?php include_once('../views/common/board_sort.php'); ?>
 <?php include_once('../views/inc/sidebar.php'); ?>
 <?php include_once('../views/inc/footer.php'); ?>

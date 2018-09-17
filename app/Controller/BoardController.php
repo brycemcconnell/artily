@@ -19,10 +19,12 @@ class BoardController extends BaseController
      *
      */
     private $comments_db;
+    private $posts_db;
 
     public function __construct(\PDO $pdo)
     {
         parent::__construct($pdo);
+        $this->posts_db = new Posts($pdo);
         $this->comments_db = new Comments($pdo);
     }
 
@@ -38,9 +40,9 @@ class BoardController extends BaseController
     {
         $board_data = $this->boards_db->getBoardByName($board_name);
         if (isset($_SESSION["user"])) {
-            $board_posts = $this->boards_db->userGetBoardPostsById($_SESSION["user"]["id"], $board_data["id"]);
+            $board_posts = $this->posts_db->userGetBoardPostsById($_SESSION["user"]["id"], $board_data["id"]);
         } else {
-            $board_posts = $this->boards_db->getBoardPostsById($board_data["id"]);
+            $board_posts = $this->posts_db->getBoardPostsById($board_data["id"]);
         }
         
         include "views/boards/view_board.php";

@@ -15,14 +15,14 @@ include_once('../views/inc/head.php');
 	<?php if (isset($board)): ?>
 		<div>Posting to: <input class="input-text" type="text" name="board" value="<?= $board; ?>" readonly></div>
 	<?php else: ?>
-		<div><span>Post to:</span> <input class="input-text" type="text" name="board"></div>
+		<div><span>Post to:</span> <input class="input-text" type="text" name="board" placeholder="Board..." value="<?= $_POST["board"] ?? "";?>"></div>
 	<?php endif; ?>
 		
 		<div>
-			<input class="input-text" type="text" name="title" placeholder="Title..." required>
+			<input class="input-text" type="text" name="title" placeholder="Title..." value="<?= $_POST["title"] ?? "";?>" required>
 		</div>
 		<div>
-			<textarea class="input-text input-textarea" name="content" placeholder="Content here..."></textarea>
+			<textarea class="input-text input-textarea" name="content" placeholder="Content here..." value="<?= $_POST["content"] ?? "";?>"></textarea>
 		</div>
 		<div>
 			<input type="file" name="image">

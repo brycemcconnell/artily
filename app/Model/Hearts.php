@@ -41,7 +41,8 @@ class Hearts {
 					post_hearts			
 				VALUES (
 					:user_id,
-					:post_id
+					:post_id,
+					UTC_TIMESTAMP()
 				);
 			';
 			$stmt = $this->pdo->prepare($sql);

@@ -26,6 +26,13 @@
     display: flex;
 }
 
+
+@media screen and (max-width: 600px) {
+    .main {
+        margin-left: var(--spacing);
+    }
+}
+
 .grid-last {
 	text-align: center;
 	color: #777;
@@ -39,7 +46,6 @@
     background-color: #fff;
     border: 3px solid var(--main-color);
     padding: 20px;
-    box-shadow: 0px 10px 59px -18px #000;
     width: 600px;
     animation: fade-out 5s forwards;
     animation-delay: 2s;
@@ -52,7 +58,7 @@
 
 @keyframes fade-out {
 	from { opacity: 1; visibility: visible; }
-	to { opacity: 0; visibility: hidden; }
+	to { opacity: 0; visibility: hidden;}
 }
 
 .home-btn {
@@ -69,15 +75,35 @@
 }
 
 @keyframes fade_out {
-    from {opacity: 1;}
-    to {opacity: 0;}
+    from {opacity: 1; margin-top: 0;}
+    to {opacity: 0; margin-top: -120px;}
 }
 
-.move_up {
-    animation: 1s move_up;
+
+.n600,
+.n900 {
+    display: block;
 }
 
-@keyframes move_up {
-    from {transform: translateY(0)}
-    to {transform: translateY(-100%)}
+.y600,
+.y900 {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .n600 {
+        display: none;
+    }
+    .y600 {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .n900 {
+        display: none;
+    }
+    .y900 {
+        display: block;
+    }
 }

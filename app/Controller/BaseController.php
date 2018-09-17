@@ -29,6 +29,8 @@ class BaseController
     } else {
       // $this->board_list = $this->boards_db->getBoardsForAnon();
     }
+
+    $this->board_list = $this->boards_db->getBoards();
   }
 
   // private function getUserData($userSession)

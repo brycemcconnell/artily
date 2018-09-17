@@ -13,17 +13,6 @@ $collections = [
         "name" => "dogs"
     ]
 ];
-$boards = [
-	[
-        "name" => "kittens"
-    ],
-    [
-        "name" => "cats"
-    ],
-    [
-        "name" => "puppers"
-    ],
-];
  ?>
 
 <aside class="sidebar">
@@ -59,11 +48,11 @@ $boards = [
 		</div>
 		<div class="sidebar-section sidebar-expanded">
 			<div class="sidebar-subtitle_container">
-				<div class="sidebar-subtitle">Artboards (<?= count($boards); ?>)</div>
+				<div class="sidebar-subtitle">Boards (<?= count($this->board_list); ?>)</div>
 				<button type="button" onclick="toggleSection('sidebarArtboards')" class="theme-btn btn-tiny"><?= $SVG->arrow_down("#fff"); ?></button>
 			</div>
 			<ul class="sidebar-section_list" id="sidebarArtboards">
-				<?php foreach($boards as $b): ?>
+				<?php foreach($this->board_list as $b): ?>
 				<li><a class="sidebar-link" href="/boards/<?= $b["name"]; ?>"><?= $b["name"]; ?></a></li>
 				<?php endforeach; ?>
 			</ul>
@@ -86,6 +75,7 @@ $boards = [
 			// 	item.classList.toggle('none');
 			// });
 			document.querySelector('.sidebar-content').classList.toggle('sidebar-content_small');
+			document.querySelector('.shadow').classList.toggle('shadow-active');
 		}
 
 		function toggleSection(section) {

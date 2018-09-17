@@ -17,6 +17,31 @@ class Posts {
 		$this->pdo = null;
 	}
 
+	private	function get_image_ratio($width, $height) {
+		if (!empty($width) && !empty($height))
+			return $width / $height;
+		return 1;
+	}
+
+	private function createPostData ($item) {
+		if (!empty($item["post_contents"]))
+			$item["post_contents"] .= "...";
+		$item["elapsed"] = time_elapsed_string($item["created"]);
+		$item["post_url"] = "/boards/".urlsafe($item["board_name"])."/posts/".urlsafe($item["title"]);
+		$item["perma_url"] = "/posts/".urlsafe($item["post_id"]);
+		$item["user_url"] = "/users/".urlsafe($item["username"]);
+		$item["ratio"] = $this->get_image_ratio($item["width"], $item["height"]);
+		$item["class"] = "";
+		if ($item["ratio"] < .5)
+			$item["class"] = "item-v2";
+		else if ($item["ratio"] > 1.5)
+			$item["class"] = "item-h2";
+		else 
+			if (rand(0,4) == 4)
+				$item["class"] = "item-h2 item-v2";
+		return $item;
+	}
+
 	public function create_post(array $post) {
 		$sql = '
 			INSERT INTO
@@ -70,6 +95,70 @@ class Posts {
 		return $this->pdo->lastInsertId();
 	}
 
+	public function getPostsByUserId(int $user_id)
+	{
+		{
+			try {
+				if (isset($_SESSION["user"])) {
+					$sql = '
+					SELECT
+							 Posts_All.*,
+							 (
+								SELECT
+								 count(post_hearts.post_id)
+							FROM
+								 post_hearts 
+							WHERE
+								(
+									(post_hearts.user_id = :user_id) 
+								AND
+									(post_hearts.post_id = Posts_All.post_id)
+								)
+						) AS `user_hearted` 
+					FROM
+						Posts_All
+					WHERE
+					user_id = :user_id
+					ORDER BY
+						created DESC
+					LIMIT
+						20;
+					';
+				} else {
+					$sql = '
+						SELECT
+							*
+						FROM
+							Posts_All
+						WHERE
+							user_id = :user_id
+						ORDER BY
+							created DESC
+						LIMIT
+							20;
+					';
+				}
+				
+				$stmt = $this->pdo->prepare($sql);
+				$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+				$stmt->execute();
+				$post = $stmt->fetchAll();
+	
+				foreach ($post as $key => $value) {
+					$post[$key] = $this->createPostData($post[$key]);			
+				}
+	
+				return $post;
+	
+			} catch(\PDOException $e) {
+				echo "oops! an error getting the board posts<br><pre>";
+				var_dump($e);
+				echo "</pre>";
+				die();
+			}
+		}
+	}
+
 	public function userGetPostsLatest(int $user_id) {
 		$sql = '
 			SELECT
@@ -97,27 +186,9 @@ class Posts {
 		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
 		$stmt->execute();
 		$post = $stmt->fetchAll();
-		function get_image_ratio($width, $height) {
-			if (!empty($width) && !empty($height))
-				return $width / $height;
-			return 1;
-		}
+		
 		foreach ($post as $key => $value) {
-			if (!empty($post[$key]["post_contents"]))
-				$post[$key]["post_contents"] .= "...";
-			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
-			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
-			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
-			$post[$key]["class"] = "";
-			if ($post[$key]["ratio"] < .5)
-				$post[$key]["class"] = "item-v2";
-			else if ($post[$key]["ratio"] > 1.5)
-				$post[$key]["class"] = "item-h2";
-			else 
-				if (rand(0,4) == 4)
-					$post[$key]["class"] = "item-h2 item-v2";
-			
+			$post[$key] = $this->createPostData($post[$key]);			
 		}
 		return $post;
 	}
@@ -133,29 +204,11 @@ class Posts {
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		$post = $stmt->fetchAll();
-		function get_image_ratio($width, $height) {
-			if (!empty($width) && !empty($height))
-				return $width / $height;
-			return 1;
-		}
+
 		foreach ($post as $key => $value) {
-			if (!empty($post[$key]["post_contents"]))
-				$post[$key]["post_contents"] .= "...";
-			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
-			$post[$key]["perma_url"] = "/posts/".urlsafe($post[$key]["post_id"]);
-			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
-			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
-			$post[$key]["class"] = "";
-			if ($post[$key]["ratio"] < .5)
-				$post[$key]["class"] = "item-v2";
-			else if ($post[$key]["ratio"] > 1.5)
-				$post[$key]["class"] = "item-h2";
-			else 
-				if (rand(0,4) == 4)
-					$post[$key]["class"] = "item-h2 item-v2";
-			
+			$post[$key] = $this->createPostData($post[$key]);			
 		}
+
 		return $post;
 	}
 
@@ -170,28 +223,11 @@ class Posts {
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute();
 		$post = $stmt->fetchAll();
-		function get_image_ratio($width, $height) {
-			if (!empty($width) && !empty($height))
-				return $width / $height;
-			return 1;
-		}
+
 		foreach ($post as $key => $value) {
-			if (!empty($post[$key]["post_contents"]))
-				$post[$key]["post_contents"] .= "...";
-			$post[$key]["elapsed"] = time_elapsed_string($post[$key]["created"]);
-			$post[$key]["post_url"] = "/boards/".urlsafe($post[$key]["board_name"])."/posts/".urlsafe($post[$key]["title"]);
-			$post[$key]["user_url"] = "/users/".urlsafe($post[$key]["username"]);
-			$post[$key]["ratio"] = get_image_ratio($post[$key]["width"], $post[$key]["height"]);
-			$post[$key]["class"] = "";
-			if ($post[$key]["ratio"] < .5)
-				$post[$key]["class"] = "item-v2";
-			else if ($post[$key]["ratio"] > 1.5)
-				$post[$key]["class"] = "item-h2";
-			else 
-				if (rand(0,4) == 4)
-					$post[$key]["class"] = "item-h2 item-v2";
-			
+			$post[$key] = $this->createPostData($post[$key]);			
 		}
+
 		return $post;
 	}
 
@@ -283,4 +319,85 @@ class Posts {
 		$stmt->execute();
 		return $stmt->rowCount();
 	}
+
+	public function getBoardPostsById(int $board_id)
+  {
+    try {
+      $sql = '
+        SELECT
+          *
+        FROM
+          Posts_All
+        WHERE
+          board_id = :board_id
+        ORDER BY
+				  created DESC
+			  LIMIT
+				  20;
+      ';
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->bindValue(':board_id', $board_id, PDO::PARAM_INT);
+      $stmt->execute();
+      $post = $stmt->fetchAll();
+
+      foreach ($post as $key => $value) {
+				$post[$key] = $this->createPostData($post[$key]);			
+			}
+
+      return $post;
+
+    } catch(\PDOException $e) {
+      echo "oops! an error getting the board posts<br><pre>";
+      var_dump($e);
+      echo "</pre>";
+      die();
+    }
+  }
+
+  public function userGetBoardPostsById(int $user_id, int $board_id)
+  {
+    try {
+      $sql = '
+      SELECT
+		   		Posts_All.*,
+		   		(
+			  		SELECT
+				 		count(post_hearts.post_id)
+					FROM
+				 		post_hearts 
+					WHERE
+						(
+							(post_hearts.user_id = :user_id) 
+						AND
+							(post_hearts.post_id = Posts_All.post_id)
+						)
+				) AS `user_hearted` 
+			FROM
+        Posts_All
+      WHERE
+        board_id = :board_id
+			ORDER BY
+				created DESC
+			LIMIT
+				20;
+      ';
+      $stmt = $this->pdo->prepare($sql);
+      $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+      $stmt->bindValue(':board_id', $board_id, PDO::PARAM_INT);
+      $stmt->execute();
+      $post = $stmt->fetchAll();
+
+      foreach ($post as $key => $value) {
+				$post[$key] = $this->createPostData($post[$key]);			
+			}
+
+      return $post;
+
+    } catch(\PDOException $e) {
+      echo "oops! an error getting the board posts<br><pre>";
+      var_dump($e);
+      echo "</pre>";
+      die();
+    }
+  }
 }

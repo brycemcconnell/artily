@@ -104,7 +104,7 @@ class Users
 
 		// The post data was all correct, now check against the database if username/email is already in use.
 		$oldUser = '';
-		$oldUser = $this->getUser($username);
+		$oldUser = $this->getUserByName($username);
 		if ($oldUser) {
 			// return 'Duplicate entry, someone with that name already exists.'
 			var_dump("old user present");
@@ -159,12 +159,14 @@ class Users
 			return false;
 	}
 
-	public function getUser(string $username) {
+	public function getUserByName(string $username) {
 		$sql = '
 			SELECT
 				id,
 				username,
-				email
+				email,
+				created,
+				level
 			FROM
 				users
 			WHERE
@@ -174,6 +176,8 @@ class Users
 		$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 		$stmt->execute();
 		$user = $stmt->fetch();
+		$user["elapsed"] = time_elapsed_string($user["created"]);
+		$user["title"] = $user["level"] == 1 ? "Admin" : "User";
 		return $user;
 	}
 
@@ -182,7 +186,9 @@ class Users
 			SELECT
 				id,
 				username,
-				email
+				email,
+				created,
+				level
 			FROM
 				users
 			WHERE
@@ -192,6 +198,9 @@ class Users
 		$stmt->bindValue(':id', $id, PDO::PARAM_STR);
 		$stmt->execute();
 		$user = $stmt->fetch();
+
+		$user["elapsed"] = time_elapsed_string($user["created"]);
+		$user["title"] = $user["level"] == 1 ? "Admin" : "User";
 		return $user;
 	}
 

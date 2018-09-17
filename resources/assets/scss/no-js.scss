@@ -20,8 +20,8 @@
 
 .sidebar-content_small {
 	width: 280px;
-	overflow-y: initial;
 	text-align: left;
+	overflow-y: scroll;
 }
 
 .sidebar-content_small .sidebar-link {
@@ -33,7 +33,7 @@
 }
 
 .main {
-	margin-left: calc(280px + 60px);
+	margin-left: calc(280px + 2vw);
 }
 
 @supports (display: grid) {

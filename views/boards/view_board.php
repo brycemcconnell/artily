@@ -9,7 +9,7 @@ $posts = $board_posts;
 
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
-
+<?php include_once('../views/common/board_sort.php'); ?>
 
 <script src="/assets/js/heartPost.js"></script>
 
@@ -27,6 +27,6 @@ $posts = $board_posts;
   <?php include_once('../views/inc/artbar.php'); ?>
 </main>
 
-<?php include_once('../views/common/board_sort.php'); ?>
+
 <?php include_once('../views/inc/sidebar.php'); ?>
 <?php include_once('../views/inc/footer.php'); ?>

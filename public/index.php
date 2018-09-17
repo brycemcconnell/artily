@@ -100,21 +100,6 @@ Router::post('api/posts/removeheart', '', function($db) {
     }
 });
 
-Router::post('api/test/json', '', function() {
-    // var_dump($_POST);
-    // $_POST["test"] = 'test';
-    $_POST = json_decode(file_get_contents('php://input'), true);
-    header('Content-Type: application/json');
-    echo json_encode($_POST);
-});
-
-Router::post('api/test/json', '', function() {
-    // var_dump($_POST);
-    // $_POST["test"] = 'test';
-    $_POST = json_decode(file_get_contents('php://input'), true);
-    header('Content-Type: application/json');
-    echo json_encode($_POST);
-});
 /******************************************************************
 
 Home
@@ -147,18 +132,17 @@ Router::get('error', 'code', function() {
 Users 
 
 ******************************************************************/
-Router::get('me', '', function() {
-    // A special route that takes the user to their user page, rather than eg. /users/bryce
-    // Controller = UserController
-    // Method = default (read)
+Router::get('me', '', function($db) {
+    $Controller = new UserController($db->pdo);
+    $Controller->renderMe();
 });
 Router::get('users', '', function($db) {
     $Controller = new UserController($db->pdo);
     $Controller->index();
 });
-Router::get('users/{id}', '', function() {
-    // Controller = UserController
-    // Method = default (read) :id
+Router::get('users/{user_name}', '', function($db) {
+    $Controller = new UserController($db->pdo);
+    $Controller->renderUserByName(Router::$items["user_name"]);
 });
 Router::get('users/{id}/collections', '', function() {
     // Controller = UserController

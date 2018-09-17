@@ -1,27 +1,50 @@
 .board_sorter {
-  position: absolute;
-  top: -2vw;
-  left: calc(100px + var(--spacing));
+  position: fixed;
+  z-index: 10;
+  top: 60px;
+  left: 60px;
+  width: calc(100% - 60px);
+  height: 40px;
   display: flex;
+  background-color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
+.board_sorter ~ .main {
+  margin-top: calc(60px + 40px + var(--spacing))
+}
+
+@media screen and (max-width: 600px) {
+  .board_sorter {
+      left: 0;
+      width: 100%;
+  }
 }
 
 .board_sorter-btn {
   width: 40px;
   height: 40px;
-  background-color: var(--main-color);
+  background-color: transparent;
   border: none;
   padding: 0;
   margin: 0;
 }
 
+.board_sorter-btn:not(:first-child) {
+  margin-left: -10px;
+}
+
 .board_sorter-btn svg {
-  fill: #ff7373;
+  transition: .2s;
+  fill: var(--main-color-pale);
+}
+
+.board_sorter-btn:hover svg {
+  fill: var(--main-color-highlight);
 }
 
 .board_sorter-btn--active svg {
-  fill: #fff;
-}
-
-.board_sorter-btn:hover {
-  background-color: var(--main-color-highlight); 
+  fill: var(--main-color);
 }
