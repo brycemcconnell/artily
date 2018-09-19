@@ -116,8 +116,8 @@ class PostController extends BaseController
         }
 
         // Create a post_id var
-        $request = Router::$items["post_id"];
-
+        // Use urldecode so we can look up posts by other languages eg japanese
+        $request = urldecode(Router::$items["post_id"]);
         
         $post = null;
         if (is_numeric($request) == false && $request !== null) {

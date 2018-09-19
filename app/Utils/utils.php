@@ -87,7 +87,7 @@ function redirect_back() {
 }
 
 function urlsafe($string) {
-    return filter_var(str_replace(' ', '-', $string), FILTER_SANITIZE_URL);
+    return filter_var(str_replace([' ','+'], '-', urlencode($string)), FILTER_SANITIZE_URL);
 }
 function urlsafereverse($string) {
     return str_replace('-'," ", $string);
