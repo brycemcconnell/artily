@@ -13,7 +13,7 @@
 		}
 		?>
 	</div>
-
+	<?php include_once('../views/common/board_pagination.php'); ?>
 
 </main>
 

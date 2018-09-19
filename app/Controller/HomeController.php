@@ -41,10 +41,16 @@ class HomeController extends BaseController
 
     private function renderHome()
     {
+        $page_count = $this->posts_db->countPosts();
+
+        $page = 0;
+        if (isset($_GET["page"])) {
+            $page = $_GET["page"];
+        }
         if (isset($_SESSION["user"])) {
-            $posts = $this->posts_db->userGetPostsLatest($_SESSION["user"]["id"]);
+            $posts = $this->posts_db->userGetPostsLatest($page, $_SESSION["user"]["id"]);
         } else {
-            $posts = $this->posts_db->getPostsLatest();
+            $posts = $this->posts_db->getPostsLatest($page);
         }
         include "views/home/home_index.php";
     }

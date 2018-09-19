@@ -23,6 +23,29 @@ class Posts {
 		return 1;
 	}
 
+	public function countPosts()
+	{
+		{
+			try {
+				$sql = '
+					SELECT COUNT(*) AS count FROM `posts` 
+				';
+				
+				$stmt = $this->pdo->prepare($sql);
+				$stmt->execute();
+				$count = $stmt->fetch();
+				return $count["count"];
+	
+			} catch(\PDOException $e) {
+				echo "oops! an error getting the board posts<br><pre>";
+				var_dump($e);
+				echo "</pre>";
+				die();
+			}
+		}
+		
+	}
+
 	private function createPostData ($item) {
 		if (!empty($item["post_contents"]))
 			$item["post_contents"] .= "...";
@@ -193,15 +216,16 @@ class Posts {
 		return $post;
 	}
 	
-	public function getPostsLatest() {
+	public function getPostsLatest(int $page) {
 		$sql = '
 			SELECT * FROM `Posts_All`
 			ORDER BY
 				created DESC
 			LIMIT
-				20;
+				:page, 20;
 		';
 		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':page', $page * 20, PDO::PARAM_INT);
 		$stmt->execute();
 		$post = $stmt->fetchAll();
 

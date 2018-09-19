@@ -1,0 +1,11 @@
+.page {
+  display: inline-block;
+  padding: 5px;
+  background-color: #fff;
+  border: 2px solid;
+}
+
+.page--active {
+  color: #333;
+  pointer-events: none;
+}
