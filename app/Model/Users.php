@@ -149,7 +149,7 @@ class Users
 		$stmt->bindValue(':password', password_hash($password, PASSWORD_DEFAULT), PDO::PARAM_STR);
 		$stmt->bindValue(':email', $email, PDO::PARAM_STR);
 		$result = $stmt->execute();
-		var_dump($result);
+
 		if ($result) {
 			// return 'Account successfully created.';
 			return ["status" => true];
@@ -176,6 +176,9 @@ class Users
 		$stmt->bindValue(':username', $username, PDO::PARAM_STR);
 		$stmt->execute();
 		$user = $stmt->fetch();
+		if ($user == false) {
+			return false;
+		}
 		$user["elapsed"] = time_elapsed_string($user["created"]);
 		$user["title"] = $user["level"] == 1 ? "Admin" : "User";
 		return $user;

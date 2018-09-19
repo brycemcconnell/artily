@@ -80,14 +80,14 @@ class AccountController extends BaseController
 	{
 		$signup_success = true; //assumed true for first run
 
+		
 		if (isset($_POST['submitsignup'])) {
 			$password = filter_input(INPUT_POST, 'password');
 			$username = filter_input(INPUT_POST, 'username');
 			$email = filter_input(INPUT_POST, 'email');
-
+			
 			// Will return a status true or false, if false contains errors array
 			$userCreation = $this->users_db->createUser($username, $password, $email);
-
 			// redirect to login page and display success message
 			if ($userCreation["status"] == true) {
 				if (isset($_POST["redirect"])) {
@@ -115,7 +115,7 @@ class AccountController extends BaseController
 			redirect_back();
 			die();
 		}
-
+		var_dump("2");
 		include 'views/account/signup.php';
 	}
 

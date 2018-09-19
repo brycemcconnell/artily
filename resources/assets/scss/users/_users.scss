@@ -13,6 +13,13 @@
   padding: 2vw;
   margin-bottom: 2vw;
   display: flex;
+  margin-top: calc(60px + 40px + 2vw);
+}
+
+@supports(position: sticky) {
+  .user-container {
+    margin-top: 0;
+  }
 }
 
 .user-avatar {
@@ -35,4 +42,11 @@
 .user-items-item--active {
   background: var(--main-color);
   color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  .user-items-item {
+    padding: 0 6px;
+    font-size: 14px;
+  }
 }

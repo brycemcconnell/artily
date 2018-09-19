@@ -61,7 +61,7 @@ use App\Core\Request;
 			</a>
 			<!-- Submit new content -->
 			<a href="/new_post" class="header-user_submit theme-btn theme-a-btn">
-				<span class="n900">Submit</span>
+				<span class="n900">Create Post</span>
 				<span class="header-user_submit-sp y900"><?= $SVG->pencil();?></span>
 			</a>
 			<!-- Open options -->
@@ -85,7 +85,7 @@ use App\Core\Request;
 		<?php else: ?>
 		<div class="header-user_container">
 			<a href="/login?<?= $redirect; ?>" class="header-user_login theme-btn">Login</a>
-			<a href="/signup" class="header-user_signup theme-btn">Signup</a>
+			<a href="/signup?<?= $redirect; ?>" class="header-user_signup theme-btn">Signup</a>
 		</div>
 	</div>
 	<?php endif;?>

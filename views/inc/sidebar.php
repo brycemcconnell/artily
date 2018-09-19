@@ -25,7 +25,7 @@ $collections = [
 		<div class="sidebar-section y500">
 			<div class="sidebar-user_submit-container">
 				<a href="/new_post" class="sidebar-user_submit theme-btn theme-a-btn">
-					<span>Submit</span>
+					<span>Create Post</span>
 				</a>
 			</div>
 			<div class="sidebar-user-container">

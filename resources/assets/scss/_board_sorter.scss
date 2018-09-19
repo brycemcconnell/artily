@@ -13,8 +13,14 @@
 }
 
 .board_sorter ~ .grid {
-  margin-top: calc(60px + 40px + var(--spacing))
+  margin-top: calc(60px + 40px + var(--spacing));
 }
+
+.user-items ~ .board_sorter ~ .grid {
+  margin-top: 2vw;
+}
+
+
 
 @supports (position: sticky) {
   .board_sorter {
@@ -22,12 +28,16 @@
     margin-bottom: 2vw;
     margin-left: -2vw;
     width: calc(100% + 4vw);
+    margin-top: -2vw;
   }
 
   .board_sorter ~ .grid {
     margin-top: 0;
   }
-  
+
+  .user-items ~ .board_sorter {
+    margin-top: 0;
+  }
 }
 
 @media screen and (max-width: 600px) {

@@ -17,24 +17,21 @@
       <div>Name: <?=$user["username"];?></div>
       <div>Created <span class="time-tooltip" title="<?=$user["created"];?>"><?=$user["elapsed"];?></span></div>
       <div>Title: <?= $user["title"]; ?></div>
-  </div>
+   </div>
   </div>
   <ul class="user-items box bb">
-    <li><a href="<?= $_SERVER["REQUEST_URI"];?>/posts" class="user-items-item user-items-item--active">Posts by <?=$user["username"];?></a></li>
+    <li><a href="<?= $_SERVER["REQUEST_URI"];?>/posts" class="user-items-item user-items-item--active">Posts</a></li>
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/comments" class="user-items-item">Comments</a></li>
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/boards" class="user-items-item">Boards</a></li>
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/collections" class="user-items-item">Collections</a></li>
   </ul>
   <?php include_once('../views/common/board_sort.php'); ?>
 	<div id="main" class="grid grid--list">    
-    <div>
       <?php
       foreach ($posts as $key => $value) {
         include('../views/home/inc/board_post.php');
       }
-      ?>
-    </div>
-    
+      ?>    
 	</div>
 	<div class="grid-last">There seems to be nothing left...</div>
 </main>

@@ -2,6 +2,9 @@
 
 namespace App\Core;
 
+use \DateTime;
+use \DateTimeZone;
+
 class Request {
 
 	static $values;
@@ -45,7 +48,14 @@ class Request {
 		print_r("path:           " . Request::$path . "\n");
 		echo "<br>SERVER:<br>";
 		var_dump($_SERVER);
-		echo "</pre>";
+		
+		$userBrowser = get_browser(null,true);
+		echo '<pre>';
+		var_dump($userBrowser);
+		echo '</pre>';
+		$now = new DateTime("now", new DateTimeZone('UTC'));
+		echo "Accessed from ".$_SERVER["REMOTE_ADDR"]." using ".$userBrowser["parent"]." on ".$userBrowser["platform"]." ".$userBrowser["device_type"]." at ";
+		echo $now->format('Y-m-d H:i:s');
 	}
 }
 
