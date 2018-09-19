@@ -21,6 +21,25 @@ $collections = [
 		<img class="sidebar-toggle_btn-img" src="/assets/img/sidebar.svg">
 	</button>
 	<div class="sidebar-content sidebar-content_small bb2">
+	<?php if (isset($_SESSION['user'])): ?>
+		<div class="sidebar-section y500">
+			<div class="sidebar-user_submit-container">
+				<a href="/new_post" class="sidebar-user_submit theme-btn theme-a-btn">
+					<span>Submit</span>
+				</a>
+			</div>
+			<div class="sidebar-user-container">
+				<a href="/me" class="sidebar-user">
+					<img class="sidebar-user_avatar" src="/assets/img/kermit.jpg"><!-- User pic -->
+					<div class="sidebar-user_details"><!-- Deets -->
+						<div class="sidebar-user_name"><?= $_SESSION['user']["username"]; ?></div><!-- User name -->
+						<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"] ?? "0"; ?></span></div><!-- User heart count -->
+					</div>
+				</a>
+			</div>
+		</div>
+	<?php endif;?>
+
 		<div class="sidebar-section">
 			<ul>
 				<li><a class="sidebar-common_link sidebar-link" href="/?sort=home" title="Home"><span class="sidebar-icon"><?= $SVG->home('#d33'); ?></span><span class="sidebar-expanded"> Home</span></a></li>

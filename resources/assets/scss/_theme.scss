@@ -85,10 +85,16 @@ ul, li {
 }
 
 .svg-icon {
-	height: 1em;
-    width: 1em;
-    display: inline-block;
-    margin-right: 1em;
+	width: 1em;
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.svg-icon svg {
+	fill: #393939;
+	height: 20px;
+	margin-top: 2px;
+	margin-left: -1px;
 }
 
 .none {

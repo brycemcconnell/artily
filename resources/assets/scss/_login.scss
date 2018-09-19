@@ -24,3 +24,9 @@
 .login-input_container .theme-btn {
 	padding: 0 30px;
 }
+
+@media screen and (max-width: 800px) {
+	.login-input_container {
+		flex-direction: column;
+	}
+}

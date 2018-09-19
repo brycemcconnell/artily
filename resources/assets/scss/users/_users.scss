@@ -1,0 +1,38 @@
+.user-items {
+  display: flex;
+  margin-left: -2vw;
+  height: 40px;
+  width: calc(100% + 4vw);
+  line-height: 40px;
+  font-weight: bold;
+  border-left: none;
+  border-right: none;
+}
+
+.user-container {
+  padding: 2vw;
+  margin-bottom: 2vw;
+  display: flex;
+}
+
+.user-avatar {
+  padding-right: 2vw;
+}
+
+.user-items-item {
+  height: 100%;
+  padding: 0 20px;
+  transition: .2s;
+  display: inline-block;
+  color: #222;
+}
+
+.user-items-item:hover {
+  background-color: var(--main-color-highlight);
+  color: #fff;
+}
+
+.user-items-item--active {
+  background: var(--main-color);
+  color: #fff;
+}

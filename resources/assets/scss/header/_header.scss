@@ -123,7 +123,6 @@
 	.header-user_submit {
 		width: 40px;
 		padding: 0;
-		padding-top: 8px;
 		fill: #fff;
 	}
 }
@@ -170,7 +169,7 @@
 	background-color: var(--main-color);
 }
 
-.header-user_login {
+.header-user_signup {
 	height: 40px;
 	padding: 0 20px;
     line-height: 40px;
@@ -180,6 +179,34 @@
 
 .header-user_login:hover {
 	color: #fff;
+}
+
+.header-user_login {
+	height: 40px;
+	padding: 0 20px;
+	line-height: 40px;
+	font-weight: bold;
+	margin-right: 10px;
+	color: var(--main-color);
+	background-color: #fff;
+	border: 2px solid var(--main-color);
+	line-height: 36px;
+}
+
+.header-user_signup:hover {
+	color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+	.header-user_login,
+	.header-user_signup {
+		padding: 0 10px;
+		font-size: 14px;
+	}
+
+	.header-user_signup {
+		margin-right: 0;
+	}
 }
 
 .header-search_input-btn {
@@ -214,5 +241,47 @@
 	}
 	.header-search_input-btn {
 		display: block;
+	}
+}
+
+.header-user_submit-sp {
+	padding-top: 11px;
+}
+
+.header-user_submit-sp svg {
+	height: 18px;
+}
+
+
+@media screen and (max-width: 600px) {
+	.header-search_container {
+		display: none;
+	}
+
+	.header-artboard_container {
+		margin: 0 10px;	
+	}
+
+	.header-artboard_name {
+		font-size: 16px;
+		text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 65px;
+	}
+	.header-user_container {
+		padding: 0 10px;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.header-user {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.header-user_submit {
+		display: none;
 	}
 }

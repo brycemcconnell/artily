@@ -49,19 +49,23 @@ use App\Core\Request;
 					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"] ?? "0"; ?></span></div><!-- User heart count -->
 				</div>
 			</a>
-			<a href="/something" class="btn header-user_icon">
-				<span class="svg-icon"><?= $SVG->arrow_down();?></span>
+			<a href="/notifications" class="btn header-user_icon">
+				<span class="svg-icon">
+					<?= $SVG->bell();?>
+				</span>
 			</a>
 			<a href="/messages" class="btn header-user_icon">
-				<img src="/assets/img/mail.png">
+				<span class="svg-icon">	
+					<?= $SVG->mail(); ?>
+				</span>
 			</a>
 			<!-- Submit new content -->
 			<a href="/new_post" class="header-user_submit theme-btn theme-a-btn">
 				<span class="n900">Submit</span>
-				<span class="y900"><?= $SVG->pencil();?></span>
+				<span class="header-user_submit-sp y900"><?= $SVG->pencil();?></span>
 			</a>
 			<!-- Open options -->
-			<button type="button" class="btn header-user_icon" onclick="toggleUserMenu();">
+			<button type="button" class="btn header-user_icon header-drop_down_btn" onclick="toggleUserMenu();">
 				<?= $SVG->arrow_down(); ?>
 			</button>
 			<!-- Other options, eg. preferences/logout -->
@@ -81,7 +85,7 @@ use App\Core\Request;
 		<?php else: ?>
 		<div class="header-user_container">
 			<a href="/login?<?= $redirect; ?>" class="header-user_login theme-btn">Login</a>
-			<a href="/signup" class="header-user_login theme-btn">Signup</a>
+			<a href="/signup" class="header-user_signup theme-btn">Signup</a>
 		</div>
 	</div>
 	<?php endif;?>

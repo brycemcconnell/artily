@@ -10,6 +10,7 @@
 .sidebar-toggle_btn {
 	width: 100%;
 	height: 60px;
+	padding: 0;
 }
 @media screen and (max-width: 780px) {
 	.sidebar {
@@ -166,5 +167,42 @@
 	}
 	.sidebar-content_small .sidebar-link {
 		padding: 4px 20px;
+	}
+}
+
+
+.sidebar-user {
+	display: none;
+}
+
+.sidebar-user_submit {
+	display: none;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+}
+
+.sidebar-user_submit-container {
+	padding: 4px 20px;
+	margin-bottom: 18px;
+}
+
+.sidebar-user-container {
+	padding: 4px 20px;
+}
+
+.sidebar-user_avatar {
+	width: 60px;
+	margin-right: 20px;
+}
+@media screen and (max-width: 500px) {
+	.sidebar-user {
+		display: flex;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.sidebar-user_submit {
+		display: block;
 	}
 }

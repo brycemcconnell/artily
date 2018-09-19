@@ -80,11 +80,13 @@
 }
 
 
+.n500,
 .n600,
 .n900 {
     display: block;
 }
 
+.y500,
 .y600,
 .y900 {
     display: none;
@@ -95,6 +97,15 @@
         display: none;
     }
     .y600 {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .n500 {
+        display: none;
+    }
+    .y500 {
         display: block;
     }
 }

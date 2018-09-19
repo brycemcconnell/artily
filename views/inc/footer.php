@@ -44,6 +44,11 @@
       listView.className = "board_sorter-btn";
       gridView.className = "board_sorter-btn board_sorter-btn--active";
     }
+
+		const boardSelector = document.getElementById('boardSorterSelector');
+		boardSelector.onchange = function() {
+			this.form.submit();
+		}
 	}
 
 	document.querySelectorAll(".js--hide-post").forEach(el => {

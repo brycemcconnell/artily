@@ -1,20 +1,20 @@
 <div class="board_sorter box bb3">
-  <div>
+  <div class="board_sorter-views">
     <button id="list_view" class="board_sorter-btn board_sorter-btn--active" title="List View"><?= $SVG->list(); ?></button>
     <button id="grid_view" class="board_sorter-btn" title="Grid View"><?= $SVG->grid(); ?></button>
   </div>
-  <form action="" method="GET">
+  <form action="" method="GET" class="board_sorter-form">
     
-    <span>Sort by: </span>
+    <span class="board_sorter-label">Sort by: </span>
     
-    <select name="sort">
+    <select id="boardSorterSelector" name="sort" class="board_sorter-select">
       <option value="trending">Trending</option>
       <option value="hearts">Most hearts</option>
       <option value="comments">Most comments</option>
       <option value="new">Newest</option>
       <option value="old">Oldest</option>
     </select>
-    <input type="submit">
+    <input class="board_sorter-submit" type="submit" value="Go">
   </form>
   <script>
     var boardSorter = true;
