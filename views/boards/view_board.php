@@ -9,22 +9,24 @@ $posts = $board_posts;
 
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
-<?php include_once('../views/common/board_sort.php'); ?>
+
 
 <script src="/assets/js/heartPost.js"></script>
 
-<main class="main main-with_artbar">
-
-	<div id="main" class="grid grid--list">
-		<?php
-		foreach ($posts as $key => $value) {
-			// render_post($posts[$key]);
-			include('../views/home/inc/board_post.php');
-		}
-		?>
-	</div>
-	<div class="grid-last">There seems to be nothing left...</div>
-  <?php include_once('../views/inc/artbar.php'); ?>
+<main class="main">
+	<?php include_once('../views/common/board_sort.php'); ?>
+	<section class="board">
+		<div id="main" class="grid grid--list">
+			<?php
+			foreach ($posts as $key => $value) {
+				// render_post($posts[$key]);
+				include('../views/home/inc/board_post.php');
+			}
+			?>
+		</div>
+		<div class="grid-last">There seems to be nothing left...</div>
+		<?php include_once('../views/inc/board_sidebar.php'); ?>
+	</section>
 </main>
 
 

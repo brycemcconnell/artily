@@ -1,9 +1,8 @@
 .board_sorter {
   position: fixed;
-  z-index: 10;
   top: 60px;
-  left: 60px;
-  width: calc(100% - 60px);
+  z-index: 10;
+  width: 100%;
   height: 40px;
   display: flex;
   background-color: #fff;
@@ -11,35 +10,11 @@
   justify-content: space-between;
   padding-right: 20px;
 }
-
-.board_sorter ~ .grid {
-  margin-top: calc(60px + 40px + var(--spacing));
-}
-
-.user-items ~ .board_sorter ~ .grid {
-  margin-top: 2vw;
-}
-
-
-
 @supports (position: sticky) {
   .board_sorter {
     position: sticky;
-    margin-bottom: 2vw;
-    margin-left: -2vw;
-    width: calc(100% + 4vw);
-    margin-top: -2vw;
-  }
-
-  .board_sorter ~ .grid {
-    margin-top: 0;
-  }
-
-  .user-items ~ .board_sorter {
-    margin-top: 0;
   }
 }
-
 @media screen and (max-width: 600px) {
   .board_sorter {
       left: 0;

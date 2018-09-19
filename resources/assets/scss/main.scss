@@ -19,14 +19,17 @@ How does this look to you
 
 @import "_post.scss";
 @import "_comments.scss";
-@import "_artbar.scss";
 @import "_debug.scss";
 @import "_reply.scss";
 
 @import "grid/_grid--list.scss";
 
 @import "_board_sorter.scss";
+@import "_board_pagination.scss";
 
 @import "common/_shadow.scss";
 
-@import "users/users.scss";
+@import "users/_users.scss";
+
+@import "boards/_board.scss";
+@import "boards/_board_sidebar.scss";

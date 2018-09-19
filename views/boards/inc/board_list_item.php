@@ -10,7 +10,7 @@ $board_data = $boards[$key];
 
 <div class="item box bb">
     <div class="item-label">
-    <a href="/boards/<?= $board_data["name"]; ?>" class="artbar-title">
+    <a href="/boards/<?= $board_data["name"]; ?>" class="board_sidebar-title">
       <?= $board_data["name"]; ?>
     </a>
     <div>

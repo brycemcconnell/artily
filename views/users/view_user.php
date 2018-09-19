@@ -9,7 +9,7 @@
 <?php include_once('../views/inc/header.php'); ?>
 <script src="/assets/js/heartPost.js"></script>
 <main class="main">
-  <div class="user-container box bb">
+  <div class="user-container box">
     <div class="user-avatar">
       <img src="/assets/img/kermit.jpg">
     </div>
@@ -19,7 +19,7 @@
       <div>Title: <?= $user["title"]; ?></div>
    </div>
   </div>
-  <ul class="user-items box bb">
+  <ul class="user-items box">
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/posts" class="user-items-item user-items-item--active">Posts</a></li>
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/comments" class="user-items-item">Comments</a></li>
     <li><a href="<?= $_SERVER["REQUEST_URI"];?>/boards" class="user-items-item">Boards</a></li>

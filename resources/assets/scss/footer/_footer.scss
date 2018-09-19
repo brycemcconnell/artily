@@ -10,3 +10,9 @@
 .footer-container {
 	text-align: center;
 }
+
+@media screen and (max-width: 600px) {
+	.footer {
+		margin-left: 0;
+	}
+}

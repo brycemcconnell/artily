@@ -10,7 +10,7 @@ $user_data = $users[$key];
 
 <div class="item box bb">
     <div class="item-label">
-    <a href="/users/<?= $user_data["username"]; ?>" class="artbar-title">
+    <a href="/users/<?= $user_data["username"]; ?>" class="board_sidebar-title">
       <?= $user_data["username"]; ?>
     </a>
     <div>

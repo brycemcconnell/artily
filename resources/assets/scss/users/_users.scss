@@ -1,25 +1,16 @@
 .user-items {
   display: flex;
-  margin-left: -2vw;
   height: 40px;
-  width: calc(100% + 4vw);
+  width: 100%;
   line-height: 40px;
   font-weight: bold;
-  border-left: none;
-  border-right: none;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
 }
 
 .user-container {
   padding: 2vw;
-  margin-bottom: 2vw;
   display: flex;
-  margin-top: calc(60px + 40px + 2vw);
-}
-
-@supports(position: sticky) {
-  .user-container {
-    margin-top: 0;
-  }
 }
 
 .user-avatar {

@@ -197,7 +197,8 @@
         grid-gap: 10px;
         justify-content: center;
         grid-auto-flow: dense;
-        margin-left: 0;
+        margin: var(--spacing);
+        width: calc(100% - 4vw);
     }
 
     .item {
