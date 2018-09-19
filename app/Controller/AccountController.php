@@ -115,7 +115,6 @@ class AccountController extends BaseController
 			redirect_back();
 			die();
 		}
-		var_dump("2");
 		include 'views/account/signup.php';
 	}
 

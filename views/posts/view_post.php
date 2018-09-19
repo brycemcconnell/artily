@@ -16,7 +16,8 @@ include_once('../views/inc/head.php');
 		<div class="view_post box bb">
 			<?php include_once("original_post.php"); ?>
 			
-			<form action="?action=reply" method="post" class="cmt-qr">
+			<form action="<?= $_SERVER["REQUEST_URI"];?>/reply" method="post" class="cmt-qr">
+				<input type="hidden" name="redirect" value="<?= $_SERVER["REQUEST_URI"];?>"/>
 				<div class="cmt-qr_title">
 					Quick Reply - 
 					<?php if (isset($_SESSION["user"])): ?>

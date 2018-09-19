@@ -13,29 +13,21 @@ use \DateTime;
 use \DateTimeZone;
 
 
-class CommentController
+class CommentController extends BaseController
 {
     /**
      *
      */
     private $posts_db;
-    private $users_db;
-    private $hearts_db;
     private $comments_db;
     
-    private $user;
 
     public function __construct(\PDO $pdo)
     {
-        // parent::__construct($pdo);
+        parent::__construct($pdo);
     	$this->posts_db = new Posts($pdo);
-        $this->users_db = new Users($pdo);
-        $this->hearts_db = new Hearts($pdo);
         $this->comments_db = new Comments($pdo);
 
-        if (array_key_exists('user',$_SESSION)) {
-            $this->user = $this->getUserData($_SESSION["user"]);
-        }
     }
     /**
      * Description
@@ -73,5 +65,20 @@ class CommentController
         $this->boards_db->getBoardById($query);
         // If query is string
         $this->boards_db->getBoardByName($query);
+    }
+
+    public function reply(string $post_name)
+    {
+        $original_post = $this->posts_db->getPostByTitle($post_name);
+        $post_data = array();
+        $post_data["post_id"] = $original_post["post_id"];
+        $post_data["content"] = $_POST["content"] ?? '';
+        $post_data["user_id"] = $_SESSION["user"]["id"];
+        $post_data["parent_comment_id"] = NULL;
+        $result = $this->comments_db->create_comment($post_data);
+
+        if (isset($result))
+            header("Location: ".$_POST["redirect"]);
+            die();
     }
 }

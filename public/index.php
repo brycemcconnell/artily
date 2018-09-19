@@ -19,6 +19,7 @@ include_once "app/Controller/PostController.php";
 include_once "app/Controller/API_PostController.php";
 include_once "app/Controller/UserController.php";
 include_once "app/Controller/BoardController.php";
+include_once "app/Controller/CommentController.php";
 
 
 use App\Controller\HomeController as HomeController;
@@ -28,6 +29,7 @@ use App\Controller\PostController as PostController;
 use App\Controller\API_PostController as API_PostController;
 use App\Controller\UserController as UserController;
 use App\Controller\BoardController as BoardController;
+use App\Controller\CommentController as CommentController;
 
 
 include_once "app/Model/Users.php";
@@ -271,7 +273,9 @@ Router::get('boards/{id}/posts/{id}', 'action', function() {
     // Note: the reply action may also have a second query 'comment',
     // this should be handled inside the controller
 });
-Router::post('boards/{id}/posts/{id}', 'action', function() {
+Router::post('boards/{id}/posts/{post_name}/reply', '', function($db) {
+    $Controller = new CommentController($db->pdo);
+    $Controller->reply(Router::$items["post_name"]);
     // Controller = PostController
     // Method = action (reply|edit|delete)
     // Note: the reply action may also have a second query 'comment',
