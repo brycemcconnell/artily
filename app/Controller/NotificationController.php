@@ -16,18 +16,10 @@ use \DateTimeZone;
 
 class NotificationController extends BaseController
 {
-  /**
-   *
-   */
-  // private $comments_db;
-  // private $posts_db;
-  private $notifications_db;
 
   public function __construct(\PDO $pdo)
   {
       parent::__construct($pdo);
-      $this->notifications_db = new Notifications($pdo);
-      // $this->comments_db = new Comments($pdo);
   }
 
   public function index()

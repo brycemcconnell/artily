@@ -50,14 +50,19 @@ use App\Core\Request;
 				</div>
 			</a>
 			<a href="/notifications" class="btn header-user_icon">
-				<span class="svg-icon">
+				<div class="svg-icon">
 					<?= $SVG->bell();?>
-				</span>
+					<?php if ($this->user["notifications"]["not_viewed"] != 0): ?>
+						<div class="header-notification_count">
+							<?= $this->user["notifications"]["not_viewed"]; ?>
+						</div>
+					<?php endif; ?>
+				</div>
 			</a>
 			<a href="/messages" class="btn header-user_icon">
-				<span class="svg-icon">	
+				<div class="svg-icon">	
 					<?= $SVG->mail(); ?>
-				</span>
+				</div>
 			</a>
 			<!-- Submit new content -->
 			<a href="/new_post" class="header-user_submit theme-btn theme-a-btn">

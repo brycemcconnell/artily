@@ -136,6 +136,7 @@
 	margin-right: 10px;
 	background-color: #fff;
 	transition: .2s;
+	position: relative;
 }
 
 .header-user_icon:hover {
@@ -283,4 +284,16 @@
 	.header-user_submit {
 		display: none;
 	}
+}
+
+.header-notification_count {
+	position: absolute;
+	top: -8px;
+	right: -8px;
+	color: #fff;
+	background-color: var(--main-color);
+	padding: 3px 6px;
+	font-size: 10px;
+	font-weight: bold;
+	border-radius: 20px;
 }
