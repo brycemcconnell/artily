@@ -20,6 +20,7 @@ include_once "app/Controller/API_PostController.php";
 include_once "app/Controller/UserController.php";
 include_once "app/Controller/BoardController.php";
 include_once "app/Controller/CommentController.php";
+include_once "app/Controller/NotificationController.php";
 
 
 use App\Controller\HomeController as HomeController;
@@ -30,6 +31,7 @@ use App\Controller\API_PostController as API_PostController;
 use App\Controller\UserController as UserController;
 use App\Controller\BoardController as BoardController;
 use App\Controller\CommentController as CommentController;
+use App\Controller\NotificationController as NotificationController;
 
 
 include_once "app/Model/Users.php";
@@ -127,6 +129,20 @@ Router::get('error', 'code', function() {
     $Controller = new ErrorController(Request::$query);
     // Display the error page
     $Controller->render();
+});
+
+/******************************************************************
+
+Notifications 
+
+******************************************************************/
+Router::get('notifications', '', function($db) {
+    $Controller = new NotificationController($db->pdo);
+    $Controller->index();
+});
+
+Router::get('madoka-page', '', function() {
+    echo "<div>It's my page!</div>";
 });
 
 /******************************************************************
@@ -422,4 +438,9 @@ Debug
 
 ******************************************************************/
 // header("Location: /error?code=404");
+Router::get('routes', '', function() {
+    echo '<pre>';
+    var_dump(Router::$routes);
+    echo '</pre>';
+});
 Request::print_debug("No route was found");

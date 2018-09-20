@@ -8,9 +8,11 @@ include_once('Database.php');
 
 use App\Core\Database as Database;
 
-class Router {
-
+class Router
+{
+	static $current_method;
 	static $items = [];
+	static $routes = [];
 
 	private static function startsWith($haystack, $needle)
 	{
@@ -32,7 +34,7 @@ class Router {
 	{
 		// Separate this route's values into an array, just like Request::$values
 		$route_values = array_filter(explode("/", substr($uri, 0)));
-
+		
 		// Some ease of use stuff
 		$parts_given = count(Request::$values);
 		$matches_needed = count($route_values);
@@ -81,6 +83,8 @@ class Router {
 	public static function get($uri, $query, $func): void
 	{
 		// Check if the request is get
+		self::$current_method = 'get';
+		self::$routes[] = self::$current_method.": ".$uri;
 		if (Request::$method !== "GET")
 			return;
 		
@@ -95,6 +99,8 @@ class Router {
 	public static function post($uri, $query, $func): void
 	{
 		// Check if the request is post
+		self::$current_method = 'post';
+		self::$routes[] = self::$current_method.": ".$uri;
 		if (Request::$method !== "POST")
 			return;
 		
