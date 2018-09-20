@@ -30,26 +30,7 @@
 		});
 	});
 
-	if (boardSorter) {
-    const listView = document.getElementById('list_view');
-    const gridView = document.getElementById('grid_view');
-    const main = document.getElementById('main');
-    listView.onclick = function() {
-      main.className = 'grid grid--list';
-      listView.className = "board_sorter-btn board_sorter-btn--active";
-      gridView.className = "board_sorter-btn";
-    }
-    gridView.onclick = function() {
-      main.className = 'grid';
-      listView.className = "board_sorter-btn";
-      gridView.className = "board_sorter-btn board_sorter-btn--active";
-    }
-
-		const boardSelector = document.getElementById('boardSorterSelector');
-		boardSelector.onchange = function() {
-			this.form.submit();
-		}
-	}
+	
 
 	document.querySelectorAll(".js--hide-post").forEach(el => {
 		el.onclick = function() {

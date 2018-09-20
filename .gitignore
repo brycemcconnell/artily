@@ -9,3 +9,4 @@ secret.php
 /vendor
 /.vscode/
 .sass-cache/
+*.css

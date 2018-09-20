@@ -10,7 +10,7 @@ include_once('../views/inc/head.php');
 		<?php 
 			// Show original post
 			$post = $op;
-			include_once("original_post.php")
+			include_once("inc/original_post.php")
 		?>
 		<?php 
 			// If comment reply, show comment 

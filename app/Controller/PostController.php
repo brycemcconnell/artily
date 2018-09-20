@@ -48,76 +48,43 @@ class PostController extends BaseController
         $this->comments_db = new Comments($pdo);
     }
 
-    public function render(string $name): void
+    public function index()
+    {
+
+    }
+
+    public function renderPostByName(string $name): void
 	{   
-        // If a post id was given show the post info
-        // To see the comments see the comments route
-
-        // If no post id, show a list of posts on the current board
-		$this->bla();
-	}
-
-	public function action($query): void
-	{
-		$action = $query["action"] ?? null;
-        switch ($action) {
-            case 'new':
-                $this->new();
-            break;
-            case 'reply':
-                $this->logout();
-            break;
-            case 'edit':
-                $this->signup();
-            break;
-            case 'delete':
-                $this->signup();
-            break;
-            default:
-                header("Location: /error?code=404");
-            break;
+        // Use urldecode so we can look up posts by other languages eg japanese
+        $request = urldecode($name);
+        if (isset($_SESSION["user"])) {
+            $post = $this->posts_db->user_getPostByTitle($request, $_SESSION["user"]["id"]);
+        } else {
+            $post = $this->posts_db->getPostByTitle($request);
         }
-	}
-	public function sort($query): void
-	{
-		$action = $query["sort"] ?? null;
-        switch ($action) {
-            case 'new':
-                $this->new();
-            break;
-            case 'old':
-                $this->logout();
-            break;
-            case 'trending':
-                $this->signup();
-            break;
-            case 'top_comments':
-                $this->signup();
-            break;
-            case 'top_hearts':
-                $this->signup();
-            break;
-            default:
-                header("Location: /error?code=404");
-            break;
-        }
-	}
-    public function bla() {
-        
-        
-
-        if (isset($_GET["action"]) && $_GET["action"] == 'new') {
-            if (isset($_POST["submitPost"])) {
-                $this->submitNewPost();
-                return;
-            }
-            $this->renderNewPost();
+        if ($post === null) {
+            // No post was found for the request
+            http_response_code(404);
+            header("Location: /error?code=404");
             die();
         }
 
-        // Create a post_id var
-        // Use urldecode so we can look up posts by other languages eg japanese
-        $request = urldecode(Router::$items["post_id"]);
+        if (isset($post["deleted"])) {
+            http_response_code(404);
+            header("Location: /error?code=404");
+            die();
+        }
+
+		$board_data = $this->boards_db->getBoardByName(Router::$items["board_id"]);
+        
+        $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
+        $comments = $response["tree"];
+        include "views/posts/view_post.php";
+        die();
+    }
+    
+    public function bla() {
+        
         
         $post = null;
         if (is_numeric($request) == false && $request !== null) {

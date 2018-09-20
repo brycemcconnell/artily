@@ -8,10 +8,10 @@ $post = $posts[$key];
 <div class="item box bb <?= $post["class"]; ?>">
 
 	<div id="h<?= $post["post_id"];?>" data-post-id="<?= $post["post_id"];?>" class="item-heart_container">
-		<div class="item-heart <?= !empty($post["user_hearted"]) ? 'item-heart_active' : ''; ?>">
+		<div class="js--heart item-heart <?= !empty($post["user_hearted"]) ? 'js--heart_active' : ''; ?>">
 			<?= $SVG->heart(); ?>
 		</div>
-		<div class="item-heart_count">
+		<div class="js--heart_count item-heart_count">
 			<?= $post["heart_count"] ?? 0; ?>
 		</div>
 	</div>
@@ -19,7 +19,7 @@ $post = $posts[$key];
 		{
 			const h = document.getElementById('h<?= $post["post_id"];?>');
 			h.onclick = function() {
-				const active = h.querySelector('.item-heart').classList.contains('item-heart_active') ? true : false;
+				const active = h.querySelector('.item-heart').classList.contains('js--heart_active') ? true : false;
 				heartPost(h, active);
 			} 
 		}

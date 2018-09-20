@@ -15,7 +15,8 @@ include_once('../views/inc/head.php');
 	<section class="board">
 		<div class="view_post-wrapper">
 			<div class="view_post box bb">
-				<?php include_once("original_post.php"); ?>
+			
+					<?php include_once("inc/original_post.php"); ?>
 				
 				<form action="<?= $_SERVER["REQUEST_URI"];?>/reply" method="post" class="cmt-qr">
 					<input type="hidden" name="redirect" value="<?= $_SERVER["REQUEST_URI"];?>"/>

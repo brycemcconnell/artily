@@ -29,8 +29,8 @@ function heartPostFetch(uri, data) {
  * @param {boolean} isHearted 
  */
 function heartPost(postEl, isHearted) {
-  const hButton = postEl.querySelector('.item-heart');
-	const hCount = postEl.querySelector('.item-heart_count');
+  const hButton = postEl.querySelector('.js--heart');
+	const hCount = postEl.querySelector('.js--heart_count');
   const postId = postEl.getAttribute("data-post-id");
   console.log(isHearted)
   var data = {
@@ -43,7 +43,7 @@ function heartPost(postEl, isHearted) {
     heartPostFetch(addHeartURI, data)
       .then(response => {
         console.log('Success:', response);
-        hButton.classList.add('item-heart_active');
+        hButton.classList.add('js--heart_active');
         hCount.innerHTML = Number(hCount.innerHTML) + 1;
       })
       .catch(err => console.error(err)); 
@@ -54,7 +54,7 @@ function heartPost(postEl, isHearted) {
     heartPostFetch(removeHeartURI, data)
       .then(response => {
         console.log('Success:', response);
-        hButton.classList.remove('item-heart_active');
+        hButton.classList.remove('js--heart_active');
         hCount.innerHTML = Number(hCount.innerHTML) - 1;
       })
       .catch(err => console.error(err)); 

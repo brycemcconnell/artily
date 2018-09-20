@@ -48,7 +48,7 @@ class HomeController extends BaseController
             $page = $_GET["page"];
         }
         if (isset($_SESSION["user"])) {
-            $posts = $this->posts_db->userGetPostsLatest($page, $_SESSION["user"]["id"]);
+            $posts = $this->posts_db->user_getPostsLatest($page, $_SESSION["user"]["id"]);
         } else {
             $posts = $this->posts_db->getPostsLatest($page);
         }

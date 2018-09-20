@@ -182,7 +182,7 @@ class Posts {
 		}
 	}
 
-	public function userGetPostsLatest(int $user_id) {
+	public function user_GetPostsLatest(int $page, int $user_id) {
 		$sql = '
 			SELECT
 		   		Posts_All.*,
@@ -203,10 +203,11 @@ class Posts {
 			ORDER BY
 				created DESC
 			LIMIT
-				20;
+				:page, 20;
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		$stmt->bindValue(':page', $page * 20, PDO::PARAM_INT);
 		$stmt->execute();
 		$post = $stmt->fetchAll();
 		
@@ -289,37 +290,52 @@ class Posts {
 		return $post;
 	}
 
-	public function getPostByTitle(string $post_title) {
-		
+	public function getPostByTitle(string $post_title)
+	{
 		$sql = '
 			SELECT
-				posts.*,
-				posts.post_id as post_id,
-				users.username,
-				users.id,
-				post_contents.content as post_contents,
-				boards.name as board_name
+				*
 			FROM
-				posts,
-				boards,
-				users,
-				post_contents
+				Posts_All_Fulltext
 			WHERE
 				posts.title = :post_title
-			AND
-				posts.user_id = users.id
-			AND
-				post_contents.post_id = posts.post_id
-			AND
-				boards.id = posts.board_id;
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':post_title', urlsafereverse($post_title), PDO::PARAM_STR);
 		$stmt->execute();
 		$post = $stmt->fetch();
-		$post["elapsed"] = time_elapsed_string($post["created"]);
-		$post["post_url"] = "/boards/".urlsafe($post["board_name"])."/posts/".urlsafe($post["title"]);
-		$post["user_url"] = "/users/".urlsafe($post["username"]);
+		$post = $this->createPostData($post);
+		return $post;
+	}
+
+	public function user_getPostByTitle(string $post_title, int $user_id)
+	{
+		$sql = '
+			SELECT
+				*,
+				(
+					SELECT
+					 count(post_hearts.post_id)
+				FROM
+					 post_hearts 
+				WHERE
+					(
+						(post_hearts.user_id = :user_id) 
+					AND
+						(post_hearts.post_id = Posts_All_Fulltext.post_id)
+					)
+			) AS `user_hearted` 
+			FROM
+				Posts_All_Fulltext
+			WHERE
+			Posts_All_Fulltext.title = :post_title
+		';
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(':post_title', urlsafereverse($post_title), PDO::PARAM_STR);
+		$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+		$stmt->execute();
+		$post = $stmt->fetch();
+		$post = $this->createPostData($post);
 		return $post;
 	}
 

@@ -20,7 +20,6 @@
 
 .post-title_wrapper {
 	display: flex;
-	justify-content: space-between;
 	position: relative;
 }
 
@@ -28,21 +27,17 @@
 	font-size: 24px;
 }
 
-.post-details,
+.post-title_wrapper,
 .post-content {
 	padding-bottom: 10px;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 10px;
 }
 
 .post-image {
 	position: relative;
 	display: inline-block;
 	padding-bottom: 10px;
-}
-
-.post-text {
-
 }
 
 .post-image img {
@@ -85,11 +80,11 @@
 
 .post-new_form {
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 40px;
 }
 
 .post-new_form > div {
@@ -128,5 +123,33 @@
 }
 .post-options a:hover {
 	color: #fff;
-    background-color: var(--main-color);
+  background-color: var(--main-color);
+}
+
+.view_post-heart_count {
+	text-align: center;
+	margin-top: -4px;
+}
+
+.view_post-heart {
+	margin-top: -4px;
+	cursor: pointer;
+}
+
+.view_post-heart svg {
+	transition: .2s;
+	stroke: #222;
+}
+
+.view_post-heart.js--heart_active svg {
+	fill: #a11;
+}
+
+.view_post-heart:hover svg {
+	fill: #ffbcbc80;
+}
+
+.view_post-title_information {
+	align-self: center;
+	padding-left: 16px;
 }

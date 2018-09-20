@@ -252,11 +252,11 @@ Router::post('posts', 'action', function() {
 (boards)/posts
 
 ******************************************************************/
-Router::get('boards/{board_id}/posts/{post_id}', '', function($db) {
+Router::get('boards/{board_id}/posts/{post_name}', '', function($db) {
     $Controller = new PostController($db->pdo);
     // Method = default (read)
     // var_dump(Router::$items);
-    $Controller->render(Router::$items["post_id"]);
+    $Controller->renderPostByName(Router::$items["post_name"]);
     // Controller = PostController
     // Method = default (read)
 });
@@ -265,7 +265,7 @@ Router::get('boards/{id}/posts/{id}', 'sort', function() {
     // Method = sort (new|old|trending|top_comments|top_hearts)
     // Note: this is sorting the comments on the post
 });
-Router::get('boards/{id}/posts/{id}', 'action', function() {
+Router::get('boards/{id}/posts/{post_name}', 'action', function() {
     $Controller = new PostController($db->pdo);
     // Controller = PostController
     $Controller->action(Request::$query);
