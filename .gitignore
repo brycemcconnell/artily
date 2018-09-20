@@ -10,3 +10,4 @@ secret.php
 /.vscode/
 .sass-cache/
 *.css
+*.css.map

@@ -298,7 +298,7 @@ class Posts {
 			FROM
 				Posts_All_Fulltext
 			WHERE
-				posts.title = :post_title
+			Posts_All_Fulltext.title = :post_title
 		';
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(':post_title', urlsafereverse($post_title), PDO::PARAM_STR);

@@ -44,9 +44,7 @@
 </div>
 	
 	<div class="post-content">
-		<?php
-		if (!empty($post["file_path"])): 
-		?>
+		<?php	if (!empty($post["file_path"])): ?>
 		<div class="post-image" onclick="toggleImageSize(this);">
 			<img src="<?= '/uploads/'.$post["file_path"]; ?>" alt="<?= $post["file_name"].'.'.$post["file_type"] ?>">
 			<div class="post-image_sizer">
@@ -54,12 +52,10 @@
 				<div class="post-image_size_icon shrink"><?= $SVG->shrink('#fff'); ?></div>
 			</div>
 		</div>
-		<?php
-		endif;
-		if (!empty($post["post_contents"])):
-		?>
-		<div class="post-text">
-			<?= nl2br($post["post_contents"]); ?>
-		</div>
-	<?php endif; ?>
+		<?php endif; ?>
+		<?php if (!empty($post["content"])):?>
+			<div class="post-text">
+				<?= nl2br($post["content"]); ?>
+			</div>
+		<?php endif; ?>
 </div>
