@@ -17,6 +17,7 @@ include_once "app/Controller/AccountController.php";
 include_once "app/Controller/ErrorController.php";
 include_once "app/Controller/PostController.php";
 include_once "app/Controller/API_PostController.php";
+include_once "app/Controller/API_NotifyController.php";
 include_once "app/Controller/UserController.php";
 include_once "app/Controller/BoardController.php";
 include_once "app/Controller/CommentController.php";
@@ -28,6 +29,7 @@ use App\Controller\AccountController as AccountController;
 use App\Controller\ErrorController as ErrorController;
 use App\Controller\PostController as PostController;
 use App\Controller\API_PostController as API_PostController;
+use App\Controller\API_NotifyController as API_NotifyController;
 use App\Controller\UserController as UserController;
 use App\Controller\BoardController as BoardController;
 use App\Controller\CommentController as CommentController;
@@ -39,6 +41,7 @@ include_once "app/Model/Hearts.php";
 include_once "app/Model/Posts.php";
 include_once "app/Model/Comments.php";
 include_once "app/Model/Boards.php";
+include_once "app/Model/Notifications.php";
 
 include_once "app/Core/Router.php";
 include_once 'app/Core/Request.php';
@@ -56,6 +59,30 @@ Router::get('api/authenticate', '', function() {
     }
 });
 
+Router::post('api/notify', '', function($db) {
+    $_POST = json_decode(file_get_contents('php://input'), true);
+    if (isset($_SESSION["user"]) &&
+        isset($_POST["trigger_id"]) &&
+        isset($_POST["sender_id"]) &&
+        isset($_POST["trigger_type"]) &&
+        isset($_POST["controller"])) {
+        $user_id = $_SESSION["user"]["id"];
+        $Controller = new API_NotifyController($db->pdo);
+        $result = $Controller->notifyFrom($user_id);
+        if ($result) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                "status" => "Successfully sent notification"
+            ]);
+        } else {
+            header($_SERVER["SERVER_PROTOCOL"]." 500 Internal Server Error");
+            echo json_encode("There was an sql error");
+        }
+    } else {
+        header($_SERVER["SERVER_PROTOCOL"]." 401 Unauthorized");
+        echo json_encode("You're not logged in");
+    }
+});
 Router::post('api/posts/addheart', '', function($db) {
     $_POST = json_decode(file_get_contents('php://input'), true);
     if (isset($_SESSION["user"]) && isset($_POST["post_id"])) {

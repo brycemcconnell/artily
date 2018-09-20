@@ -22,7 +22,7 @@
 		<div class="view_post-title_information">
 			<a class="post-title" href="<?= $post["post_url"]; ?>"><?= $post["title"]; ?></a>
 			<div class="post-details">
-				Posted by <a href="<?= $post["user_url"]; ?>"><?= $post["username"]; ?></a> <?= $post["elapsed"]; ?>
+				Posted by <a href="<?= $post["user_url"]; ?>"><?= $post["username"]; ?></a> <span class="time-tooltip" title="<?= $post["created"]; ?>"><?= $post["elapsed"]; ?></span>
 			</div>
 		</div>
 

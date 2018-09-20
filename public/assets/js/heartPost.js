@@ -45,7 +45,35 @@ function heartPost(postEl, isHearted) {
         console.log('Success:', response);
         hButton.classList.add('js--heart_active');
         hCount.innerHTML = Number(hCount.innerHTML) + 1;
+        return response;
       })
+      .then(response => {
+        const notifyData = {
+          "trigger_id": response.post_id,
+          "sender_id": response.user_id,
+          "trigger_type": "post_heart",
+          "controller": "posts"
+        }
+        fetch(`//${window.location.host}/api/notify`, {
+          method: "POST",
+          credentials: "same-origin",
+          body: JSON.stringify(notifyData),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => {
+          if (res.ok) {
+            console.log(res);
+            return res.json();
+          }
+          throw new Error(`${res.status}: ${res.statusText}`);
+        })
+        .then(response => {
+          console.log('Sent notify:', response);
+        })
+      })
+     
       .catch(err => console.error(err)); 
 
   } else {

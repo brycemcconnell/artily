@@ -76,7 +76,6 @@ class PostController extends BaseController
         }
 
 		$board_data = $this->boards_db->getBoardByName(Router::$items["board_id"]);
-        
         $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
         include "views/posts/view_post.php";
