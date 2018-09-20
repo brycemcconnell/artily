@@ -394,7 +394,8 @@ ul, li {
   height: calc(100% - 60px);
   margin-top: 60px;
   background-color: #fff;
-  z-index: 99; }
+  z-index: 99;
+  box-shadow: 0px 49px 20px -10px #000a; }
 
 .sidebar-toggle_btn {
   width: 100%;
@@ -404,7 +405,8 @@ ul, li {
 @media screen and (max-width: 780px) {
   .sidebar {
     margin-top: 0;
-    height: 100%; } }
+    height: 100%;
+    box-shadow: none; } }
 .sidebar-content {
   width: 280px;
   overflow-y: scroll;
@@ -616,7 +618,7 @@ ul, li {
 
 @media screen and (max-width: 600px) {
   .main {
-    margin-left: var(--spacing); } }
+    margin-left: 0; } }
 .grid-last {
   text-align: center;
   color: #777;

@@ -5,6 +5,7 @@
 	margin-top: 60px;
 	background-color: #fff;
 	z-index: 99;
+	box-shadow: 0px 49px 20px -10px #000a;
 }
 
 .sidebar-toggle_btn {
@@ -16,6 +17,7 @@
 	.sidebar {
 		margin-top: 0;
 		height: 100%;
+		box-shadow: none;
 	}
 }
 .sidebar-content {

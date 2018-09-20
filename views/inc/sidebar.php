@@ -103,3 +103,17 @@ $collections = [
 	
 	</script>
 </aside>
+<script>
+
+window.addEventListener('mouseup', (e) => {
+	const sidebar = document.querySelector('.sidebar');
+	const sidebarContent = document.querySelector('.sidebar-content');
+	if (sidebar.contains(e.target)) {
+		return;
+	}
+	if (sidebarContent.classList.contains('sidebar-content_small')) {
+		return;
+	}
+	toggleSidebar();
+});
+</script>
