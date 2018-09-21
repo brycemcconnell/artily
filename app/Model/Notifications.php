@@ -28,7 +28,7 @@ class Notifications
           COUNT(*) AS total,
           sum(viewed = 0) AS not_viewed
         FROM
-          notifications
+          notification_recipients
         WHERE
           receiver_id = :user_id
       ';
@@ -51,18 +51,13 @@ class Notifications
     try {
       $sql = '
         SELECT
-          notifications.*,
-          users.username AS sender_username
+          Notifications_All.*
         FROM
-          notifications
-        LEFT JOIN
-          users
-        ON
-          notifications.sender_id = users.id
+          Notifications_All
         WHERE
           receiver_id = :user_id
         ORDER BY
-          notifications.time DESC
+          Notifications_All.time DESC
       ';
       $stmt = $this->pdo->prepare($sql);
       $stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
