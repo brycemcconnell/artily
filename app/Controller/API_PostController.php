@@ -33,13 +33,15 @@ class API_PostController
 
     public function addHeart(int $user_id, int $post_id)
     {
-        $success = $this->hearts_db->addPostHeart($user_id, $post_id);
-
-        if ($success) {
-            return 'Success';
-        } else {
-            return false;
-        }
+        /* 
+            Returns
+            array [
+                status - boolean
+                message - string
+            ]
+        */
+        $result = $this->hearts_db->addPostHeart($user_id, $post_id);
+        return $result;
     }
 
     public function removeHeart(int $user_id, int $post_id)

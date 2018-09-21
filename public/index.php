@@ -90,10 +90,10 @@ Router::post('api/posts/addheart', '', function($db) {
         $post_id = $_POST["post_id"];
         $Controller = new API_PostController($db->pdo);
         $result = $Controller->addHeart($user_id, $post_id);
-        if ($result) {
+        if ($result["success"] == true) {
             header('Content-Type: application/json');
             echo json_encode([
-                "status" => "Successfully added heart",
+                "status" => $result["message"],
                 "user_id" => $user_id,
                 "post_id" => $post_id
             ]);
