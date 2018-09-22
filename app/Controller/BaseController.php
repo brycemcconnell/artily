@@ -27,9 +27,9 @@ class BaseController
 
 		if (array_key_exists('user',$_SESSION)) {
       // $this->user = $this->getUserData($_SESSION["user"]);
-      $this->user["userhearts"] = $this->hearts_db->getHeartsByUserId($_SESSION["user"]["id"]);
-      $this->user["notifications"] = $this->notifications_db->user_getNotificationCount($_SESSION["user"]["id"]);
-
+      // $this->user["userhearts"] = $this->hearts_db->getHeartsByUserId($_SESSION["user"]["id"]);
+      // $this->user["notifications"] = $this->notifications_db->user_getNotificationCount($_SESSION["user"]["id"]);
+      $this->user = $this->users_db->getAllData($_SESSION["user"]["id"]);
       
       // $this->board_list = $this->boards_db->getBoardsForUser($_SESSION["user"]);
     } else {

@@ -74,8 +74,8 @@ class Hearts {
 			$stmt = $this->pdo->prepare($sql);
 			$stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
 			$result = $stmt->execute();
+			
 			$receiver_id = (int)$stmt->fetch()["user_id"];
-			// var_dump($receiver_id);
 			
 			if ($result == false) { // If the user isnt found
 				// Still add a heart to the post, but don't send any notification

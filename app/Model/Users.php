@@ -289,4 +289,30 @@ class Users
       die();
     }
 	}
+
+	public function getAllData(int $user_id)
+	{
+		try {
+      $sql = '
+				SELECT
+					*
+				FROM
+					Users_All
+				WHERE
+					id = :user_id
+      ';
+      $stmt = $this->pdo->prepare($sql);
+			$stmt->bindValue(':user_id', $user_id, PDO::PARAM_INT);
+			$stmt->execute();
+      $result = $stmt->fetch();
+		
+			return $result;
+			
+    } catch(\PDOException $e) {
+      echo "oops! an error getting the board info<br><pre>";
+      var_dump($e);
+      echo "</pre>";
+      die();
+    }
+	}
 }

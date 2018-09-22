@@ -46,15 +46,15 @@ use App\Core\Request;
 				<img class="header-user_avatar" src="/assets/img/kermit.jpg"><!-- User pic -->
 				<div class="header-user_details"><!-- Deets -->
 					<div class="header-user_name"><?= $_SESSION['user']["username"]; ?></div><!-- User name -->
-					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["userhearts"] ?? "0"; ?></span></div><!-- User heart count -->
+					<div><span class="heart">♥</span><span id="userHeartCount"><?= $this->user["heart_count"] ?? "0"; ?></span></div><!-- User heart count -->
 				</div>
 			</a>
 			<a href="/notifications" class="btn header-user_icon">
 				<div class="svg-icon">
 					<?= $SVG->bell();?>
-					<?php if ($this->user["notifications"]["not_viewed"] != 0): ?>
+					<?php if ($this->user["not_seen_count"] != 0): ?>
 						<div class="header-notification_count">
-							<?= $this->user["notifications"]["not_viewed"]; ?>
+							<?= $this->user["not_seen_count"]; ?>
 						</div>
 					<?php endif; ?>
 				</div>
