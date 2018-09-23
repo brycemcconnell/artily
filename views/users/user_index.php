@@ -8,10 +8,9 @@
 
 <?php include_once('../views/inc/head.php'); ?>
 <?php include_once('../views/inc/header.php'); ?>
-<?php include_once('../views/common/board_sort.php'); ?>
 
 <main class="main">
-
+	<?php include_once('../views/common/board_sort.php'); ?>
 	<div id="main" class="grid grid--list">
 		<?php
 		foreach ($users as $key => $value) {
