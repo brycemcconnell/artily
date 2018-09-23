@@ -73,7 +73,13 @@ class PostController extends BaseController
             die();
         }
 
-		$board_data = $this->boards_db->getBoardByName(Router::$items["board_id"]);
+        if ($post["board_name"] != Router::$items["board_name"]) {
+            http_response_code(404);
+            header("Location: /error?code=404");
+            die();
+        }
+        
+		$board_data = $this->boards_db->getBoardByName(Router::$items["board_name"]);
         $response = $this->comments_db->getCommentsByPostId($post["post_id"]);
         $comments = $response["tree"];
         include "views/posts/view_post.php";
