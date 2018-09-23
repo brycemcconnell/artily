@@ -295,11 +295,11 @@ Router::post('posts', 'action', function() {
 (boards)/posts
 
 ******************************************************************/
-Router::get('boards/{board_id}/posts/{post_name}', '', function($db) {
+Router::get('boards/{board_id}/posts/{post_id}/{post_name}', '', function($db) {
     $Controller = new PostController($db->pdo);
     // Method = default (read)
     // var_dump(Router::$items);
-    $Controller->renderPostByName(Router::$items["post_name"]);
+    $Controller->renderPostById(Router::$items["post_id"]);
     // Controller = PostController
     // Method = default (read)
 });

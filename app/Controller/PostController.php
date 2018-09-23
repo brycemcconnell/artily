@@ -53,14 +53,12 @@ class PostController extends BaseController
 
     }
 
-    public function renderPostByName(string $name): void
+    public function renderPostById(int $id): void
 	{   
-        // Use urldecode so we can look up posts by other languages eg japanese
-        $request = urldecode($name);
         if (isset($_SESSION["user"])) {
-            $post = $this->posts_db->user_getPostByTitle($request, $_SESSION["user"]["id"]);
+            $post = $this->posts_db->user_getPostById($id, $_SESSION["user"]["id"]);
         } else {
-            $post = $this->posts_db->getPostByTitle($request);
+            $post = $this->posts_db->getPostById($id);
         }
         if ($post === null) {
             // No post was found for the request
