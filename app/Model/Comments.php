@@ -84,36 +84,29 @@ class Comments {
 		    $branch = array();
 
 		    foreach ($elements as $element) {
+					
 		        if ($element['parent_comment_id'] == $parentId) {
 		            $children = buildTree($elements, $element['id']);
-		            $element["child_count"] = 0;
-		            $element["user_url"] = "/user/".urlsafe($element["username"]);
+		            // $element["child_count"] = 0;
+		            $element["user_url"] = "/users/".urlsafe($element["username"]);
 		            $element['children'] = [];
 		            if ($children) {
-		                $element['children'] = $children;
+										$element['children'] = $children;
+										
 		            }
-		            $element["child_count"] = count($element['children']);
-		            $branch[] = $element;
+								$element["child_count"] = count($element['children']);
+								$element["descendant_count"] = $element["child_count"];
+								$count = $element["child_count"];
+								for ($i=0; $i < $count; $i++) { 
+									$element["descendant_count"] += !empty($element['children'][$i]["descendant_count"]) ? $element['children'][$i]["descendant_count"] : 0;
+								}
+								$branch[] = $element;
 		        }
-		    }
+				}
 		    return $branch;
 		}
-
 		$tree = buildTree($comments);
 		
-		// Count descendants and calculate
-		function array_tree($tree) {     
-			$result = array();     
-			foreach($tree as $node) {
-		        if (count($node["children"])) {
-		            $result = array_tree($node["children"]);
-		        }
-
-		        $result[] = $node["id"];
-		    }
-		    return $result;
-		}
-		$result = array_tree($tree);
 		$response = array();
 		$response["count"] = $comment_total_count;
 		$response["tree"] = $tree;

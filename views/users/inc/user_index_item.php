@@ -16,6 +16,9 @@ $user_data = $users[$key];
     <div>
       Created account <span class="time-tooltip" title="<?= $user_data["created"]; ?>"><?= $user_data["elapsed"]; ?></span>
     </div>
+    <div>
+      User heart count: <?= $user_data["heart_count"] ?? "0"; ?>
+    </div>
   </div>
   <a class="item-link" href="/users/<?= $user_data["username"]; ?>"></a>
 </div>

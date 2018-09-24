@@ -260,17 +260,12 @@ class Users
 	public function getUsers()
 	{
 		try {
-      // Note: Distinct here is kind of hacky, really we want the query to return the correct number of rows either way
-      // Perhaps this is because of the subquery, or the joins, not sure
+			// Note that Users_All view removes all deleted results
       $sql = '
-				SELECT
-					username,
-					created,
-					level
-				FROM
-					users
-				WHERE
-					deleted IS NULL
+			SELECT
+				*
+			FROM
+				Users_All
       ';
       $stmt = $this->pdo->prepare($sql);
       $stmt->execute();

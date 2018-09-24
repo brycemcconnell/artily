@@ -32,7 +32,8 @@ function render_comments($elements, $op_id, $depth = 0) {
 					<span class="comment-hidden_helper">Hidden</span>
 					<span><?= $element["elapsed"]; ?> by <a href="<?= $element["user_url"];?>" class="<?= $op_comment_class; ?>" ><?= $element["username"]; ?></a></span>
 					<span class="cmt-dot">-</span>
-					(<?= count($element["children"]); ?>) Replies
+					(<?= $element["child_count"]; ?>) Replies
+					(<?= $element["descendant_count"]; ?>) Descendants
 					<div class="comment-actions">
 						<span class="cmt-dot">-</span>
 						<?php if (!empty($user_comment)): ?>
